@@ -9,15 +9,17 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
+    private bool facingRight = true;
 
     [Header("Components")]
     public PlayerSO playerData;
     Rigidbody2D rb;
-
+    SpriteRenderer spriteRenderer;
 
     private void Start()
     {
        rb = GetComponent<Rigidbody2D>();
+        playerData.Init();
     }
 
     private void Update()
@@ -34,6 +36,15 @@ public class PlayerMovement : MonoBehaviour
     {
         float move = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(move * playerData.moveSpeed, rb.velocity.y);
+
+        if (move > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (move < 0 && facingRight)
+        {
+            Flip();
+        }
     }
 
     void Jump()
@@ -41,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, playerData.jumpForce);
     }
 
+    void Flip()
+    {
+        facingRight = !facingRight;
 
-
+        // X 스케일 반전
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
+    }
 }

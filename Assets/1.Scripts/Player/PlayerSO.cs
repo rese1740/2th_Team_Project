@@ -11,7 +11,7 @@ public class PlayerSO : ScriptableObject
 
 
     [Header("Stat Setting")]
-    [Range(0, 100)] public float health = 100f;
+    [Range(0, 100)] public float currentHealth = 100f;
     [Range(0, 100)] public float maxHealth = 100f;
     [Range(0, 100)] public float attackPower = 100f;
 
