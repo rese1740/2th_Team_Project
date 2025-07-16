@@ -11,9 +11,20 @@ public class PlayerSO : ScriptableObject
 
 
     [Header("Stat Setting")]
+    [Tooltip("플레이어 현재 체력")]
     [Range(0, 100)] public float currentHealth = 100f;
+    
+    [Tooltip("플레이어 최대 체력")]
     [Range(0, 100)] public float maxHealth = 100f;
+
+    [Tooltip("플레이어 공격력")]
     [Range(0, 100)] public float attackPower = 100f;
+
+    [Tooltip("플레이어 크리티컬 확률 %")]
+    [Range(0, 100)] public float critValue = 100f;
+
+    [Tooltip("플레이어 크리티컬 데미지 증가 %")]
+    [Range(0, 1000)] public float critPower = 100f;
 
 
 

@@ -15,4 +15,9 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+    public void TakeDamage(float damage)
+    {
+        Debug.Log("적이 " + damage + "의 데미지를 받았습니다.");
+    }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -31,7 +31,17 @@ public class PlayerAttack : MonoBehaviour
         PlayerHitbox hitbox = hitboxInstance.GetComponent<PlayerHitbox>();
         if (hitbox != null)
         {
-            hitbox.damage = playerData.attackPower;
+            float finalDamage = playerData.attackPower;
+
+            // ÌÅ¨Î¶¨Ìã∞Ïª¨ ÌåêÏ†ï
+            float rand = Random.Range(0f, 100f);
+            if (rand < playerData.critValue)
+            {
+                finalDamage *= playerData.critPower / 100f;
+                Debug.Log("üí• ÌÅ¨Î¶¨Ìã∞Ïª¨ ÌûàÌä∏! Îç∞ÎØ∏ÏßÄ: " + finalDamage);
+            }
+
+            hitbox.damage = finalDamage;
         }
     }
 
@@ -51,13 +61,13 @@ public class PlayerAttack : MonoBehaviour
     {
         sr.color = Color.red;
 
-        yield return new WaitForSeconds(0.2f); // ±Ù∫˝¿Ã¥¬ Ω√∞£
+        yield return new WaitForSeconds(0.2f); // ÍπúÎπ°Ïù¥Îäî ÏãúÍ∞Ñ
 
-        sr.color = Color.white; // ø¯∑° ªˆ (∂«¥¬ ¿˙¿Â«ÿ µ– ªˆ)
+        sr.color = Color.white; // ÏõêÎûò ÏÉâ (ÎòêÎäî Ï†ÄÏû•Ìï¥ Îëî ÏÉâ)
     }
 
     void Die()
     {
-        Debug.Log("«√∑π¿ÃæÓ ªÁ∏¡");
+        Debug.Log("ÌîåÎ†àÏù¥Ïñ¥ ÏÇ¨Îßù");
     }
 }
