@@ -26,6 +26,9 @@ public class PlayerSO : ScriptableObject
     [Tooltip("플레이어 크리티컬 데미지 증가 %")]
     [Range(0, 1000)] public float critPower = 100f;
 
+    [Tooltip("플레이어 골드량")]
+    [Range(0, 1000)] public int Gold = 100;
+
 
 
     public void Init()
