@@ -18,6 +18,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        if (UIStateManager.Instance.isUIOpen) return;
         if (Input.GetMouseButtonDown(0))
         {
             Attack();
@@ -49,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
     {
         playerData.currentHealth -= damage;
 
-        StartCoroutine(HitEffect());
+        StartCoroutine(DamageEffect());
 
         if (playerData.currentHealth <= 0)
         {
@@ -57,13 +58,13 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    IEnumerator HitEffect()
+    IEnumerator DamageEffect()
     {
         sr.color = Color.red;
 
-        yield return new WaitForSeconds(0.2f); // 깜빡이는 시간
+        yield return new WaitForSeconds(0.2f);
 
-        sr.color = Color.white; // 원래 색 (또는 저장해 둔 색)
+        sr.color = Color.white;
     }
 
     void Die()

@@ -24,9 +24,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (UIStateManager.Instance.isUIOpen) return;
+
         Move();
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (Input.GetButtonDown("Jump")&& isGrounded)
+        if (Input.GetKeyDown(KeyCode.W)&& isGrounded)
         {
             Jump();
         }

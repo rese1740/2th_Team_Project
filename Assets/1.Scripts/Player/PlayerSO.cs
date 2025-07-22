@@ -1,5 +1,14 @@
 using UnityEngine;
 
+public enum PlayerElement
+{
+    None = 0,
+    Fire = 1,
+    Water = 2,
+    Earth = 3,
+    Air = 4
+}
+
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "PlayerSO", order = 1)]
 public class PlayerSO : ScriptableObject
 {
@@ -28,6 +37,9 @@ public class PlayerSO : ScriptableObject
 
     [Tooltip("플레이어 골드량")]
     [Range(0, 1000)] public int Gold = 100;
+
+    [Tooltip("플레이어 속성")]
+    public PlayerElement playerElement = PlayerElement.None;
 
 
 
