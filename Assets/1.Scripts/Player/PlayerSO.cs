@@ -26,6 +26,9 @@ public class PlayerSO : ScriptableObject
     [Tooltip("플레이어 최대 체력")]
     [Range(0, 100)] public float maxHealth = 100f;
 
+    [Tooltip("플레이어 폭주 게이지")]
+    [Range(0, 100)] public float rageValue = 50f;
+
     [Tooltip("플레이어 공격력")]
     [Range(0, 100)] public float attackPower = 100f;
 

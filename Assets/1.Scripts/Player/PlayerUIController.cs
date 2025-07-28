@@ -10,6 +10,8 @@ public class PlayerUIController : MonoBehaviour
 
     private void Update()
     {
+        if (UIStateManager.Instance.isUIOpen) return;
+
         if (Input.GetKeyDown(KeyCode.V))
         {
             elementPanel.Show();

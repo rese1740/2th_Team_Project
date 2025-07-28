@@ -19,9 +19,20 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         if (UIStateManager.Instance.isUIOpen) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Attack();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            playerData.currentHealth = playerData.maxHealth; // 테스트용: 체력 회복
+            Debug.Log("플레이어 체력 회복: " + playerData.currentHealth);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            playerData.Gold += 100; // 테스트용: 골드 증가
+            Debug.Log("플레이어 골드 증가: " + playerData.Gold);
         }
     }
 
@@ -44,6 +55,11 @@ public class PlayerAttack : MonoBehaviour
 
             hitbox.damage = finalDamage;
         }
+    }
+
+    void SkillA()
+    {
+
     }
 
     public void TakeDamage(float damage)
