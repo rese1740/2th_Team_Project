@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour
 {
-    public ElementType currentElement;
+    public PlayerElement currentElement;
 
-    [SerializeField] private List<SkillData> skillList; // Inspector에서 등록
-    private Dictionary<(ElementType, KeyCode), SkillData> skillMap;
+    [Tooltip("플레이어 스킬 목록")]
+    [SerializeField] private List<SkillData> skillList; 
+
+    private Dictionary<(PlayerElement, KeyCode), SkillData> skillMap;
+    private Dictionary<(PlayerElement, KeyCode), float> cooldownTimers = new();
 
     private void Awake()
     {
-        skillMap = new Dictionary<(ElementType, KeyCode), SkillData>();
+        skillMap = new Dictionary<(PlayerElement, KeyCode), SkillData>();
 
         foreach (var skill in skillList)
         {
@@ -21,21 +24,44 @@ public class PlayerSkillController : MonoBehaviour
 
     private void Update()
     {
+        HandleCooldowns();
+
+        currentElement = PlayerSO.Instance.currentElement;
         if (Input.GetKeyDown(KeyCode.Q)) UseSkill(KeyCode.Q);
         if (Input.GetKeyDown(KeyCode.E)) UseSkill(KeyCode.E);
     }
 
     private void UseSkill(KeyCode key)
     {
-        if (skillMap.TryGetValue((currentElement, key), out SkillData skill))
+        var skillKey = (currentElement, key);
+
+        if (skillMap.TryGetValue(skillKey, out SkillData skill))
         {
+            if (cooldownTimers.TryGetValue(skillKey, out float timeRemaining) && timeRemaining > 0f)
+            {
+                Debug.Log($"{skill.skillName}은 {timeRemaining:F1}초 남음");
+                return;
+            }
+
             Debug.Log($"사용한 스킬: {skill.skillName}");
-            // Instantiate(skill.skillEffectPrefab, transform.position, Quaternion.identity);
-            // 쿨타임 처리, 데미지 등등
+
+            cooldownTimers[skillKey] = skill.cooldown;
         }
-        else
+    }
+
+    private void HandleCooldowns()
+    {
+        var keys = new List<(PlayerElement, KeyCode)>(cooldownTimers.Keys);
+
+        foreach (var key in keys)
         {
-            Debug.LogWarning($"속성 {currentElement}에 해당하는 {key} 스킬이 없음");
+            if (cooldownTimers[key] > 0f)
+            {
+                cooldownTimers[key] -= Time.deltaTime;
+
+                if (cooldownTimers[key] < 0f)
+                    cooldownTimers[key] = 0f;
+            }
         }
     }
 }

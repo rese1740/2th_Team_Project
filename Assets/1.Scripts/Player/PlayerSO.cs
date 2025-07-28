@@ -42,7 +42,7 @@ public class PlayerSO : ScriptableObject
     [Range(0, 1000)] public int Gold = 100;
 
     [Tooltip("플레이어 속성")]
-    public PlayerElement playerElement = PlayerElement.None;
+    public PlayerElement currentElement = PlayerElement.None;
 
 
 

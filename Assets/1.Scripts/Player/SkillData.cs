@@ -7,7 +7,7 @@ public class SkillData : ScriptableObject
 {
     public string skillName;
     public KeyCode key; // Q or E
-    public ElementType elementType;
+    public PlayerElement elementType;
     public GameObject skillEffectPrefab;
     public float damage;
     public float cooldown;

@@ -49,7 +49,7 @@ public class ButtonScaler : MonoBehaviour
 
     public void OnButtonClicked()
     {
-        PlayerSO.Instance.playerElement = stateToSet;
+        PlayerSO.Instance.currentElement = stateToSet;
         popupAnimator.Hide();
         UIStateManager.Instance.isUIOpen = false;
     }

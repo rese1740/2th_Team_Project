@@ -24,16 +24,6 @@ public class PlayerAttack : MonoBehaviour
         {
             Attack();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            playerData.currentHealth = playerData.maxHealth; // 테스트용: 체력 회복
-            Debug.Log("플레이어 체력 회복: " + playerData.currentHealth);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            playerData.Gold += 100; // 테스트용: 골드 증가
-            Debug.Log("플레이어 골드 증가: " + playerData.Gold);
-        }
     }
 
     void Attack()
