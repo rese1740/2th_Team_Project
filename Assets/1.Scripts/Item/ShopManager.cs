@@ -36,6 +36,5 @@ public class ShopManager : MonoBehaviour
        PlayerSO.Instance.Gold -= item.itemPrice;
         TryBuy(item);
         Debug.Log($"구매 완료: {item.itemName}, 남은 금액: {PlayerSO.Instance.Gold}");
-        // UI 업데이트 등 추가 작업
     }
 }

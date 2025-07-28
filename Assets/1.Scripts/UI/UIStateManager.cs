@@ -13,4 +13,9 @@ public class UIStateManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
+
+    public void UIClose()
+    {
+        isUIOpen = false;
+    }
 }
