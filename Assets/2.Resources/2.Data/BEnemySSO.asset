@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31239be3adb89c40969f9d2a7d6bc53, type: 3}
+  m_Name: BEnemySSO
+  m_EditorClassIdentifier: 
+  patrolSpeed: 3
+  detectRangeTiles: 3
+  tileSize: 1
+  alertIconPrefab: {fileID: 0}
+  alertOffset: {x: 0, y: 1.5, z: 0}
+  alertDuration: 0.3
+  bounceHeight: 0.3
+  bounceSpeed: 6
+  projectilePrefab: {fileID: 3375249882092023955, guid: f07b2fa08fde6df43b930d06ef269829, type: 3}
+  projectileSpeed: 8
+  attackInterval: 0.8
+  attackOnlyHorizontal: 0
+  persistAggro: 1
+  chaseWhileAggro: 1
+  chaseSpeed: 4.5
