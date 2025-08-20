@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class ButtonScaler : MonoBehaviour
 {
     public UIPopupAnimator popupAnimator;
+    public Image iconImg;
+    public Sprite iconSprite;
     public PlayerElement stateToSet;
     public float scaleUpSize = 1.2f;
     public float scaleDuration = 0.2f;
@@ -19,6 +22,7 @@ public class ButtonScaler : MonoBehaviour
     void Awake()
     {
         originalScale = transform.localScale;
+        iconImg.enabled = false;
         groupManager = GetComponentInParent<ButtonGroupManager>();
         groupManager.RegisterButton(this);
     }
@@ -50,6 +54,8 @@ public class ButtonScaler : MonoBehaviour
     public void OnButtonClicked()
     {
         PlayerSO.Instance.currentElement = stateToSet;
+        iconImg.enabled = true;
+        iconImg.sprite = iconSprite;
         popupAnimator.Hide();
         UIStateManager.Instance.isUIOpen = false;
     }

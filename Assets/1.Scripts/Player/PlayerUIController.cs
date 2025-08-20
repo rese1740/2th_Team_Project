@@ -1,17 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIController : MonoBehaviour
 {
-
     private GameObject currentNpc = null;
 
     [Header("Gameobject")]
     public UIPopupAnimator elementPanel;
     public GameObject InventoryPanel;
+    public Image hpImg;
+    public Image mpImg;
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        hpImg.fillAmount = PlayerSO.Instance.currentHealth / PlayerSO.Instance.maxHealth;
+        mpImg.fillAmount = PlayerSO.Instance.rageValue / 100f;
+
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             InventoryPanel.SetActive(!InventoryPanel.activeSelf);
             UIStateManager.Instance.isUIOpen = InventoryPanel.activeSelf;
