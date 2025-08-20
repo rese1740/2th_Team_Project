@@ -38,4 +38,11 @@ public class BELBullet : MonoBehaviour
         float ang = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, ang);
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
