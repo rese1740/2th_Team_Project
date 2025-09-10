@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BossDuck : MonoBehaviour
 {
-    public enum BossState { Idle, Chase, Attacking, Jumping, Charging, Summoning, Stunned }
+    public enum BossState { Idle, Chase, /*Attacking,*/ Jumping, Charging, Summoning, Stunned }
 
     [Header("Refs")]
     [SerializeField] private Transform player;
@@ -15,30 +15,42 @@ public class BossDuck : MonoBehaviour
     [Header("Move")]
     [SerializeField] private float moveSpeed = 4f;
 
-    [Header("Tile/Range")]
-    [SerializeField] private float tileSize = 1f;
-    [SerializeField] private float peckRangeTiles = 5f;
-    private float PeckRangeWorld => peckRangeTiles * tileSize;
-
-    [Header("Peck (쪼기)")]
-    [SerializeField] private float peckDuration = 1.3f;
-    [SerializeField] private float peckHitRadius = 1.0f;
-
-    [Header("Slam (내려찍기)")]
-    [SerializeField] private float hangTime = 3f;
+    [Header("Slam (내려찍기: 위에서 빠르게 하강)")]
+    [Tooltip("정조준한 타겟 지점 위로 얼마나 올라갈지(수직 높이)")]
+    [SerializeField] private float slamRiseHeight = 6f;
+    [Tooltip("타겟 상공으로 상승하는 데 걸리는 시간")]
+    [SerializeField] private float slamRiseTime = 0.25f;
+    [Tooltip("상공에서 잠깐 멈추는 시간(연출용)")]
+    [SerializeField] private float hangTime = 0.15f;
+    // (중요) 더 이상 사용 안 함: 지면까지 계속 떨어지므로 dropTime 제거
+    [Tooltip("착지 후 멍해 있는 시간(이 동안 플레이어에게 기회 제공)")]
     [SerializeField] private float stunAfterSlam = 2.5f;
-    [SerializeField] private float slamKillRadius = 0.8f;
+    [Tooltip("착지 지점 표시용 데칼(선택)")]
     [SerializeField] private GameObject slamDecalPrefab;
+
+    [Header("Shockwave Fire Points")]
+    [SerializeField] private Transform firePointLeft;
+    [SerializeField] private Transform firePointRight;
     [SerializeField] private GameObject shockwavePrefab;
+    [SerializeField] private bool spawnShockwaveOnSlam = true;
+    [SerializeField] private float shockwaveSideDelay = 0f;
+
+    public enum TwoDAxis { Right, Up } // 충격파 프리팹의 전진 방향 축
+    [Tooltip("충격파 프리팹이 전진할 때 사용하는 로컬 축(+X면 Right, +Y면 Up)")]
+    [SerializeField] private TwoDAxis shockwaveForwardAxis = TwoDAxis.Right;
 
     [Header("Charge (돌진)")]
     [SerializeField] private float chargeWindup = 1f;
     [SerializeField] private float chargeSpeed = 10f;
     [SerializeField] private float chargeDuration = 0.8f;
     [SerializeField] private LayerMask wallMask;
+    [SerializeField] private float chargeCollisionRadius = 0.4f;
+    [SerializeField] private float chargeSkin = 0.2f;
 
-    [Header("Summon (신하 소환)")]
-    [SerializeField] private GameObject minionPrefab;
+    [Header("Summon (신하 소환: A/B)")]
+    [SerializeField] private GameObject minionPrefabA;
+    [SerializeField] private GameObject minionPrefabB;
+    [SerializeField, Range(0f, 1f)] private float minionAChance = 0.5f;
     [SerializeField] private int minionMin = 7;
     [SerializeField] private int minionMax = 12;
     [SerializeField] private float minionSpawnRadius = 2.5f;
@@ -51,19 +63,20 @@ public class BossDuck : MonoBehaviour
     [Header("FX/Etc")]
     [SerializeField] private float facingFlipThreshold = 0.05f;
 
+    [Header("Ground Detection")]
+    [SerializeField] private LayerMask groundMask;           // Ground Layer 지정
+    [SerializeField] private float groundCheckRadius = 0.4f; // 보스 발 밑 원반 체크 반경
+
+    [Header("Slam Fall")]
+    [SerializeField] private float slamFallSpeed = 30f;      // 낙하 속도(유닛/초)
+    [SerializeField] private float slamMaxFallSeconds = 2f;  // 안전 타임아웃(지면 못 찾을 때)
+
     private BossState state = BossState.Idle;
     private Vector2 chargeDir;
     private float lastSlamTime = -999f;
     private float lastChargeTime = -999f;
     private float lastSummonTime = -999f;
     private bool _hitWallDuringCharge = false;
-
-    private void Reset()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
-        anim = GetComponentInChildren<Animator>();
-    }
 
     private void Awake()
     {
@@ -74,18 +87,38 @@ public class BossDuck : MonoBehaviour
 
     private void Start()
     {
-        if (!player) player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (!player)
+        {
+            var p = GameObject.FindGameObjectWithTag("Player");
+            if (p) player = p.transform;
+            else StartCoroutine(FindPlayerLoop());
+        }
+        // 권장 물리 세팅
+        rb.gravityScale = 0f;       // 2D 보스는 주로 0
+        rb.freezeRotation = true;   // 회전 고정
         state = BossState.Chase;
+    }
+
+    private IEnumerator FindPlayerLoop()
+    {
+        while (!player)
+        {
+            var p = GameObject.FindGameObjectWithTag("Player");
+            if (p) player = p.transform;
+            yield return null;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!player) return;
+        if (!player) { rb.velocity = Vector2.zero; return; }
 
         switch (state)
         {
             case BossState.Chase:
-                ChaseTick();
+                Vector2 toPlayer = (player.position - transform.position);
+                rb.velocity = toPlayer.normalized * moveSpeed;
+                if (anim) anim.SetFloat("speed", rb.velocity.magnitude);
                 break;
             default:
                 rb.velocity = Vector2.zero;
@@ -99,12 +132,6 @@ public class BossDuck : MonoBehaviour
 
         if (state == BossState.Chase)
         {
-            if (Vector2.Distance(transform.position, player.position) <= PeckRangeWorld)
-            {
-                StartCoroutine(CoPeck());
-                return;
-            }
-
             bool canSlam = Time.time - lastSlamTime >= slamCooldown;
             bool canCharge = Time.time - lastChargeTime >= chargeCooldown;
             bool canSummon = Time.time - lastSummonTime >= summonCooldown;
@@ -112,73 +139,162 @@ public class BossDuck : MonoBehaviour
             if (canSlam || canCharge || canSummon)
             {
                 int pick = Random.Range(0, 3);
-                if (pick == 0 && canSlam) { StartCoroutine(CoSlam()); return; }
-                if (pick == 1 && canCharge) { StartCoroutine(CoChargeSequence()); return; }
-                if (pick == 2 && canSummon) { StartCoroutine(CoSummon()); return; }
+                if (pick == 0 && canSlam) { state = BossState.Jumping; StartCoroutine(CoSlam()); return; }
+                if (pick == 1 && canCharge) { state = BossState.Charging; StartCoroutine(CoChargeSequence()); return; }
+                if (pick == 2 && canSummon) { state = BossState.Summoning; StartCoroutine(CoSummon()); return; }
 
-                if (canSlam) { StartCoroutine(CoSlam()); return; }
-                if (canCharge) { StartCoroutine(CoChargeSequence()); return; }
-                if (canSummon) { StartCoroutine(CoSummon()); return; }
+                if (canSlam) { state = BossState.Jumping; StartCoroutine(CoSlam()); return; }
+                if (canCharge) { state = BossState.Charging; StartCoroutine(CoChargeSequence()); return; }
+                if (canSummon) { state = BossState.Summoning; StartCoroutine(CoSummon()); return; }
             }
         }
 
+        // 좌우 바라보기
         var dir = player.position - transform.position;
         if (dir.x > facingFlipThreshold) sr.flipX = false;
         else if (dir.x < -facingFlipThreshold) sr.flipX = true;
     }
 
-    private void ChaseTick()
-    {
-        Vector2 toPlayer = (player.position - transform.position);
-        rb.velocity = toPlayer.normalized * moveSpeed;
-        if (anim) anim.SetFloat("speed", rb.velocity.magnitude);
-    }
-
-    // ─────────────────────── 공격들 ───────────────────────
-
-    private IEnumerator CoPeck()
-    {
-        state = BossState.Attacking;
-        rb.velocity = Vector2.zero;
-        if (anim) anim.SetTrigger("peck");
-
-        yield return new WaitForSeconds(peckDuration);
-
-        state = BossState.Chase;
-    }
+    // ─────────────────────── Slam (위에서 빠르게 낙하: Ground에 닿을 때까지) ───────────────────────
 
     private IEnumerator CoSlam()
     {
-        state = BossState.Jumping;
+        Debug.Log("[BossDuck] 패턴 시작: 내려찍기");
         lastSlamTime = Time.time;
 
-        Vector2 targetPos = player.position;
+        Vector2 targetPos = player ? (Vector2)player.position : (Vector2)transform.position;
+
         GameObject decal = null;
-        if (slamDecalPrefab) decal = Instantiate(slamDecalPrefab, targetPos, Quaternion.identity);
+        if (slamDecalPrefab)
+            decal = Instantiate(slamDecalPrefab, targetPos, Quaternion.identity);
 
-        bool prevEnabled = sr.enabled;
-        sr.enabled = false;
-        rb.simulated = false;
+        bool prevKinematic = rb.isKinematic;
+        rb.isKinematic = true;
+        rb.velocity = Vector2.zero;
 
-        yield return new WaitForSeconds(hangTime);
+        // 1) 상승: 현재 (타겟.x, 타겟.y + 높이)
+        if (anim) anim.SetTrigger("slam_up");
+        Vector2 startPos = rb.position;
+        Vector2 apexPos = new Vector2(targetPos.x, targetPos.y + slamRiseHeight);
+        yield return StartCoroutine(InterpPosition(startPos, apexPos, slamRiseTime)); // 상승은 시간 보간
 
-        transform.position = targetPos;
-        sr.enabled = prevEnabled;
-        rb.simulated = true;
+        // 2) 상공 잠깐 정지(연출)
+        if (hangTime > 0f) yield return new WaitForSeconds(hangTime);
 
-        if (shockwavePrefab) Instantiate(shockwavePrefab, targetPos, Quaternion.identity);
+        // 3) Ground를 만날 때까지 계속 낙하 (시간 제한: slamMaxFallSeconds)
+        yield return StartCoroutine(DropUntilGround(apexPos, slamFallSpeed));
+
+        // 착지 처리 (DropUntilGround에서 rb.position을 설정함)
+        if (spawnShockwaveOnSlam && shockwavePrefab)
+            yield return StartCoroutine(SpawnShockwavesFromFirePoints());
+
         if (decal) Destroy(decal);
 
         state = BossState.Stunned;
         if (anim) anim.SetTrigger("slam_land");
+        Debug.Log("[BossDuck] 슬램 착지 & 스턴");
         yield return new WaitForSeconds(stunAfterSlam);
 
+        rb.isKinematic = prevKinematic;
+        Debug.Log("[BossDuck] 패턴 종료: 내려찍기");
         state = BossState.Chase;
     }
 
+    // 상승/수평 이동 등 시간 보간 유틸 (물리틱 기준)
+    private IEnumerator InterpPosition(Vector2 from, Vector2 to, float duration, bool fastCurve = false)
+    {
+        float t = 0f;
+        while (t < duration)
+        {
+            float alpha = t / duration;
+            if (fastCurve) alpha = alpha * alpha;
+
+            Vector2 nextPos = Vector2.LerpUnclamped(from, to, alpha);
+            rb.position = nextPos;
+
+            t += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        rb.position = to;
+    }
+
+    // 지면 만날 때까지 지속 낙하 (터널링 방지용 Raycast 포함)
+    private IEnumerator DropUntilGround(Vector2 start, float fallSpeed)
+    {
+        float elapsed = 0f;
+        Vector2 pos = start;
+        rb.position = pos;
+
+        while (elapsed < slamMaxFallSeconds)
+        {
+            float step = fallSpeed * Time.fixedDeltaTime;
+            Vector2 next = pos + Vector2.down * step;
+
+            // 이동 경로만큼 레이캐스트해서 지면 히트 감지(터널링 방지)
+            RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.down, step + groundCheckRadius, groundMask);
+            if (hit.collider != null)
+            {
+                // 접점 바로 위로 스냅(반경만큼 띄워서 박힘 방지)
+                float snapY = hit.point.y + groundCheckRadius * 0.95f;
+                rb.position = new Vector2(pos.x, snapY);
+                Debug.Log("[BossDuck] Ground Layer 감지 → 낙하 종료");
+                yield break;
+            }
+
+            // 아직 지면 없음 계속 낙하
+            rb.position = next;
+            pos = next;
+
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        Debug.LogWarning("[BossDuck] 낙하 타임아웃: slamMaxFallSeconds 내에 Ground를 찾지 못함");
+    }
+
+    // ─────────────────────── Shockwave (좌/우 자동 회전) ───────────────────────
+
+    private Quaternion DirToRotation(Vector2 dir)
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (shockwaveForwardAxis == TwoDAxis.Up) angle -= 90f;
+        return Quaternion.Euler(0f, 0f, angle);
+    }
+
+    private IEnumerator SpawnShockwavesFromFirePoints()
+    {
+        bool leftOk = firePointLeft != null;
+        bool rightOk = firePointRight != null;
+
+        if (!leftOk && !rightOk)
+        {
+            Debug.LogWarning("[BossDuck] Fire 포인트가 비어 있습니다. 충격파 미생성.");
+            yield break;
+        }
+
+        if (leftOk && shockwavePrefab)
+        {
+            Quaternion rotL = DirToRotation(Vector2.left);
+            Instantiate(shockwavePrefab, firePointLeft.position, rotL);
+            Debug.Log($"[BossDuck] Shockwave @Left (rotZ={rotL.eulerAngles.z:0.0}°)");
+        }
+
+        if (shockwaveSideDelay > 0f)
+            yield return new WaitForSeconds(shockwaveSideDelay);
+
+        if (rightOk && shockwavePrefab)
+        {
+            Quaternion rotR = DirToRotation(Vector2.right);
+            Instantiate(shockwavePrefab, firePointRight.position, rotR);
+            Debug.Log($"[BossDuck] Shockwave @Right (rotZ={rotR.eulerAngles.z:0.0}°)");
+        }
+    }
+
+    // ─────────────────────── Charge (물리틱 동기화) ───────────────────────
+
     private IEnumerator CoChargeSequence()
     {
-        state = BossState.Charging;
+        Debug.Log("[BossDuck] 패턴 시작: 돌진");
         lastChargeTime = Time.time;
 
         rb.velocity = Vector2.zero;
@@ -190,52 +306,99 @@ public class BossDuck : MonoBehaviour
         if (_hitWallDuringCharge)
         {
             _hitWallDuringCharge = false;
+            Debug.Log("[BossDuck] 벽 충돌 → 2차 돌진");
             yield return StartCoroutine(CoChargeOnce());
         }
 
+        Debug.Log("[BossDuck] 패턴 종료: 돌진");
         state = BossState.Chase;
     }
 
     private IEnumerator CoChargeOnce()
     {
-        chargeDir = ((Vector2)(player.position - transform.position)).normalized;
+        if (player)
+            chargeDir = ((Vector2)(player.position - transform.position)).normalized;
+        else
+            chargeDir = (sr.flipX ? Vector2.left : Vector2.right);
+
         if (anim) anim.SetTrigger("charge");
 
         float t = 0f;
         while (t < chargeDuration)
         {
             rb.velocity = chargeDir * chargeSpeed;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, chargeDir, 0.6f, wallMask);
+
+            float dist = chargeSpeed * Time.fixedDeltaTime + chargeSkin;
+            RaycastHit2D hit = Physics2D.CircleCast(rb.position, chargeCollisionRadius, chargeDir, dist, wallMask);
             if (hit.collider != null)
             {
                 _hitWallDuringCharge = true;
+                Debug.Log("[BossDuck] 돌진 중 벽 감지");
                 break;
             }
-            t += Time.deltaTime;
-            yield return null;
+
+            t += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
         }
 
         rb.velocity = Vector2.zero;
         yield return null;
     }
 
+    // ─────────────────────── Summon (A/B 확률, 위쪽 반원, 5초 후 삭제) ───────────────────────
+
     private IEnumerator CoSummon()
     {
-        state = BossState.Summoning;
+        Debug.Log("[BossDuck] 패턴 시작: 소환");
         lastSummonTime = Time.time;
 
         if (anim) anim.SetTrigger("summon");
         yield return new WaitForSeconds(0.4f);
 
-        int count = Random.Range(minionMin, minionMax + 1);
-        for (int i = 0; i < count; i++)
+        if (!minionPrefabA && !minionPrefabB)
         {
-            float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-            Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * Random.Range(0.5f, minionSpawnRadius);
+            Debug.LogWarning("[BossDuck] 소환 실패: 미니언 프리팹 A/B가 모두 비어 있음");
+            state = BossState.Chase;
+            yield break;
+        }
+        if (!minionPrefabA) { Debug.LogWarning("[BossDuck] A 프리팹 없음 → B만 소환"); minionAChance = 0f; }
+        if (!minionPrefabB) { Debug.LogWarning("[BossDuck] B 프리팹 없음 → A만 소환"); minionAChance = 1f; }
+
+        int count = Random.Range(minionMin, minionMax + 1);
+        int tries = 0, spawned = 0;
+        int aSpawned = 0, bSpawned = 0;
+
+        while (spawned < count && tries < count * 8)
+        {
+            tries++;
+
+            // 위쪽 반원(0~180도)
+            float angleDeg = Random.Range(0f, 180f);
+            float angleRad = angleDeg * Mathf.Deg2Rad;
+
+            float r = Random.Range(0.5f, minionSpawnRadius);
+            Vector2 offset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * r;
             Vector2 spawnPos = (Vector2)transform.position + offset;
-            Instantiate(minionPrefab, spawnPos, Quaternion.identity);
+
+            if (spawnPos.y < transform.position.y)
+                continue;
+
+            if (Physics2D.OverlapCircle(spawnPos, 0.3f, wallMask))
+                continue;
+
+            bool pickA = Random.value < minionAChance;
+            GameObject prefab = pickA ? minionPrefabA : minionPrefabB;
+            if (!prefab) prefab = pickA ? minionPrefabB : minionPrefabA;
+            if (!prefab) continue;
+
+            GameObject newMinion = Instantiate(prefab, spawnPos, Quaternion.identity);
+            Destroy(newMinion, 5f); // 5초 뒤 자동 삭제
+
+            spawned++;
+            if (prefab == minionPrefabA) aSpawned++; else bSpawned++;
         }
 
+        Debug.Log($"[BossDuck] 소환 완료: 총 {spawned} (A:{aSpawned}, B:{bSpawned}) - 위쪽 반원 / 5초 후 삭제");
         yield return new WaitForSeconds(0.4f);
         state = BossState.Chase;
     }
@@ -243,8 +406,7 @@ public class BossDuck : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(1, 0, 0, 0.25f);
-        Gizmos.DrawWireSphere(transform.position, PeckRangeWorld);
+        // 필요시 추가 기즈모 그리기
     }
 #endif
 }
