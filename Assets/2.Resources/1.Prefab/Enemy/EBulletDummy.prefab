@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7831555117999434245}
   - component: {fileID: -8812302456898984803}
   - component: {fileID: -977579023082253576}
-  - component: {fileID: 4742704789499766377}
+  - component: {fileID: 5522974717516419834}
   m_Layer: 0
   m_Name: EBulletDummy
   m_TagString: Untagged
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   duration: 5
---- !u!58 &4742704789499766377
+--- !u!58 &5522974717516419834
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

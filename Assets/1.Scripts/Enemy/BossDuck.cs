@@ -98,7 +98,6 @@ public class BossDuck : MonoBehaviour
         rb.freezeRotation = true;   // 회전 고정
         state = BossState.Chase;
     }
-
     private IEnumerator FindPlayerLoop()
     {
         while (!player)
@@ -120,11 +119,21 @@ public class BossDuck : MonoBehaviour
                 rb.velocity = toPlayer.normalized * moveSpeed;
                 if (anim) anim.SetFloat("speed", rb.velocity.magnitude);
                 break;
-            default:
+
+            // 코루틴이 속도를 직접 관리하는 상태 건드리지 않음
+            case BossState.Jumping:
+            case BossState.Charging:
+            case BossState.Summoning:
+                // do nothing (velocity는 코루틴에서 설정)
+                break;
+
+            case BossState.Stunned:
+            case BossState.Idle:
                 rb.velocity = Vector2.zero;
                 break;
         }
     }
+
 
     private void Update()
     {
@@ -355,37 +364,39 @@ public class BossDuck : MonoBehaviour
         if (anim) anim.SetTrigger("summon");
         yield return new WaitForSeconds(0.4f);
 
+        // 프리팹 가드
         if (!minionPrefabA && !minionPrefabB)
         {
-            Debug.LogWarning("[BossDuck] 소환 실패: 미니언 프리팹 A/B가 모두 비어 있음");
+            Debug.LogWarning("[BossDuck] 소환 실패, 미니언 프리팹 A와 B가 모두 비어 있음");
             state = BossState.Chase;
             yield break;
         }
-        if (!minionPrefabA) { Debug.LogWarning("[BossDuck] A 프리팹 없음 → B만 소환"); minionAChance = 0f; }
-        if (!minionPrefabB) { Debug.LogWarning("[BossDuck] B 프리팹 없음 → A만 소환"); minionAChance = 1f; }
+        if (!minionPrefabA) { Debug.LogWarning("[BossDuck] A 프리팹 없음, B만 소환"); minionAChance = 0f; }
+        if (!minionPrefabB) { Debug.LogWarning("[BossDuck] B 프리팹 없음, A만 소환"); minionAChance = 1f; }
 
         int count = Random.Range(minionMin, minionMax + 1);
         int tries = 0, spawned = 0;
         int aSpawned = 0, bSpawned = 0;
 
-        while (spawned < count && tries < count * 8)
+        float bossY = transform.position.y;
+
+        while (spawned < count && tries < count * 10)
         {
             tries++;
 
-            // 위쪽 반원(0~180도)
-            float angleDeg = Random.Range(0f, 180f);
-            float angleRad = angleDeg * Mathf.Deg2Rad;
+            // 같은 높이에서만 스폰: 보스 y를 그대로 사용
+            // 좌우로 랜덤 오프셋, 중심 너무 가까운 곳은 피함
+            float xOffset = Random.Range(-minionSpawnRadius, minionSpawnRadius);
+            if (Mathf.Abs(xOffset) < 0.5f)
+                xOffset = 0.5f * Mathf.Sign((xOffset == 0f) ? (Random.value - 0.5f) : xOffset);
 
-            float r = Random.Range(0.5f, minionSpawnRadius);
-            Vector2 offset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * r;
-            Vector2 spawnPos = (Vector2)transform.position + offset;
+            Vector2 spawnPos = new Vector2(transform.position.x + xOffset, bossY);
 
-            if (spawnPos.y < transform.position.y)
-                continue;
-
+            // 장애물 위 스폰 방지
             if (Physics2D.OverlapCircle(spawnPos, 0.3f, wallMask))
                 continue;
 
+            // 타입 선택
             bool pickA = Random.value < minionAChance;
             GameObject prefab = pickA ? minionPrefabA : minionPrefabB;
             if (!prefab) prefab = pickA ? minionPrefabB : minionPrefabA;
@@ -398,10 +409,11 @@ public class BossDuck : MonoBehaviour
             if (prefab == minionPrefabA) aSpawned++; else bSpawned++;
         }
 
-        Debug.Log($"[BossDuck] 소환 완료: 총 {spawned} (A:{aSpawned}, B:{bSpawned}) - 위쪽 반원 / 5초 후 삭제");
+        Debug.Log($"[BossDuck] 소환 완료, 총 {spawned}마리 (A:{aSpawned}, B:{bSpawned}), 보스와 같은 높이에서 생성, 5초 후 삭제");
         yield return new WaitForSeconds(0.4f);
         state = BossState.Chase;
     }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

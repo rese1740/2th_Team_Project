@@ -4310,6 +4310,8 @@ GameObject:
   - component: {fileID: 869151204}
   - component: {fileID: 869151203}
   - component: {fileID: 869151206}
+  - component: {fileID: 869151207}
+  - component: {fileID: 869151208}
   m_Layer: 0
   m_Name: BossDummy
   m_TagString: Untagged
@@ -4353,8 +4355,8 @@ MonoBehaviour:
   moveSpeed: 4
   slamRiseHeight: 10
   slamRiseTime: 0.25
-  hangTime: 3
-  stunAfterSlam: 2.5
+  hangTime: 2
+  stunAfterSlam: 3
   slamDecalPrefab: {fileID: 5006686032466867144, guid: b35a0514b7af67141a6cbe6e00c4ae55, type: 3}
   firePointLeft: {fileID: 673756006}
   firePointRight: {fileID: 1797277756}
@@ -4363,8 +4365,8 @@ MonoBehaviour:
   shockwaveSideDelay: 0
   shockwaveForwardAxis: 0
   chargeWindup: 1
-  chargeSpeed: 10
-  chargeDuration: 0.8
+  chargeSpeed: 40
+  chargeDuration: 0.4
   wallMask:
     serializedVersion: 2
     m_Bits: 0
@@ -4376,9 +4378,9 @@ MonoBehaviour:
   minionMin: 3
   minionMax: 7
   minionSpawnRadius: 2.5
-  slamCooldown: 10
+  slamCooldown: 15
   chargeCooldown: 6
-  summonCooldown: 12
+  summonCooldown: 17
   facingFlipThreshold: 0.05
   groundMask:
     serializedVersion: 2
@@ -4465,8 +4467,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &869151206
-CapsuleCollider2D:
+--- !u!61 &869151206
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4498,8 +4500,47 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_EdgeRadius: 0
+--- !u!114 &869151207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869151201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cddd2d3d1f06d444a1a4cce0835912d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  duration: 1000000
+--- !u!114 &869151208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869151201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593364cfaeac7e943925c5ceb7de49eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  currentHealth: 0
+  sr: {fileID: 0}
 --- !u!1 &870073508
 GameObject:
   m_ObjectHideFlags: 0
@@ -12011,14 +12052,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
-    - target: {fileID: 34216831161828077, guid: de2564eeb46117242b7d508957110ec6, type: 3}
-      propertyPath: m_Size.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 34216831161828077, guid: de2564eeb46117242b7d508957110ec6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1868639352382766877, guid: de2564eeb46117242b7d508957110ec6, type: 3}
       propertyPath: m_Name
       value: BDummyL
@@ -12088,18 +12121,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
-    - target: {fileID: 1541865120975766800, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
-      propertyPath: m_Size.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1541865120975766800, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1541865120975766800, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4910632714518866029, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: m_Name
       value: BDummyS
