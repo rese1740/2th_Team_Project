@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonScaler : MonoBehaviour
@@ -12,11 +11,11 @@ public class ButtonScaler : MonoBehaviour
     public float scaleDuration = 0.2f;
 
     private Vector3 originalScale;
-    private Tween currentTween;
     private Button button;
     private Image buttonImage;
-    [HideInInspector] public bool isSelected = false;
-
+    public bool isSelected = false;
+    public bool isUse = false;
+    public ButtonScaler otherButton;
     private ButtonGroupManager groupManager;
 
     void Awake()
@@ -28,43 +27,66 @@ public class ButtonScaler : MonoBehaviour
 
         groupManager = GetComponentInParent<ButtonGroupManager>();
         groupManager.RegisterButton(this);
+       
     }
 
-    public void AnimateScale(bool enlarge)
+    private void Update()
     {
-        currentTween?.Kill();
-
-        if (enlarge)
-            currentTween = transform.DOScale(originalScale * scaleUpSize, scaleDuration).SetEase(Ease.OutBack);
-        else
-            currentTween = transform.DOScale(originalScale, scaleDuration).SetEase(Ease.InBack);
+        if (isUse)
+        {
+            SetSelected();
+        }
     }
+    public void ForceSelect()
+    {
+        if (isSelected) return;
+
+        otherButton.isSelected = true;
+        isSelected = true;
+
+        if (groupManager.selectedCount == 0)
+        {
+            PlayerSO.Instance.saved1 = stateToSet;
+        }
+        else if (groupManager.selectedCount == 1)
+        {
+            PlayerSO.Instance.saved2 = stateToSet;
+        }
+
+        if (groupManager != null)
+        {
+            groupManager.selectedCount++;
+
+            if (groupManager.selectedCount >= 2 && groupManager.popupAnimator != null)
+            {
+                Debug.Log("ㅈㅂ 자고싶어요");
+                groupManager.UpdatePlayerElement();
+                groupManager.popupAnimator.Hide();
+            }
+        }
+    }
+
 
     public void OnButtonClicked()
     {
         groupManager.OnButtonClicked(this);
     }
 
-    public void SetSelected(bool selected)
+    public void SetSelected()
     {
-        isSelected = selected;
-        AnimateScale(isSelected);
-
         if (isSelected)
         {
             iconImg.enabled = true;
             iconImg.sprite = iconSprite;
 
-            buttonImage.color = Color.gray;
-            button.interactable = false;
-
-            PlayerSO.Instance.currentElement = stateToSet;
+            buttonImage.color = Color.white;
+            button.interactable = true;
         }
         else
         {
             iconImg.enabled = false;
-            buttonImage.color = Color.white;
-            button.interactable = true;
+            buttonImage.color = Color.gray;
+            button.interactable = false;
         }
     }
 }

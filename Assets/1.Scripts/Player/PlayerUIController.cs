@@ -29,6 +29,11 @@ public class PlayerUIController : MonoBehaviour
             OpenNpcWindow(currentNpc);
             UIStateManager.Instance.isUIOpen = false;
         }
+        else if (Input.GetKeyDown(KeyCode.V))
+        {
+            elementPanel.Show();
+            UIStateManager.Instance.isUIOpen = elementPanel.gameObject.activeSelf;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

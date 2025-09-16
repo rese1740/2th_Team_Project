@@ -21,4 +21,7 @@ MonoBehaviour:
   critValue: 50
   critPower: 200
   Gold: 100
-  currentElement: 0
+  currentElement_Q: 1
+  currentElement_E: 5
+  saved1: 1
+  saved2: 2

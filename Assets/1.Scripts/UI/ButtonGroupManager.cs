@@ -5,14 +5,29 @@ using UnityEngine.UI;
 public class ButtonGroupManager : MonoBehaviour
 {
     private List<ButtonScaler> buttons = new List<ButtonScaler>();
-    private List<ButtonScaler> selectedButtons = new List<ButtonScaler>();
+    public List<ButtonScaler> selectedButtons = new List<ButtonScaler>();
 
     [Header("선택된 버튼을 표시할 UI 슬롯")]
     public Image slot1Icon;
     public Image slot2Icon;
-
-    [Header("팝업 Animator")]
     public UIPopupAnimator popupAnimator;
+   
+    public int selectedCount = 0;
+
+    private Dictionary<(PlayerElement, PlayerElement), PlayerElement> elementCombinations =
+        new Dictionary<(PlayerElement, PlayerElement), PlayerElement>()
+    {
+        { (PlayerElement.Fire, PlayerElement.Water), PlayerElement.Steam },
+        { (PlayerElement.Water, PlayerElement.Fire), PlayerElement.Steam },
+        { (PlayerElement.Fire, PlayerElement.Wind), PlayerElement.Firestorm },
+        { (PlayerElement.Wind, PlayerElement.Fire), PlayerElement.Firestorm },
+        { (PlayerElement.Water, PlayerElement.Earth), PlayerElement.Mud },
+        { (PlayerElement.Earth, PlayerElement.Water), PlayerElement.Mud },
+        { (PlayerElement.Wind, PlayerElement.Earth), PlayerElement.Sandstorm },
+        { (PlayerElement.Earth, PlayerElement.Wind), PlayerElement.Sandstorm },
+    };
+
+   
 
     public void RegisterButton(ButtonScaler button)
     {
@@ -22,49 +37,29 @@ public class ButtonGroupManager : MonoBehaviour
 
     public void OnButtonClicked(ButtonScaler clicked)
     {
-        if (clicked.isSelected)
-        {
-            clicked.SetSelected(false);
-            selectedButtons.Remove(clicked);
-        }
-        else
-        {
-            if (selectedButtons.Count < 2)
-            {
-                selectedButtons.Add(clicked);
-                clicked.SetSelected(true);
-            }
-            else
-            {
-                ButtonScaler oldest = selectedButtons[0];
-                oldest.SetSelected(false);
-                selectedButtons.RemoveAt(0);
+        PlayerSO.Instance.currentElement_Q = clicked.stateToSet;
+        Debug.Log(clicked.stateToSet);
 
-                selectedButtons.Add(clicked);
-                clicked.SetSelected(true);
-            }
+        if (popupAnimator != null)
+            popupAnimator.Hide();
 
-            if (popupAnimator != null)
-                popupAnimator.Hide();
-        }
-
+        clicked.SetSelected();
         UpdateUI();
+        UpdatePlayerElement();
     }
+
 
     private void UpdateUI()
     {
-        for (int i = 0; i < selectedButtons.Count; i++)
-        {
-            if (i == 0)
-            {
-                slot1Icon.enabled = true;
-                slot1Icon.sprite = selectedButtons[0].iconSprite;
-            }
-            else if (i == 1)
-            {
-                slot2Icon.enabled = true;
-                slot2Icon.sprite = selectedButtons[1].iconSprite;
-            }
-        }
+       
+    }
+
+    public void UpdatePlayerElement()
+    {
+        PlayerElement e1 = PlayerSO.Instance.saved1;
+        PlayerElement e2 = PlayerSO.Instance.saved2;
+
+        if (elementCombinations.TryGetValue((e1, e2), out PlayerElement combined))
+            PlayerSO.Instance.currentElement_E = combined;
     }
 }

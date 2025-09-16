@@ -2,11 +2,15 @@ using UnityEngine;
 
 public enum PlayerElement
 {
-    None = 0,
-    Fire = 1,
-    Water = 2,
-    Earth = 3,
-    Air = 4
+    None,
+    Fire,
+    Water,
+    Earth,
+    Wind,
+    Steam,
+    Firestorm,
+    Mud,
+    Sandstorm
 }
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "PlayerSO", order = 1)]
@@ -42,12 +46,14 @@ public class PlayerSO : ScriptableObject
     [Range(0, 1000)] public int Gold = 100;
 
     [Tooltip("플레이어 속성")]
-    public PlayerElement currentElement = PlayerElement.None;
-
-
+    public PlayerElement currentElement_Q = PlayerElement.None;
+    public PlayerElement currentElement_E = PlayerElement.None;
+    public PlayerElement saved1;
+    public PlayerElement saved2;
 
     public void Init()
     {
         Instance = this;
+        Debug.Log("아니지?");
     }
 }

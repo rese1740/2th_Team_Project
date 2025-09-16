@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour
 {
-    public PlayerElement currentElement;
+    public PlayerElement currentElement_Q;
+    public PlayerElement currentElement_E;
 
     [Tooltip("플레이어 스킬 목록")]
     [SerializeField] private List<SkillData> skillList; 
@@ -26,14 +27,22 @@ public class PlayerSkillController : MonoBehaviour
     {
         HandleCooldowns();
 
-        currentElement = PlayerSO.Instance.currentElement;
+        currentElement_Q = PlayerSO.Instance.currentElement_Q;
+        currentElement_E = PlayerSO.Instance.currentElement_E;
         if (Input.GetKeyDown(KeyCode.Q)) UseSkill(KeyCode.Q);
         if (Input.GetKeyDown(KeyCode.E)) UseSkill(KeyCode.E);
     }
 
     private void UseSkill(KeyCode key)
     {
-        var skillKey = (currentElement, key);
+        PlayerElement element = key switch
+        {
+            KeyCode.Q => currentElement_Q,
+            KeyCode.E => currentElement_E,
+            _ => PlayerElement.None
+        };
+
+        var skillKey = (element, key);
 
         if (skillMap.TryGetValue(skillKey, out SkillData skill))
         {
@@ -48,6 +57,7 @@ public class PlayerSkillController : MonoBehaviour
             cooldownTimers[skillKey] = skill.cooldown;
         }
     }
+
 
     private void HandleCooldowns()
     {

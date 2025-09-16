@@ -1,19 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIPopupAnimator : MonoBehaviour
 {
-    public float duration = 0.3f; 
-    public AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); 
+    public float duration = 0.3f;
+    public AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    public bool beginHiden = true;
 
     private Vector3 originalScale;
 
     void Awake()
     {
         originalScale = transform.localScale;
-        transform.localScale = Vector3.zero; 
-        gameObject.SetActive(false); 
+
+        if (beginHiden)
+        {
+            gameObject.SetActive(false);
+            transform.localScale = Vector3.zero;
+        }
     }
 
     public void Show()
@@ -27,6 +31,7 @@ public class UIPopupAnimator : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(ScaleRoutine(transform.localScale, Vector3.zero, () => gameObject.SetActive(false)));
+        UIStateManager.Instance.isUIOpen = false;
     }
 
     private IEnumerator ScaleRoutine(Vector3 from, Vector3 to, System.Action onComplete = null)
