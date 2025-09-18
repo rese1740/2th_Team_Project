@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
   m_Name: FireQ
   m_EditorClassIdentifier: 
-  skillName: "\uBD88 Q"
+  skillName: "\uBD88\uAF43 \uACE0\uB9AC"
   key: 113
   elementType: 1
   skillEffectPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
-  damage: 0
-  cooldown: 0
+  damage: 10
+  cooldown: 10
