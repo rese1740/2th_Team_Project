@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - NPC
   - Boundary
+  - Boss
+  - Goal
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - UI
   - Player
   - Ground
-  - 
-  - 
+  - Enemy
+  - Boss
   - 
   - 
   - 

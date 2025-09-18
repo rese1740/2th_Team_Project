@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8616101925567455038}
   - component: {fileID: 7744022028443780320}
   - component: {fileID: 4114080353133586042}
-  m_Layer: 0
+  - component: {fileID: 6208110124585844998}
+  m_Layer: 8
   m_Name: BDummyL
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +145,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -176,6 +177,20 @@ MonoBehaviour:
   firePoint: {fileID: 5203766035473446050}
   spriteRenderer: {fileID: 0}
   gfxRoot: {fileID: 0}
+--- !u!114 &6208110124585844998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868639352382766877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bec8bc2ecc16d4dbaf674f0165a716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpData: {fileID: 11400000, guid: 0a63911565d00114e88cd069e027305f, type: 2}
+  sr: {fileID: 0}
 --- !u!1 &3093925203361805445
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5203766035473446050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
