@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossHealth : MonoBehaviour
 {
-    [Header("Boss Stats")]
+    [Header("Stats")]
     public float maxHealth = 100f;
     public float currentHealth;
 
@@ -20,7 +20,7 @@ public class BossHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        Debug.Log("보스 HP: " + currentHealth);
+        Debug.Log("적 HP: " + currentHealth);
 
         if (sr != null)
         {
@@ -43,7 +43,7 @@ public class BossHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("보스 사망!");
+        Debug.Log("적 사망!");
         // 여기에 죽었을 때의 처리(애니메이션, 오브젝트 비활성화 등) 추가
         gameObject.SetActive(false);
     }
