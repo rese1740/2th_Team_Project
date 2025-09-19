@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
   m_Name: WaterQ
   m_EditorClassIdentifier: 
-  skillName: "\uD30C\uB3C4 \uBAB0\uAE30"
+  skillName: "\uD30C\uB3D7\uACB0"
   key: 113
   elementType: 2
   skillEffectPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
