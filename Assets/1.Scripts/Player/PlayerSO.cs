@@ -5,7 +5,7 @@ public enum PlayerElement
     None,
     Fire,
     Water,
-    Earth,
+    Ice,
     Wind,
     Steam,
     Firestorm,

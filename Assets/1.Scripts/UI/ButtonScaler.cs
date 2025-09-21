@@ -59,7 +59,6 @@ public class ButtonScaler : MonoBehaviour
 
             if (groupManager.selectedCount >= 2 && groupManager.popupAnimator != null)
             {
-                Debug.Log("ㅈㅂ 자고싶어요");
                 groupManager.UpdatePlayerElement();
                 groupManager.popupAnimator.Hide();
             }
