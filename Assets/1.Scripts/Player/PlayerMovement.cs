@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Settings")]
-    public  bool isGrounded;
+    public bool isGrounded;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
@@ -13,12 +11,14 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     public PlayerSO playerData;
+    Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-       rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         playerData.Init();
     }
 
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         Move();
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (Input.GetKeyDown(KeyCode.W)&& isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             Jump();
         }
@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
     {
         float move = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(move * playerData.moveSpeed, rb.velocity.y);
+
+        bool isWalking = move != 0;
+        animator.SetBool("isMove", isWalking);
 
         if (move > 0 && !facingRight)
         {
@@ -52,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, playerData.jumpForce);
+        animator.SetTrigger("jump");
     }
 
     void Flip()

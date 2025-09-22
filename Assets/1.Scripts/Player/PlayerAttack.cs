@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Components")]
     public PlayerSO playerData;
+    Animator animator;
     SpriteRenderer sr;
 
     [Header("Settings")]
@@ -13,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
 
