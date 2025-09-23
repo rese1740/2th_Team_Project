@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BossDuck : MonoBehaviour
 {
-    public enum BossState { Idle, Chase, /*Attacking,*/ Jumping, Charging, Summoning, Stunned }
+    public enum BossState { Idle, Chase, Jumping, Charging, Summoning, Stunned }
 
     [Header("Refs")]
     [SerializeField] private Transform player;
@@ -22,7 +22,6 @@ public class BossDuck : MonoBehaviour
     [SerializeField] private float slamRiseTime = 0.25f;
     [Tooltip("상공에서 잠깐 멈추는 시간(연출용)")]
     [SerializeField] private float hangTime = 0.15f;
-    // (중요) 더 이상 사용 안 함: 지면까지 계속 떨어지므로 dropTime 제거
     [Tooltip("착지 후 멍해 있는 시간(이 동안 플레이어에게 기회 제공)")]
     [SerializeField] private float stunAfterSlam = 2.5f;
     [Tooltip("착지 지점 표시용 데칼(선택)")]
@@ -35,7 +34,7 @@ public class BossDuck : MonoBehaviour
     [SerializeField] private bool spawnShockwaveOnSlam = true;
     [SerializeField] private float shockwaveSideDelay = 0f;
 
-    public enum TwoDAxis { Right, Up } // 충격파 프리팹의 전진 방향 축
+    public enum TwoDAxis { Right, Up } // 충격파 전진 방향 
     [Tooltip("충격파 프리팹이 전진할 때 사용하는 로컬 축(+X면 Right, +Y면 Up)")]
     [SerializeField] private TwoDAxis shockwaveForwardAxis = TwoDAxis.Right;
 
@@ -54,6 +53,7 @@ public class BossDuck : MonoBehaviour
     [SerializeField] private int minionMin = 7;
     [SerializeField] private int minionMax = 12;
     [SerializeField] private float minionSpawnRadius = 2.5f;
+    [SerializeField] private LayerMask spawnBlockMask; //스폰 불가 레이어(벽/기둥/장식/금지영역 등)
 
     [Header("Pattern Cooldowns")]
     [SerializeField] private float slamCooldown = 10f;
@@ -68,7 +68,7 @@ public class BossDuck : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.4f; // 보스 발 밑 원반 체크 반경
 
     [Header("Slam Fall")]
-    [SerializeField] private float slamFallSpeed = 30f;      // 낙하 속도(유닛/초)
+    [SerializeField] private float slamFallSpeed = 30f;      // 낙하 속도
     [SerializeField] private float slamMaxFallSeconds = 2f;  // 안전 타임아웃(지면 못 찾을 때)
 
     private BossState state = BossState.Idle;
@@ -93,11 +93,12 @@ public class BossDuck : MonoBehaviour
             if (p) player = p.transform;
             else StartCoroutine(FindPlayerLoop());
         }
-        // 권장 물리 세팅
-        rb.gravityScale = 0f;       // 2D 보스는 주로 0
+        //물리 세팅
+        rb.gravityScale = 0f;       
         rb.freezeRotation = true;   // 회전 고정
         state = BossState.Chase;
     }
+
     private IEnumerator FindPlayerLoop()
     {
         while (!player)
@@ -120,11 +121,10 @@ public class BossDuck : MonoBehaviour
                 if (anim) anim.SetFloat("speed", rb.velocity.magnitude);
                 break;
 
-            // 코루틴이 속도를 직접 관리하는 상태 건드리지 않음
+            
             case BossState.Jumping:
             case BossState.Charging:
-            case BossState.Summoning:
-                // do nothing (velocity는 코루틴에서 설정)
+            case BossState.Summoning:          
                 break;
 
             case BossState.Stunned:
@@ -133,7 +133,6 @@ public class BossDuck : MonoBehaviour
                 break;
         }
     }
-
 
     private void Update()
     {
@@ -185,7 +184,7 @@ public class BossDuck : MonoBehaviour
         if (anim) anim.SetTrigger("slam_up");
         Vector2 startPos = rb.position;
         Vector2 apexPos = new Vector2(targetPos.x, targetPos.y + slamRiseHeight);
-        yield return StartCoroutine(InterpPosition(startPos, apexPos, slamRiseTime)); // 상승은 시간 보간
+        yield return StartCoroutine(InterpPosition(startPos, apexPos, slamRiseTime));
 
         // 2) 상공 잠깐 정지(연출)
         if (hangTime > 0f) yield return new WaitForSeconds(hangTime);
@@ -209,7 +208,7 @@ public class BossDuck : MonoBehaviour
         state = BossState.Chase;
     }
 
-    // 상승/수평 이동 등 시간 보간 유틸 (물리틱 기준)
+    // 상승/수평 이동 등 시간 보간 유틸
     private IEnumerator InterpPosition(Vector2 from, Vector2 to, float duration, bool fastCurve = false)
     {
         float t = 0f;
@@ -227,24 +226,33 @@ public class BossDuck : MonoBehaviour
         rb.position = to;
     }
 
-    // 지면 만날 때까지 지속 낙하 (터널링 방지용 Raycast 포함)
+    // 지면 만날 때까지 지속 낙하 + 타임아웃 보정
     private IEnumerator DropUntilGround(Vector2 start, float fallSpeed)
     {
         float elapsed = 0f;
         Vector2 pos = start;
         rb.position = pos;
 
+        // 현재 콜라이더의 절반 높이를 구해 스냅 높이로 사용
+        float HalfHeight()
+        {
+            float hh = groundCheckRadius;
+            var col2d = GetComponent<Collider2D>();
+            if (col2d != null) hh = col2d.bounds.extents.y;
+            return hh;
+        }
+
         while (elapsed < slamMaxFallSeconds)
         {
             float step = fallSpeed * Time.fixedDeltaTime;
             Vector2 next = pos + Vector2.down * step;
 
-            // 이동 경로만큼 레이캐스트해서 지면 히트 감지(터널링 방지)
+            // 이동 경로만큼 레이캐스트해서 지면 히트 감지
             RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.down, step + groundCheckRadius, groundMask);
             if (hit.collider != null)
             {
-                // 접점 바로 위로 스냅(반경만큼 띄워서 박힘 방지)
-                float snapY = hit.point.y + groundCheckRadius * 0.95f;
+                // 접점 바로 위로 스냅
+                float snapY = hit.point.y + HalfHeight() * 0.98f;
                 rb.position = new Vector2(pos.x, snapY);
                 Debug.Log("[BossDuck] Ground Layer 감지 → 낙하 종료");
                 yield break;
@@ -258,7 +266,19 @@ public class BossDuck : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        Debug.LogWarning("[BossDuck] 낙하 타임아웃: slamMaxFallSeconds 내에 Ground를 찾지 못함");
+        // 타임아웃 보정
+        Debug.LogWarning("[BossDuck] 낙하 타임아웃: 보정 레이 시도");
+        RaycastHit2D fixHit = Physics2D.Raycast(rb.position, Vector2.down, 100f, groundMask);
+        if (fixHit.collider != null)
+        {
+            float snapY = fixHit.point.y + (GetComponent<Collider2D>() ? GetComponent<Collider2D>().bounds.extents.y : groundCheckRadius) * 0.98f;
+            rb.position = new Vector2(rb.position.x, snapY);
+            Debug.Log("[BossDuck] 보정 레이 성공 → 강제 착지");
+        }
+        else
+        {
+            Debug.LogWarning("[BossDuck] 보정 실패: 지면을 찾지 못함(맵 레이어 설정 확인 필요)");
+        }
     }
 
     // ─────────────────────── Shockwave (좌/우 자동 회전) ───────────────────────
@@ -328,7 +348,7 @@ public class BossDuck : MonoBehaviour
         if (player)
             chargeDir = ((Vector2)(player.position - transform.position)).normalized;
         else
-            chargeDir = (sr.flipX ? Vector2.left : Vector2.right);
+            chargeDir = (sr && sr.flipX) ? Vector2.left : Vector2.right;
 
         if (anim) anim.SetTrigger("charge");
 
@@ -341,8 +361,11 @@ public class BossDuck : MonoBehaviour
             RaycastHit2D hit = Physics2D.CircleCast(rb.position, chargeCollisionRadius, chargeDir, dist, wallMask);
             if (hit.collider != null)
             {
+                // 벽 앞에 정확히 스냅(재충돌/박힘 방지)
+                Vector2 snapPos = hit.point - chargeDir * (chargeCollisionRadius + 0.02f);
+                rb.position = snapPos;
                 _hitWallDuringCharge = true;
-                Debug.Log("[BossDuck] 돌진 중 벽 감지");
+                Debug.Log("[BossDuck] 돌진 중 벽 감지 → 스냅 & 중단");
                 break;
             }
 
@@ -354,7 +377,7 @@ public class BossDuck : MonoBehaviour
         yield return null;
     }
 
-    // ─────────────────────── Summon (A/B 확률, 위쪽 반원, 5초 후 삭제) ───────────────────────
+    // ─────────────────────── Summon (A/B 확률, 같은 높이, 5초 후 삭제) ───────────────────────
 
     private IEnumerator CoSummon()
     {
@@ -384,16 +407,15 @@ public class BossDuck : MonoBehaviour
         {
             tries++;
 
-            // 같은 높이에서만 스폰: 보스 y를 그대로 사용
-            // 좌우로 랜덤 오프셋, 중심 너무 가까운 곳은 피함
+            // 같은 높이에서만 스폰: 보스 y를 그대로 사용         
             float xOffset = Random.Range(-minionSpawnRadius, minionSpawnRadius);
             if (Mathf.Abs(xOffset) < 0.5f)
                 xOffset = 0.5f * Mathf.Sign((xOffset == 0f) ? (Random.value - 0.5f) : xOffset);
 
             Vector2 spawnPos = new Vector2(transform.position.x + xOffset, bossY);
 
-            // 장애물 위 스폰 방지
-            if (Physics2D.OverlapCircle(spawnPos, 0.3f, wallMask))
+            // 스폰 금지 영역 체크(벽/기둥/장식/금지영역 등 통합 마스크)
+            if (Physics2D.OverlapCircle(spawnPos, 0.3f, spawnBlockMask))
                 continue;
 
             // 타입 선택
@@ -414,11 +436,16 @@ public class BossDuck : MonoBehaviour
         state = BossState.Chase;
     }
 
-
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        // 필요시 추가 기즈모 그리기
+        // Ground 체크 반경 시각화
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, groundCheckRadius);
+
+        // FirePoints 시각화
+        if (firePointLeft) { Gizmos.color = Color.cyan; Gizmos.DrawSphere(firePointLeft.position, 0.08f); }
+        if (firePointRight) { Gizmos.color = Color.cyan; Gizmos.DrawSphere(firePointRight.position, 0.08f); }
     }
 #endif
 }
