@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +7,30 @@ public enum ItemType
     Artifact
 }
 
-public enum ElementType
+public enum EffectType
 {
-    None,
-    Fire,
-    Water,
-    Electric,
-    Wind,
+    Debuff,
+    Speed,
+    MaxHP,
+    Arrow,
+    crit,
+    critValue,
+    Heal,
+    Rage_Increase,
+    Rage_Decrease
+
 }
+
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "ItemData", order = 3)]
 public class ItemData : ScriptableObject
 {
     public static ItemData Instance;
 
-    [Header("Item Settings")]
+    [Header("기본 정보")]
 
     [Tooltip("아이템 이름")]
-    public string itemName;
+    public string itemID;
 
     [Tooltip("아이템 설명")]
     [TextArea(3, 5)]
@@ -37,11 +42,11 @@ public class ItemData : ScriptableObject
     [Tooltip("아이템 가격")]
     [Range(0, 10000)] public int itemPrice;
 
-    [Tooltip("아이템 획득 시 플레이어에게 주는 효과 수치")]
-    [Range(0, 100)] public float effectValue;
-
     [Tooltip("아이템 타입")]
     public ItemType itemType;
+
+    [Header("단계별 능력치")]
+    public List<ItemLevelData> levelStats = new List<ItemLevelData>();
 
     public void Init()
     {
@@ -49,3 +54,15 @@ public class ItemData : ScriptableObject
     }
 }
 
+[System.Serializable]
+public class ItemLevelData
+{
+    [Tooltip("단계")]
+    public int level;
+
+    [Tooltip("최대 단계")]
+    public int maxLevel;
+
+    [Tooltip("해당 단계에서 증가하는 능력치 수치")]
+    public float effectValue;
+}

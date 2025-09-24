@@ -15,7 +15,6 @@ public class ShopSlot : MonoBehaviour
         item = newItem;
         icon.sprite = item.itemIcon;
         priceText.text = item.itemPrice.ToString();
-        // 기타 정보 세팅
     }
 
     public void OnBuyButtonClicked()

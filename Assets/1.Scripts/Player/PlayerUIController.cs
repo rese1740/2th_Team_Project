@@ -54,6 +54,8 @@ public class PlayerUIController : MonoBehaviour
 
     private void OpenNpcWindow(GameObject npc)
     {
+        if(npc == null) return;
+
         Debug.Log($"NPC {npc.name}와 상호작용 시작");
         // 여기에 UI 활성화 코드
         npc.GetComponent<NPC>().OpenWindow(); // 예시

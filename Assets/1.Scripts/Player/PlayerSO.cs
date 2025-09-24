@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlayerElement
@@ -51,9 +52,24 @@ public class PlayerSO : ScriptableObject
     public PlayerElement saved1;
     public PlayerElement saved2;
 
+    [Header("Item Setting")]
+    public Dictionary<string, int> itemLevels = new Dictionary<string, int>();
+
+    public int GetItemLevel(string itemID)
+    {
+        return itemLevels.ContainsKey(itemID) ? itemLevels[itemID] : 0;
+    }
+
+    public void LevelUpItem(string itemID)
+    {
+        if (itemLevels.ContainsKey(itemID))
+            itemLevels[itemID]++;
+        else
+            itemLevels[itemID] = 1;
+    }
+
     public void Init()
     {
         Instance = this;
-        Debug.Log("¾Æ´ÏÁö?");
     }
 }
