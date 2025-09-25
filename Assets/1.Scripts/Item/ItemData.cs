@@ -36,11 +36,6 @@ public class ItemData : ScriptableObject
     [TextArea(3, 5)]
     public string itemDescription;
 
-    [Tooltip("아이템 아이콘")]
-    public Sprite itemIcon;
-
-    [Tooltip("아이템 가격")]
-    [Range(0, 10000)] public int itemPrice;
 
     [Tooltip("아이템 타입")]
     public ItemType itemType;
@@ -62,6 +57,15 @@ public class ItemLevelData
 
     [Tooltip("최대 단계")]
     public int maxLevel;
+
+    [Tooltip("아이템 아이콘")]
+    public Sprite itemIcon;
+
+    [Tooltip("아이템 가격")]
+    [Range(0, 10000)] public int itemPrice;
+
+    [Tooltip("이 레벨에서 영향을 주는 효과 타입")]
+    public EffectType effectType;
 
     [Tooltip("해당 단계에서 증가하는 능력치 수치")]
     public float effectValue;

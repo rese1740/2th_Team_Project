@@ -11,7 +11,13 @@ public class InventorySlot : MonoBehaviour
     public void SetItem(ItemData item)
     {
         currentItem = item;
-        iconImage.sprite = item.itemIcon;
+        int currentLevel = PlayerSO.Instance.GetItemLevel(item.itemID);
+        ItemLevelData levelData = item.levelStats.Find(l => l.level == currentLevel);
+        if (levelData != null && levelData.itemIcon != null)
+        {
+            iconImage.sprite = levelData.itemIcon;
+            iconImage.enabled = true;
+        }
         iconImage.enabled = true;
     }
 

@@ -2737,7 +2737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &620836188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2810,10 +2810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0a6b9f5e9a3b14b9bcdcf2940faaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 1088750092}
-  itemsForSale:
-  - {fileID: 11400000, guid: 317eadb9562711a4b98dcae82271974d, type: 2}
 --- !u!1 &627314064
 GameObject:
   m_ObjectHideFlags: 0
@@ -6138,6 +6134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12899ac9fde3fa24aba595a5dc90649b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 2f132c219f575bc46bfa9ae01f4c660c, type: 2}
   icon: {fileID: 1904968560}
   priceText: {fileID: 1191426341}
   buyButton: {fileID: 1727773627}

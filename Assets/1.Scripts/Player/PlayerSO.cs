@@ -68,6 +68,44 @@ public class PlayerSO : ScriptableObject
             itemLevels[itemID] = 1;
     }
 
+    public void ApplyItemEffect(ItemData item, int currentLevel)
+    {
+        ItemLevelData levelData = item.levelStats.Find(l => l.level == currentLevel);
+
+        if (levelData == null) return;
+
+        switch (levelData.effectType)
+        {
+            case EffectType.MaxHP:
+                maxHealth += levelData.effectValue;
+                break;
+
+            case EffectType.Speed:
+                moveSpeed += levelData.effectValue;
+                break;
+
+            case EffectType.crit:
+                critValue += levelData.effectValue;
+                break;
+
+            case EffectType.critValue:
+                critPower += levelData.effectValue;
+                break;
+
+            case EffectType.Heal:
+                currentHealth = Mathf.Min(maxHealth, currentHealth + levelData.effectValue);
+                break;
+
+            case EffectType.Rage_Increase:
+                rageValue += levelData.effectValue;
+                break;
+
+            case EffectType.Rage_Decrease:
+                rageValue = Mathf.Max(0, rageValue - levelData.effectValue);
+                break;
+        }
+    }
+
     public void Init()
     {
         Instance = this;

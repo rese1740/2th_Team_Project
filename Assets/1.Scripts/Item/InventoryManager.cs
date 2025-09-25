@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
     public bool AddItem(ItemData item)
     {
         foreach (InventorySlot slot in inventorySlots)
-        {
+        {   
             if (slot.IsEmpty)
             {
                 slot.SetItem(item);
