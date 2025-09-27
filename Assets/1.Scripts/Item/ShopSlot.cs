@@ -1,16 +1,18 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopSlot : MonoBehaviour
 {
-    [Header("æ∆¿Ã≈€ º≥¡§")]
+    [Header("ÏïÑÏù¥ÌÖú ÏÑ§Ï†ï")]
     public ItemData item;
 
     public Image icon;
     public Text priceText;
+    public Text itemDescriptionTxt;
     public Button buyButton;
+    private bool isSold = false;
 
     private void Start()
     {
@@ -19,16 +21,15 @@ public class ShopSlot : MonoBehaviour
 
     public void UpdateSlotUI()
     {
-        if (item == null)
+        if (item == null || isSold)  
         {
-            Debug.LogWarning("æ∆¿Ã≈€¿Ã ø¨∞·µ«¡ˆ æ ¿Ω!");
             icon.enabled = false;
             priceText.text = "-";
+            buyButton.interactable = false; 
             return;
         }
 
         int currentLevel = PlayerSO.Instance.GetItemLevel(item.itemID);
-
         ItemLevelData levelData = item.levelStats.Find(l => l.level == currentLevel);
 
         if (levelData != null)
@@ -38,18 +39,25 @@ public class ShopSlot : MonoBehaviour
 
             priceText.text = levelData.itemPrice.ToString();
             icon.enabled = true;
+            buyButton.interactable = true;
         }
         else
         {
-            Debug.LogWarning($"[{item.itemID}] {currentLevel}∑π∫ß µ•¿Ã≈Õ∞° æ¯¿Ω!");
             icon.enabled = false;
             priceText.text = "-";
+         
         }
     }
 
     public void OnBuyButtonClicked()
     {
-        if (item != null)
-            ShopManager.Instance.BuyItem(item);
+        if (item != null && !isSold) 
+        {
+            if (ShopManager.Instance.BuyItem(item))
+            {
+                isSold = true;
+                buyButton.interactable = false;
+            }
+        }
     }
 }

@@ -17,7 +17,14 @@ public enum PlayerElement
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "PlayerSO", order = 1)]
 public class PlayerSO : ScriptableObject
 {
-    public static PlayerSO Instance;
+    private static PlayerSO _instance;
+    public static PlayerSO Instance => _instance;
+
+    private void OnEnable()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
 
     [Header("Movement Settings")]
     [Range(0, 100)] public float moveSpeed = 5f;
@@ -104,10 +111,5 @@ public class PlayerSO : ScriptableObject
                 rageValue = Mathf.Max(0, rageValue - levelData.effectValue);
                 break;
         }
-    }
-
-    public void Init()
-    {
-        Instance = this;
     }
 }

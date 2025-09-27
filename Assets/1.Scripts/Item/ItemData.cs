@@ -55,9 +55,6 @@ public class ItemLevelData
     [Tooltip("단계")]
     public int level;
 
-    [Tooltip("최대 단계")]
-    public int maxLevel;
-
     [Tooltip("아이템 아이콘")]
     public Sprite itemIcon;
 

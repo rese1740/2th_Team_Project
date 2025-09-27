@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -19,7 +19,7 @@ public class ShopManager : MonoBehaviour
 
         if (levelData == null)
         {
-            Debug.LogWarning($"[{item.itemID}] {currentLevel}·¹º§ µ¥ÀÌÅÍ ¾øÀ½!");
+            Debug.LogWarning($"[{item.itemID}] {currentLevel}ë ˆë²¨ ë°ì´í„° ì—†ìŒ!");
             return false;
         }
 
@@ -32,7 +32,7 @@ public class ShopManager : MonoBehaviour
         return false;
     }
 
-    public void BuyItem(ItemData item)
+    public bool BuyItem(ItemData item)
     {
         if (TryBuy(item))
         {
@@ -41,11 +41,13 @@ public class ShopManager : MonoBehaviour
             int newLevel = PlayerSO.Instance.GetItemLevel(item.itemID);
             PlayerSO.Instance.ApplyItemEffect(item, newLevel);
 
-            Debug.Log($"±¸¸Å ¿Ï·á: {item.itemID}, ÇöÀç ·¹º§: {newLevel}, ³²Àº °ñµå: {PlayerSO.Instance.Gold}");
+            Debug.Log($"êµ¬ë§¤ ì™„ë£Œ: {item.itemID}, í˜„ì¬ ë ˆë²¨: {newLevel}, ë‚¨ì€ ê³¨ë“œ: {PlayerSO.Instance.Gold}");
+            return true;  
         }
         else
         {
-            Debug.Log("±¸¸Å ½ÇÆĞ: °ñµå ºÎÁ· ¶Ç´Â ·¹º§ µ¥ÀÌÅÍ ¾øÀ½");
+            Debug.Log("êµ¬ë§¤ ì‹¤íŒ¨: ê³¨ë“œ ë¶€ì¡± ë˜ëŠ” ë ˆë²¨ ë°ì´í„° ì—†ìŒ");
+            return false; 
         }
     }
 }
