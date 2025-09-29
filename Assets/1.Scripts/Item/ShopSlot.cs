@@ -12,7 +12,7 @@ public class ShopSlot : MonoBehaviour
     public Text priceText;
     public Text itemDescriptionTxt;
     public Button buyButton;
-    private bool isSold = false;
+    public bool isSold = false;
 
     private void Start()
     {
@@ -21,7 +21,10 @@ public class ShopSlot : MonoBehaviour
 
     public void UpdateSlotUI()
     {
-        if (item == null || isSold)  
+        int currentLevel = PlayerSO.Instance.GetItemLevel(item.itemID);
+        ItemLevelData levelData = item.levelStats.Find(l => l.level == currentLevel);
+
+        if (item == null || isSold || currentLevel >= 3)  
         {
             icon.enabled = false;
             priceText.text = "-";
@@ -29,8 +32,6 @@ public class ShopSlot : MonoBehaviour
             return;
         }
 
-        int currentLevel = PlayerSO.Instance.GetItemLevel(item.itemID);
-        ItemLevelData levelData = item.levelStats.Find(l => l.level == currentLevel);
 
         if (levelData != null)
         {

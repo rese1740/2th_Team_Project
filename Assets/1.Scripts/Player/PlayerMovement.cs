@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        playerData.Init();
     }
 
     private void Update()
@@ -54,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, playerData.jumpForce);
         animator.SetTrigger("jump");
+        rb.velocity = new Vector2(rb.velocity.x, playerData.jumpForce);
     }
 
     void Flip()

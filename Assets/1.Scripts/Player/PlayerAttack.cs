@@ -3,19 +3,25 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("Components")]
+    [Header("컴퍼넌트")]
     public PlayerSO playerData;
     Animator animator;
-    SpriteRenderer sr;
 
-    [Header("Settings")]
+    [Header("공격 세팅")]
     public Transform attackPoint;
     public GameObject hitboxPrefab;
+
+    [Header("콤보 세팅")]
+    public int maxCombo = 3;
+    public float comboResetTime = 1f;   // 콤보 초기화 시간
+    public float attackDelay = 0.3f;    // 공격 텀
+    private int currentCombo = 0;
+    private float lastAttackTime = 0f;
+    private bool isAttacking = false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -24,41 +30,67 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Attack();
+            TryAttack();
         }
     }
 
-    void Attack()
+    void TryAttack()
+    {
+        if (isAttacking) return;
+
+        // 일정 시간 지나면 콤보 리셋
+        if (Time.time - lastAttackTime > comboResetTime)
+        {
+            currentCombo = 0;
+        }
+
+        currentCombo++;
+        lastAttackTime = Time.time;
+
+        if (currentCombo <= 2)
+            animator.SetTrigger("attack1");
+        else if (currentCombo == 3)
+            animator.SetTrigger("attack2");
+
+        if (currentCombo > maxCombo)
+            currentCombo = 1;
+
+        StartCoroutine(AttackCooldown());  // 공격마다 텀 주기
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(attackDelay);
+        isAttacking = false;
+    }
+
+    public void SpawnHitbox()
     {
         GameObject hitboxInstance = Instantiate(hitboxPrefab, attackPoint.position, attackPoint.rotation);
-
         PlayerHitbox hitbox = hitboxInstance.GetComponent<PlayerHitbox>();
+
         if (hitbox != null)
         {
             float finalDamage = playerData.attackPower;
 
-            // 크리티컬 판정
             float rand = Random.Range(0f, 100f);
             if (rand < playerData.critValue)
             {
                 finalDamage *= playerData.critPower / 100f;
-                Debug.Log("💥 크리티컬 히트! 데미지: " + finalDamage);
+                Debug.Log("크리티컬 히트! 데미지: " + finalDamage);
             }
+
+            finalDamage *= 1f + (currentCombo - 1) * 0.2f;
 
             hitbox.damage = finalDamage;
         }
     }
 
-    void SkillA()
-    {
-
-    }
 
     public void TakeDamage(float damage)
     {
         playerData.currentHealth -= damage;
-
-        StartCoroutine(DamageEffect());
 
         if (playerData.currentHealth <= 0)
         {
@@ -66,14 +98,6 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    IEnumerator DamageEffect()
-    {
-        sr.color = Color.red;
-
-        yield return new WaitForSeconds(0.2f);
-
-        sr.color = Color.white;
-    }
 
     void Die()
     {

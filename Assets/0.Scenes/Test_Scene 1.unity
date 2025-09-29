@@ -3014,10 +3014,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0a6b9f5e9a3b14b9bcdcf2940faaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 1088750092}
-  itemsForSale:
-  - {fileID: 11400000, guid: 317eadb9562711a4b98dcae82271974d, type: 2}
 --- !u!1 &627314064
 GameObject:
   m_ObjectHideFlags: 0
@@ -6180,9 +6176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12899ac9fde3fa24aba595a5dc90649b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 25a4eb45d5860404c9d05d06cd1bf90b, type: 2}
   icon: {fileID: 1904968560}
   priceText: {fileID: 1191426341}
+  itemDescriptionTxt: {fileID: 0}
   buyButton: {fileID: 1727773627}
+  isSold: 0
 --- !u!1 &1097400562
 GameObject:
   m_ObjectHideFlags: 0
