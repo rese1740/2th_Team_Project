@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSO
   m_EditorClassIdentifier: 
   moveSpeed: 8.5
-  jumpForce: 20
+  jumpForce: 15
   currentHealth: 0
   maxHealth: 100
   rageValue: 50
@@ -21,7 +21,7 @@ MonoBehaviour:
   critValue: 50
   critPower: 200
   Gold: 100
-  currentElement_Q: 1
+  currentElement_Q: 4
   currentElement_E: 7
-  saved1: 3
-  saved2: 2
+  saved1: 2
+  saved2: 4

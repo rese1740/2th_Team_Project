@@ -38,7 +38,6 @@ public class ButtonGroupManager : MonoBehaviour
     public void OnButtonClicked(ButtonScaler clicked)
     {
         PlayerSO.Instance.currentElement_Q = clicked.stateToSet;
-        Debug.Log(clicked.stateToSet);
 
         if (popupAnimator != null)
             popupAnimator.Hide();

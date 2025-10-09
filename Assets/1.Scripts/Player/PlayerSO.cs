@@ -59,8 +59,16 @@ public class PlayerSO : ScriptableObject
     public PlayerElement saved1;
     public PlayerElement saved2;
 
-    [Header("Item Setting")]
+    #region 아이템
+    [Header("아이템 세팅")]
     public Dictionary<string, int> itemLevels = new Dictionary<string, int>();
+
+    [Header("소모 아이템 세팅")]
+    public int hpPotionCount = 3;
+    public int rageIncreasePotionCount = 3;
+    public int rageDecreasePotionCount = 3;
+
+    [SerializeField] private int maxPotionCount = 3; // 최대 소지 개수
 
     public int GetItemLevel(string itemID)
     {
@@ -112,4 +120,30 @@ public class PlayerSO : ScriptableObject
                 break;
         }
     }
+
+    public void UsePotion(EffectType potionType)
+    {
+        switch (potionType)
+        {
+            case EffectType.Heal:
+                if (hpPotionCount <= 0) return;
+                currentHealth = Mathf.Min(maxHealth, currentHealth + 30f); // 30 회복
+                hpPotionCount--;
+                break;
+
+            case EffectType.Rage_Increase:
+                if (rageIncreasePotionCount <= 0) return;
+                rageValue = Mathf.Min(100f, rageValue + 30f); // Rage 30 증가
+                rageIncreasePotionCount--;
+                break;
+
+            case EffectType.Rage_Decrease:
+                if (rageDecreasePotionCount <= 0) return;
+                rageValue = Mathf.Max(0f, rageValue - 30f); // Rage 30 감소
+                rageDecreasePotionCount--;
+                break;
+        }
+    }
 }
+#endregion
+

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
-    private bool facingRight = true;
+    public bool facingRight = true;
 
     [Header("Components")]
     public PlayerSO playerData;

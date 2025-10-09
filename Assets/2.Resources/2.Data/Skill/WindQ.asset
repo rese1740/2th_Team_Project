@@ -15,6 +15,14 @@ MonoBehaviour:
   skillName: "\uBC14\uB78C\uAE38"
   key: 113
   elementType: 4
+  skillType: 0
   skillEffectPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
   damage: 4
-  cooldown: 5
+  cooldown: 1
+  projectileCount: 0
+  projectileSpeed: 10
+  dashForce_Ground: 400
+  dashForce_Air: 70
+  dashDuration: 0.2
+  isDashing: 0
+  canDash: 1

@@ -28,6 +28,21 @@ public class PlayerAttack : MonoBehaviour
     {
         if (UIStateManager.Instance.isUIOpen) return;
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlayerSO.Instance.UsePotion(EffectType.Heal);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            PlayerSO.Instance.UsePotion(EffectType.Rage_Increase);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            PlayerSO.Instance.UsePotion(EffectType.Rage_Decrease);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             TryAttack();

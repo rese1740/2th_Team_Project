@@ -2529,7 +2529,7 @@ MonoBehaviour:
   popupAnimator: {fileID: 853730927}
   iconImg: {fileID: 1478756986}
   iconSprite: {fileID: 21300000, guid: a53802899cf808c40880c1e235f47fa7, type: 3}
-  stateToSet: 2
+  stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
   isSelected: 0
@@ -14014,7 +14014,7 @@ MonoBehaviour:
   popupAnimator: {fileID: 853730927}
   iconImg: {fileID: 1478756986}
   iconSprite: {fileID: 21300000, guid: 406126055985d564d9440e2688767311, type: 3}
-  stateToSet: 4
+  stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
   isSelected: 0
@@ -14223,6 +14223,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
+    - target: {fileID: 971369656305273810, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: skillList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 971369656305273810, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: skillList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: efead3ce7fca1f542b7d4e4b3cdbd0ce, type: 2}
     - target: {fileID: 5725696781877795741, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: m_Interpolate
       value: 1
