@@ -16,12 +16,16 @@ MonoBehaviour:
   jumpForce: 15
   currentHealth: 0
   maxHealth: 100
-  rageValue: 50
+  rageValue: 10
   attackPower: 100
   critValue: 50
-  critPower: 200
-  Gold: 100
+  critPower: 230
+  Gold: 1000
   currentElement_Q: 4
-  currentElement_E: 7
-  saved1: 2
-  saved2: 4
+  currentElement_E: 5
+  saved1: 1
+  saved2: 2
+  hpPotionCount: 0
+  rageIncreasePotionCount: 1
+  rageDecreasePotionCount: 0
+  maxPotionCount: 3

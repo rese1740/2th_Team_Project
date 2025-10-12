@@ -1,7 +1,9 @@
 ﻿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerSkillController : MonoBehaviour
 {
@@ -9,15 +11,18 @@ public class PlayerSkillController : MonoBehaviour
     public PlayerElement currentElement_E;
 
     [Tooltip("플레이어 스킬 목록")]
+    Rigidbody2D rb;
     [SerializeField] private List<SkillData> skillList; 
 
     private Dictionary<(PlayerElement, KeyCode), SkillData> skillMap;
     private Dictionary<(PlayerElement, KeyCode), float> cooldownTimers = new();
 
     private PlayerMovement pm;
+  
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         pm = GetComponent<PlayerMovement>();
         skillMap = new Dictionary<(PlayerElement, KeyCode), SkillData>();
         currentElement_Q = PlayerElement.None;
@@ -29,15 +34,18 @@ public class PlayerSkillController : MonoBehaviour
         }
     }
 
+
     private void Update()
     {
         HandleCooldowns();
 
         currentElement_Q = PlayerSO.Instance.currentElement_Q;
         currentElement_E = PlayerSO.Instance.currentElement_E;
+
         if (Input.GetKeyDown(KeyCode.Q)) UseSkill(KeyCode.Q);
         if (Input.GetKeyDown(KeyCode.E)) UseSkill(KeyCode.E);
     }
+
 
     private void UseSkill(KeyCode key)
     {
@@ -65,7 +73,7 @@ public class PlayerSkillController : MonoBehaviour
 
             Debug.Log($"사용한 스킬: {skill.skillName}");
 
-            cooldownTimers[skillKey] = skill.cooldown;
+            cooldownTimers[skillKey] = skill.coolTime;
             switch (skill.skillType)
             {
                 case SkillType.Projectile:
@@ -77,7 +85,8 @@ public class PlayerSkillController : MonoBehaviour
                     break;
 
                 case SkillType.Move:
-                    StartCoroutine(UseDashSkill(skill));
+                    if (skill.canDash)
+                        StartCoroutine(UseDashSkill(skill));
                     break;
 
                 case SkillType.Buff:
@@ -115,47 +124,25 @@ public class PlayerSkillController : MonoBehaviour
 
     private IEnumerator UseDashSkill(SkillData skill)
     {
-        if (!skill.canDash || skill.isDashing)
-            yield break;
+        yield return new WaitForFixedUpdate(); 
 
-        skill.isDashing = true;
         skill.canDash = false;
-
-        Debug.Log("도약 스킬 실행");
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb == null) yield break;
+        skill.isDashing = true;
 
         float originalGravity = rb.gravityScale;
-
         rb.gravityScale = 0f;
-        rb.velocity = Vector2.zero;
+        rb.velocity = new Vector2(transform.localScale.x * skill.dashingPower, 0f);
 
-        Vector2 dashDirection = pm.facingRight ? Vector2.right : Vector2.left;
+        yield return new WaitForSeconds(skill.dashDuration);
 
-        bool isGrounded = pm.isGrounded; 
-        Vector2 finalDirection = isGrounded
-            ? dashDirection
-            : (dashDirection + Vector2.up * 0.3f).normalized;
-
-        float dashForce = isGrounded ? skill.dashForce_Ground : skill.dashForce_Air;
-
-        if (skill.skillEffectPrefab != null)
-            Instantiate(skill.skillEffectPrefab, transform.position, Quaternion.identity);
-
-        rb.AddForce(finalDirection * dashForce, ForceMode2D.Impulse);
-
-        yield return new WaitForSeconds(skill.dashDuration * 0.7f);
         rb.gravityScale = originalGravity;
-
-        yield return new WaitForSeconds(skill.dashDuration * 0.3f);
-        rb.velocity = Vector2.zero;
-
         skill.isDashing = false;
 
-        yield return new WaitForSeconds(skill.cooldown);
+        yield return new WaitForSeconds(skill.coolTime);
         skill.canDash = true;
     }
+
+
     IEnumerator UseBuffSkill(SkillData skill)
     {
         Debug.Log("버프 스킬 실행");

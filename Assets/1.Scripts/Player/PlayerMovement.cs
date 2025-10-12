@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -25,7 +26,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (UIStateManager.Instance.isUIOpen) return;
 
+
         Move();
+        Fall();
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
@@ -55,6 +58,17 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetTrigger("jump");
         rb.velocity = new Vector2(rb.velocity.x, playerData.jumpForce);
+    }
+    void Fall()
+    {
+        if (!isGrounded && rb.velocity.y < -0.1f)
+        {
+            animator.SetBool("isFalling", true);
+        }
+        else
+        {
+            animator.SetBool("isFalling", false);
+        }
     }
 
     void Flip()

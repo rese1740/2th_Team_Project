@@ -16,6 +16,9 @@ MonoBehaviour:
   itemDescription: "\uB9E4\uC6B0 \uCEE4 \uC190\uAC00\uB77D\uC5D0 \uB084 \uC218\uB294
     \uC5C6\uC744 \uAC70 \uAC19\uB2E4."
   itemType: 1
+  itemMaxCount: 1
+  itemIcon: {fileID: 0}
+  itemPrice: 0
   levelStats:
   - level: 0
     itemIcon: {fileID: 21300000, guid: d4998f419f0e61a43b2752ea687b0a9b, type: 3}

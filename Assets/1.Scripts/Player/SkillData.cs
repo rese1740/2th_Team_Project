@@ -19,15 +19,14 @@ public class SkillData : ScriptableObject
     public SkillType skillType;
     public GameObject skillEffectPrefab;
     public float damage;
-    public float cooldown;
+    public float coolTime;
 
     [Header("투사체 세팅")]
     public int projectileCount = 1;
     public float projectileSpeed = 10f;
 
     [Header("이동 세팅")]
-    public float dashForce_Ground = 15f;   
-    public float dashForce_Air = 18f;     
+    public float dashingPower = 15f;   
     public float dashDuration = 0.2f;
     public bool isDashing = false;
     public bool canDash = true;

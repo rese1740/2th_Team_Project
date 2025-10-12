@@ -36,9 +36,15 @@ public class ItemData : ScriptableObject
     [TextArea(3, 5)]
     public string itemDescription;
 
-
     [Tooltip("아이템 타입")]
     public ItemType itemType;
+
+    [Tooltip("아이템 구매 개수")]
+    public int itemMaxCount = 1;
+
+    [Header("소모 아이템 정보")]
+    public Sprite itemIcon;
+    [Range(0, 10000)] public int itemPrice;
 
     [Header("단계별 능력치")]
     public List<ItemLevelData> levelStats = new List<ItemLevelData>();

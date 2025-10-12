@@ -83,6 +83,23 @@ public class PlayerSO : ScriptableObject
             itemLevels[itemID] = 1;
     }
 
+    public int GetPotionCount(string itemID)
+    {
+        if (itemID == "HpPotion")
+        {
+            return hpPotionCount;
+        }
+        else if (itemID == "RageIncreasePotion")
+        {
+            return rageIncreasePotionCount;
+        }
+        else if (itemID == "RageDecreasePotion")
+        {
+            return rageDecreasePotionCount;
+        }
+        return 0;
+    }
+
     public void ApplyItemEffect(ItemData item, int currentLevel)
     {
         ItemLevelData levelData = item.levelStats.Find(l => l.level == currentLevel);
