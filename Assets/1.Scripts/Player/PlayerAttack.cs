@@ -53,7 +53,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (isAttacking) return;
 
-        // 일정 시간 지나면 콤보 리셋
         if (Time.time - lastAttackTime > comboResetTime)
         {
             currentCombo = 0;
@@ -62,15 +61,15 @@ public class PlayerAttack : MonoBehaviour
         currentCombo++;
         lastAttackTime = Time.time;
 
-        if (currentCombo <= 2)
-            animator.SetTrigger("attack1");
-        else if (currentCombo == 3)
-            animator.SetTrigger("attack2");
+        string element = PlayerSO.Instance.currentElement_Q.ToString(); // ex) "Fire"
+        string comboName = currentCombo <= 2 ? "attack1" : "attack2";
+
+        animator.SetTrigger($"{element}_{comboName}");
 
         if (currentCombo > maxCombo)
             currentCombo = 1;
 
-        StartCoroutine(AttackCooldown());  // 공격마다 텀 주기
+        StartCoroutine(AttackCooldown());
     }
 
     IEnumerator AttackCooldown()
