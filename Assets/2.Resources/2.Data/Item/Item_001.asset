@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807ad09b9b64b7a4498f868215de5e9d, type: 3}
+  m_Name: Item_001
+  m_EditorClassIdentifier: 
+  itemID: "\uBD80\uC801"
+  itemDescription: "\uC5B4\uB518\uAC00 \uB0A1\uC544 \uBCF4\uC774\uC9C0\uB9CC \uC4F8\uBAA8\uB294
+    \uC788\uC5B4 \uBCF4\uC778\uB2E4."
+  itemType: 1
+  itemMaxCount: 3
+  itemIcon: {fileID: 21300000, guid: 09938088a9b972e479ff4022b980c009, type: 3}
+  itemPrice: 100
+  levelStats:
+  - level: 0
+    itemIcon: {fileID: 21300000, guid: 09938088a9b972e479ff4022b980c009, type: 3}
+    itemPrice: 100
+    effectType: 0
+    effectValue: 1
+  - level: 1
+    itemIcon: {fileID: 21300000, guid: ad6f3383b4107d240875114f40949353, type: 3}
+    itemPrice: 150
+    effectType: 0
+    effectValue: 2.5
+  - level: 2
+    itemIcon: {fileID: 21300000, guid: 91a25563e4052ae428da89039b567910, type: 3}
+    itemPrice: 300
+    effectType: 0
+    effectValue: 4

@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 807ad09b9b64b7a4498f868215de5e9d, type: 3}
-  m_Name: Ring
+  m_Name: Item_005
   m_EditorClassIdentifier: 
   itemID: "\uBC18\uC9C0"
   itemDescription: "\uB9E4\uC6B0 \uCEE4 \uC190\uAC00\uB77D\uC5D0 \uB084 \uC218\uB294
     \uC5C6\uC744 \uAC70 \uAC19\uB2E4."
   itemType: 1
-  itemMaxCount: 1
+  itemMaxCount: 3
   itemIcon: {fileID: 0}
-  itemPrice: 0
+  itemPrice: 500
   levelStats:
   - level: 0
     itemIcon: {fileID: 21300000, guid: d4998f419f0e61a43b2752ea687b0a9b, type: 3}
-    itemPrice: 0
+    itemPrice: 500
     effectType: 4
     effectValue: 15
   - level: 1
     itemIcon: {fileID: 21300000, guid: a03df3d96dbb0ee48ab695fa647f20cb, type: 3}
-    itemPrice: 0
+    itemPrice: 600
     effectType: 4
-    effectValue: 15
+    effectValue: 20
   - level: 2
     itemIcon: {fileID: 21300000, guid: 87276d176889bfe4b95927d9cabf79c0, type: 3}
-    itemPrice: 0
+    itemPrice: 800
     effectType: 4
-    effectValue: 15
+    effectValue: 30
