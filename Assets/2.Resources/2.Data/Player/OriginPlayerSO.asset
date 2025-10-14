@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8.5
   jumpForce: 20
-  currentHealth: 0
+  currentHealth: 100
   maxHealth: 100
   rageValue: 50
   attackPower: 100
@@ -25,3 +25,7 @@ MonoBehaviour:
   currentElement_E: 7
   saved1: 3
   saved2: 2
+  hpPotionCount: 3
+  rageIncreasePotionCount: 3
+  rageDecreasePotionCount: 3
+  maxPotionCount: 3

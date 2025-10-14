@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8.5
   jumpForce: 15
-  currentHealth: -420
+  currentHealth: 0
   maxHealth: 100
   rageValue: 10
   attackPower: 100
   critValue: 50
-  critPower: 245
+  critPower: 260
   Gold: 1000
-  currentElement_Q: 1
-  currentElement_E: 5
-  saved1: 3
-  saved2: 1
+  currentElement_Q: 3
+  currentElement_E: 7
+  saved1: 2
+  saved2: 3
   hpPotionCount: 0
   rageIncreasePotionCount: 1
   rageDecreasePotionCount: 0
