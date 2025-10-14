@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BoundaryEnemy : MonoBehaviour
 {
+    public enum State { Patrol, Alert, Chase, Attack }
+
     [Header("Config (ScriptableObject)")]
     public EnemySO config;
 
@@ -12,26 +14,38 @@ public class BoundaryEnemy : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Transform gfxRoot;
 
+    [Header("Ground Settings")]
+    public LayerMask groundLayer;
+    public float groundCheckDistance = 0.2f; // 바닥 감지 거리
+    public float airGravityScale = 3f;       // 공중일 때 중력
+    public float groundGravityScale = 0f;    // Ground 위일 때 중력
+
     private Rigidbody2D rb;
-    private bool movingRight = true;
     private Transform player;
 
-    // 상태
-    private enum State { Patrol, Alert, Chase, Attack }
-    private State state = State.Patrol;
-
-    // 플래그/코루틴
+    private bool movingRight = true;
     private bool isAlerting = false;
     private bool hasAggro = false;
+
     private Coroutine attackRoutine;
     private float nextShotTime = 0f;
 
+    private State state = State.Patrol;
+    private bool isOnGround = false;
+
+    // --------------------------------------------------------------------
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (gfxRoot == null) gfxRoot = spriteRenderer != null ? spriteRenderer.transform : transform;
-        if (firePoint == null) firePoint = transform; // 안전장치
+
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (gfxRoot == null)
+            gfxRoot = spriteRenderer != null ? spriteRenderer.transform : transform;
+
+        if (firePoint == null)
+            firePoint = transform;
     }
 
     void Start()
@@ -44,10 +58,10 @@ public class BoundaryEnemy : MonoBehaviour
     {
         StopAttackLoop();
         rb.velocity = Vector2.zero;
-        // 필요 시 상태 초기화:
-        // state = State.Patrol; hasAggro = false;
+        hasAggro = false;
     }
 
+    // --------------------------------------------------------------------
     void FixedUpdate()
     {
         bool inRange = IsPlayerInRange();
@@ -58,39 +72,32 @@ public class BoundaryEnemy : MonoBehaviour
                 if (!hasAggro && inRange && !isAlerting)
                     StartCoroutine(EnterAlert());
                 break;
-
             case State.Alert:
-                // 전이는 코루틴에서 처리
                 break;
-
             case State.Chase:
                 if (inRange)
+                    state = State.Attack;
+                else if (!config.persistAggro)
                 {
-                    state = State.Attack;    // 사거리 재진입 → 공격
-                }
-                else
-                {
-                    if (!config.persistAggro)
-                    {
-                        state = State.Patrol; // 어그로 미유지면 복귀
-                        hasAggro = false;
-                    }
+                    state = State.Patrol;
+                    hasAggro = false;
                 }
                 break;
-
             case State.Attack:
                 if (!inRange)
                 {
-                    state = State.Chase;     // 사거리 이탈 → 추격만
-                    StopAttackLoop();        // 즉시 발사 중단
+                    state = State.Chase;
+                    StopAttackLoop();
                 }
                 break;
         }
 
         MoveByState();
         ApplyFlip();
+        CheckGround();
     }
 
+    // --------------------------------------------------------------------
     private bool IsPlayerInRange()
     {
         if (player == null || config == null) return false;
@@ -115,7 +122,6 @@ public class BoundaryEnemy : MonoBehaviour
         yield return StartCoroutine(BounceAnimation());
         yield return new WaitForSeconds(config.alertDuration);
 
-        // 발견 완료 → 어그로 ON 후 Chase 시작
         hasAggro = true;
         state = State.Chase;
         isAlerting = false;
@@ -127,6 +133,7 @@ public class BoundaryEnemy : MonoBehaviour
 
         float half = 0.5f / Mathf.Max(0.0001f, config.bounceSpeed);
         float elapsed = 0f;
+
         Vector3 start = gfxRoot.localPosition;
         Vector3 peak = start + Vector3.up * config.bounceHeight;
 
@@ -150,6 +157,7 @@ public class BoundaryEnemy : MonoBehaviour
         gfxRoot.localPosition = start;
     }
 
+    // --------------------------------------------------------------------
     private void MoveByState()
     {
         if (config == null) return;
@@ -158,7 +166,7 @@ public class BoundaryEnemy : MonoBehaviour
         {
             case State.Patrol:
                 rb.velocity = new Vector2((movingRight ? 1f : -1f) * config.patrolSpeed, rb.velocity.y);
-                StopAttackLoop(); // 혹시 모를 잔여 루프 정리
+                StopAttackLoop();
                 break;
 
             case State.Alert:
@@ -167,7 +175,7 @@ public class BoundaryEnemy : MonoBehaviour
                 break;
 
             case State.Chase:
-                StopAttackLoop(); // Chase에서는 사격 없음
+                StopAttackLoop();
                 if (config.chaseWhileAggro && hasAggro && player != null)
                 {
                     float dirX = Mathf.Sign(player.position.x - transform.position.x);
@@ -176,7 +184,7 @@ public class BoundaryEnemy : MonoBehaviour
                 }
                 else
                 {
-                    rb.velocity = Vector2.zero;
+                    rb.velocity = new Vector2(0f, rb.velocity.y);
                 }
                 break;
 
@@ -184,20 +192,19 @@ public class BoundaryEnemy : MonoBehaviour
                 if (config.chaseWhileAggro && hasAggro && player != null)
                 {
                     float dirX = Mathf.Sign(player.position.x - transform.position.x);
-                    rb.velocity = new Vector2(dirX * config.chaseSpeed, rb.velocity.y); // 공격 중 추격 유지(옵션)
+                    rb.velocity = new Vector2(dirX * config.chaseSpeed, rb.velocity.y);
                     movingRight = dirX >= 0f;
                 }
                 else
                 {
-                    rb.velocity = Vector2.zero; // 제자리 사격
+                    rb.velocity = new Vector2(0f, rb.velocity.y);
                 }
-
-                StartAttackLoop(); // 단일 루프 보장
+                StartAttackLoop();
                 break;
         }
     }
 
-    // ===== 발사 루프 관리 =====
+    // --------------------------------------------------------------------
     private void StartAttackLoop()
     {
         if (attackRoutine == null)
@@ -217,56 +224,51 @@ public class BoundaryEnemy : MonoBehaviour
     {
         while (state == State.Attack)
         {
-            // 사거리 안에서만 사격
-            if (IsPlayerInRange())
+            if (IsPlayerInRange() && Time.time >= nextShotTime)
             {
-                // 쿨다운 보장: 다중 호출/경계 프레임에서의 중복 발사 방지
-                if (Time.time >= nextShotTime)
-                {
-                    FireOnce();
-                    nextShotTime = Time.time + Mathf.Max(0f, config.attackInterval);
-                }
+                FireOnce();
+                nextShotTime = Time.time + Mathf.Max(0f, config.attackInterval);
             }
-            yield return null; // 매 프레임 체크
+            yield return null;
         }
         attackRoutine = null;
     }
 
     private void FireOnce()
     {
-        if (config == null || config.projectilePrefab == null || player == null) return;
+        if (config == null || config.projectilePrefab == null || player == null)
+            return;
 
         Vector2 dir = (player.position - firePoint.position);
+
         if (config.attackOnlyHorizontal)
         {
             float sx = Mathf.Sign(dir.x);
             if (sx == 0) sx = movingRight ? 1f : -1f;
             dir = new Vector2(sx, 0f);
         }
-        dir = dir.sqrMagnitude > 0.0001f ? dir.normalized : Vector2.right;
 
+        dir = dir.sqrMagnitude > 0.0001f ? dir.normalized : Vector2.right;
         movingRight = dir.x >= 0f;
 
         GameObject proj = Instantiate(config.projectilePrefab, firePoint.position, Quaternion.identity);
+
         var bullet = proj.GetComponent<BELBullet>();
         if (bullet != null)
-        {
             bullet.Init(dir, config.projectileSpeed);
-        }
         else
         {
             var prb = proj.GetComponent<Rigidbody2D>();
             if (prb != null) prb.velocity = dir * config.projectileSpeed;
-            Destroy(proj, 5f); // 안전 수명
+            Destroy(proj, 5f);
         }
     }
 
+    // --------------------------------------------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (state == State.Patrol && collision.CompareTag("Boundary"))
-        {
             movingRight = !movingRight;
-        }
     }
 
     private void ApplyFlip()
@@ -287,18 +289,42 @@ public class BoundaryEnemy : MonoBehaviour
         }
     }
 
+    // --------------------------------------------------------------------
+    // Ground 감지: Ground 위에서는 중력 꺼서 바닥처럼 유지
+    private void CheckGround()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+
+        if (hit.collider != null)
+        {
+            isOnGround = true;
+            rb.gravityScale = groundGravityScale;
+            rb.velocity = new Vector2(rb.velocity.x, 0f); // y속도 제거
+        }
+        else
+        {
+            isOnGround = false;
+            rb.gravityScale = airGravityScale;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
-        if (config == null) return;
-
-        Gizmos.color = Color.yellow;
-        float r = config.detectRangeTiles * config.tileSize;
-        Gizmos.DrawWireSphere(transform.position, r);
+        if (config != null)
+        {
+            Gizmos.color = Color.yellow;
+            float r = config.detectRangeTiles * config.tileSize;
+            Gizmos.DrawWireSphere(transform.position, r);
+        }
 
         if (firePoint != null)
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(firePoint.position, 0.05f);
         }
+
+        // 바닥 감지 레이 시각화
+        Gizmos.color = isOnGround ? Color.green : Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
 }

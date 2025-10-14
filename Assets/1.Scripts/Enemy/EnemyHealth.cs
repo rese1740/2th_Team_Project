@@ -6,9 +6,11 @@ public class EnemyHealth : MonoBehaviour
     [Tooltip("HpSO 불러오기")]
     public HpSO hpData;
 
+
     [Header("Damage Feedback")]
     [Tooltip("피격 시 이펙트")]
     public SpriteRenderer sr;
+
 
     private void Awake()
     {
@@ -20,7 +22,6 @@ public class EnemyHealth : MonoBehaviour
         if (sr == null)
             sr = GetComponentInChildren<SpriteRenderer>();
     }
-
     public void TakeDamage(float damage)
     {
         if (hpData == null) return;
@@ -33,33 +34,32 @@ public class EnemyHealth : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(DamageEffect());
         }
-
-        if (hpData.currentHealth <= 0f)
-        {
-            Die();
+        if (hpData.currentHealth <= 0f) 
+        { 
+            Die(); 
         }
     }
-
-    System.Collections.IEnumerator DamageEffect()
+    System.Collections.IEnumerator DamageEffect() 
     {
-        sr.color = hpData != null ? hpData.hitColor : Color.red;
-        yield return new WaitForSeconds(0.15f);
-        sr.color = Color.white;
+     sr.color = hpData != null ? hpData.hitColor : Color.red; 
+     yield return new WaitForSeconds(0.15f);
+     sr.color = Color.white; 
     }
 
-    void Die()
-    {
-        Debug.Log("적 사망!");
-        gameObject.SetActive(false);
+    void Die() 
+    { 
+    Debug.Log("적 사망!"); gameObject.SetActive(false); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerHitbox hitbox = collision.GetComponent<PlayerHitbox>();
-        if (hitbox != null)
-        {
+        if (hitbox != null) 
+        { 
             TakeDamage(hitbox.damage);
-            Destroy(collision.gameObject);
-        }
+            Destroy(collision.gameObject); 
+        } 
     }
+
+
 }
