@@ -11,6 +11,9 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackPoint;
     public GameObject hitboxPrefab;
 
+    [Header("폭주 세팅")]
+    public bool isRaging = false;
+
     [Header("콤보 세팅")]
     public int maxCombo = 3;
     public float comboResetTime = 1f;   // 콤보 초기화 시간
@@ -28,6 +31,13 @@ public class PlayerAttack : MonoBehaviour
     {
         if (UIStateManager.Instance.isUIOpen) return;
 
+
+        if (!isRaging && playerData.rageValue >= 100f)
+        {
+            StartRage();
+        }
+
+        #region 포션 사용
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             PlayerSO.Instance.UsePotion(EffectType.Heal);
@@ -43,11 +53,50 @@ public class PlayerAttack : MonoBehaviour
             PlayerSO.Instance.UsePotion(EffectType.Rage_Decrease);
         }
 
+        #endregion
+
         if (Input.GetMouseButtonDown(0))
         {
             TryAttack();
         }
     }
+
+
+    void StartRage()
+    {
+        Debug.Log("폭주 모드 시작");
+        isRaging = true;
+        playerData.rageValue = 100f;
+        playerData.attackPower += playerData.rageAttack;
+        playerData.currentHealth -= playerData.rageHPDecrease;
+
+        StartCoroutine(RageRoutine());
+    }
+
+    IEnumerator RageRoutine()
+    {
+        float timer = 0f;
+
+        while (timer < playerData.rageDuration)
+        {
+            playerData.rageValue = Mathf.Max(0, playerData.rageValue - (Time.deltaTime * playerData.rageDuration));
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        EndRage();
+    }
+
+    public void EndRage()
+    {
+        Debug.Log("폭주 모드 종료");
+        isRaging = false;
+        playerData.attackPower -= playerData.rageAttack;
+        playerData.rageValue = 0f;
+    }
+
+
 
     void TryAttack()
     {

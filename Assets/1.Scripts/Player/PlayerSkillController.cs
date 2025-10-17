@@ -18,12 +18,14 @@ public class PlayerSkillController : MonoBehaviour
     private Dictionary<(PlayerElement, KeyCode), float> cooldownTimers = new();
 
     private PlayerMovement pm;
-  
+    private PlayerAttack pa;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         pm = GetComponent<PlayerMovement>();
+        pa = GetComponent<PlayerAttack>();
         skillMap = new Dictionary<(PlayerElement, KeyCode), SkillData>();
         currentElement_Q = PlayerElement.None;
         currentElement_E = PlayerElement.None;
@@ -49,6 +51,11 @@ public class PlayerSkillController : MonoBehaviour
 
     private void UseSkill(KeyCode key)
     {
+        if (pa.isRaging)
+        {
+            return;
+        }
+
         if(currentElement_Q == PlayerElement.None && currentElement_E == PlayerElement.None)
         {
             return;

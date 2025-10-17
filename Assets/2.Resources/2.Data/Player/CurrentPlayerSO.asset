@@ -10,22 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a19fcb1880b2e5f489e8983c8f90ce80, type: 3}
-  m_Name: OriginPlayerSO
+  m_Name: CurrentPlayerSO
   m_EditorClassIdentifier: 
-  moveSpeed: 8.5
-  jumpForce: 20
-  currentHealth: 100
+  moveSpeed: 10
+  jumpForce: 15
+  currentHealth: -600
   maxHealth: 100
-  rageValue: 50
-  attackPower: 100
-  critValue: 50
-  critPower: 200
-  Gold: 100
+  attackPower: 10
+  critValue: 5
+  critPower: 1.5
+  rageValue: 0
+  rageDuration: 10
+  rageAttack: 100
+  rageHPDecrease: 100
+  rageGainRate: 50
+  Gold: 1000
   currentElement_Q: 1
-  currentElement_E: 7
-  saved1: 3
-  saved2: 2
-  hpPotionCount: 3
-  rageIncreasePotionCount: 3
-  rageDecreasePotionCount: 3
+  currentElement_E: 6
+  saved1: 1
+  saved2: 4
+  hpPotionCount: 0
+  rageIncreasePotionCount: 1
+  rageDecreasePotionCount: 0
   maxPotionCount: 3

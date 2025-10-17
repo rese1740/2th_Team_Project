@@ -34,12 +34,9 @@ public class PlayerSO : ScriptableObject
     [Header("Stat Setting")]
     [Tooltip("플레이어 현재 체력")]
     [Range(0, 100)] public float currentHealth = 100f;
-    
-    [Tooltip("플레이어 최대 체력")]
-    [Range(0, 100)] public float maxHealth = 100f;
 
-    [Tooltip("플레이어 폭주 게이지")]
-    [Range(0, 100)] public float rageValue = 50f;
+    [Tooltip("플레이어 최대 체력")]
+    [Range(0, 500)] public float maxHealth = 100f;
 
     [Tooltip("플레이어 공격력")]
     [Range(0, 100)] public float attackPower = 100f;
@@ -50,6 +47,23 @@ public class PlayerSO : ScriptableObject
     [Tooltip("플레이어 크리티컬 데미지 증가 %")]
     [Range(0, 1000)] public float critPower = 100f;
 
+    [Tooltip("플레이어 폭주 게이지")]
+    [Range(0, 100)] public float rageValue = 50f;
+
+    [Tooltip("플레이어 폭주 시간")]
+    [Range(0, 1000)] public float rageDuration = 10f;
+
+    [Tooltip("플레이어 폭주 공결력 증가")]
+    [Range(0, 1000)] public float rageAttack = 100f;
+
+    [Tooltip("플레이어 폭주 HP 감소량")]
+    [Range(0, 1000)] public float rageHPDecrease = 100f;
+
+    [Tooltip("플레이어 폭주 게이지 증가량")]
+    [Range(0, 1000)] public float rageGainRate = 100f;
+
+
+
     [Tooltip("플레이어 골드량")]
     [Range(0, 1000)] public int Gold = 100;
 
@@ -58,6 +72,8 @@ public class PlayerSO : ScriptableObject
     public PlayerElement currentElement_E = PlayerElement.None;
     public PlayerElement saved1;
     public PlayerElement saved2;
+
+
 
     #region 아이템
     [Header("아이템 세팅")]

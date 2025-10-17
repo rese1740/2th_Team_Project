@@ -16,7 +16,7 @@ public class PlayerHitbox : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Enemy enemy = other.GetComponent<Enemy>();
+            EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
                 Debug.Log("Àû ÇÇ°Ý");

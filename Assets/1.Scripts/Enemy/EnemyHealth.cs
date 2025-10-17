@@ -28,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
 
         hpData.currentHealth -= damage;
         Debug.Log("Àû HP: " + hpData.currentHealth);
+        PlayerSO.Instance.rageValue += PlayerSO.Instance.rageGainRate;
 
         if (sr != null)
         {

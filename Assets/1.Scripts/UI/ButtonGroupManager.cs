@@ -11,7 +11,8 @@ public class ButtonGroupManager : MonoBehaviour
     public Image slot1Icon;
     public Image slot2Icon;
     public UIPopupAnimator popupAnimator;
-   
+    public PlayerElementManager playerElementManager;
+
     public int selectedCount = 0;
 
     private Dictionary<(PlayerElement, PlayerElement), PlayerElement> elementCombinations =
@@ -38,19 +39,13 @@ public class ButtonGroupManager : MonoBehaviour
     public void OnButtonClicked(ButtonScaler clicked)
     {
         PlayerSO.Instance.currentElement_Q = clicked.stateToSet;
+        playerElementManager.ChangeElement(clicked.stateToSet);
 
         if (popupAnimator != null)
             popupAnimator.Hide();
 
         clicked.SetSelected();
-        UpdateUI();
         UpdatePlayerElement();
-    }
-
-
-    private void UpdateUI()
-    {
-       
     }
 
     public void UpdatePlayerElement()
