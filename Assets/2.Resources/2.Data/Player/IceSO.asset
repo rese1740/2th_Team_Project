@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: IceSO
   m_EditorClassIdentifier: 
   elementType: 3
-  attackPower: 10
-  maxHP: 10
-  attackSpeed: 1
-  critChance: 5
-  critPower: 1.5
-  rageGainRate: 1
-  rageHPDecreasePercent: 5
+  attackPower: 7
+  maxHP: 120
+  moveSpeed: 2
+  rageValue: 10
+  critChance: 2
+  critPower: 12
+  rageAttack: 35
+  rageHPDecrease: 85
+  rageGainRate: 10

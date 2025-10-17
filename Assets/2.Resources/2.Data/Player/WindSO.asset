@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: WindSO
   m_EditorClassIdentifier: 
   elementType: 4
-  attackPower: 10
-  maxHP: 10
-  attackSpeed: 1
+  attackPower: 5
+  maxHP: 80
+  moveSpeed: 4
+  rageValue: 10
   critChance: 5
-  critPower: 1.5
-  rageGainRate: 1
-  rageHPDecreasePercent: 5
+  critPower: 8
+  rageAttack: 40
+  rageHPDecrease: 70
+  rageGainRate: 10
