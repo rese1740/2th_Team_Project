@@ -49,7 +49,6 @@ public class PlayerElementManager : MonoBehaviour
         playerSO.critPower = elementSO.critPower;
         playerSO.rageGainRate = elementSO.rageGainRate;
         playerSO.moveSpeed = elementSO.moveSpeed;
-        playerSO.moveSpeed = elementSO.maxHP;
 
         playerSO.rageAttack = elementSO.rageAttack;
         playerSO.rageHPDecrease = elementSO.rageHPDecrease;
