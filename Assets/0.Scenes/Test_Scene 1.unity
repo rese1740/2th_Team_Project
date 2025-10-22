@@ -3350,6 +3350,7 @@ MonoBehaviour:
   slot1Icon: {fileID: 702486761}
   slot2Icon: {fileID: 369512515}
   popupAnimator: {fileID: 723302226}
+  playerElementManager: {fileID: 0}
   selectedCount: 0
 --- !u!1 &674169586
 GameObject:
@@ -8011,6 +8012,7 @@ MonoBehaviour:
   slot1Icon: {fileID: 702486761}
   slot2Icon: {fileID: 369512515}
   popupAnimator: {fileID: 853730927}
+  playerElementManager: {fileID: 0}
   selectedCount: 0
 --- !u!1 &1445110140
 GameObject:
