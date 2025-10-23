@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class ButtonGroupManager : MonoBehaviour
 {
+    public static ButtonGroupManager Instance;
+
     private List<ButtonScaler> buttons = new List<ButtonScaler>();
     public List<ButtonScaler> selectedButtons = new List<ButtonScaler>();
 
@@ -12,6 +14,9 @@ public class ButtonGroupManager : MonoBehaviour
     public Image slot2Icon;
     public UIPopupAnimator popupAnimator;
     public PlayerElementManager playerElementManager;
+    public GameObject[] ElementEffecct;
+    private GameObject player;
+    public bool isChangedElement = false;
 
     public int selectedCount = 0;
 
@@ -28,7 +33,11 @@ public class ButtonGroupManager : MonoBehaviour
         { (PlayerElement.Ice, PlayerElement.Wind), PlayerElement.Sandstorm },
     };
 
-   
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        Instance = this;
+    }
 
     public void RegisterButton(ButtonScaler button)
     {
@@ -46,6 +55,28 @@ public class ButtonGroupManager : MonoBehaviour
 
         clicked.SetSelected();
         UpdatePlayerElement();
+
+       isChangedElement = true;
+        Vector2 spawnPos = player.transform.position + new Vector3(0, 2.5f);
+        GameObject effectInstance = null;
+
+        switch (clicked.stateToSet)
+        {
+            case PlayerElement.Fire:
+                effectInstance = Instantiate(ElementEffecct[0], spawnPos, Quaternion.identity);
+                break;
+            case PlayerElement.Water:
+                effectInstance = Instantiate(ElementEffecct[1], spawnPos, Quaternion.identity);
+                break;
+            case PlayerElement.Ice:
+                effectInstance = Instantiate(ElementEffecct[2], spawnPos, Quaternion.identity);
+                break;
+            case PlayerElement.Wind:
+                effectInstance = Instantiate(ElementEffecct[3], spawnPos, Quaternion.identity);
+                break;
+        }
+
+        effectInstance.transform.SetParent(player.transform);
     }
 
     public void UpdatePlayerElement()

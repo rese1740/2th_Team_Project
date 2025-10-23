@@ -9,7 +9,8 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("공격 세팅")]
     public Transform attackPoint;
-    public GameObject hitboxPrefab;
+    public GameObject hitboxPrefab1;
+    public GameObject hitboxPrefab2;
 
     [Header("폭주 세팅")]
     public bool isRaging = false;
@@ -21,10 +22,12 @@ public class PlayerAttack : MonoBehaviour
     private int currentCombo = 0;
     private float lastAttackTime = 0f;
     private bool isAttacking = false;
+    bool isDie = false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        playerData.currentHealth = playerData.maxHealth;
     }
 
     private void Update()
@@ -128,9 +131,31 @@ public class PlayerAttack : MonoBehaviour
         isAttacking = false;
     }
 
-    public void SpawnHitbox()
+    public void SpawnHitbox1()
     {
-        GameObject hitboxInstance = Instantiate(hitboxPrefab, attackPoint.position, attackPoint.rotation);
+        GameObject hitboxInstance = Instantiate(hitboxPrefab1, attackPoint.position, attackPoint.rotation);
+        PlayerHitbox hitbox = hitboxInstance.GetComponent<PlayerHitbox>();
+
+        if (hitbox != null)
+        {
+            float finalDamage = playerData.attackPower;
+
+            float rand = Random.Range(0f, 100f);
+            if (rand < playerData.critValue)
+            {
+                finalDamage *= playerData.critPower / 100f;
+                Debug.Log("크리티컬 히트! 데미지: " + finalDamage);
+            }
+
+            finalDamage *= 1f + (currentCombo - 1) * 0.2f;
+
+            hitbox.damage = finalDamage;
+        }
+    }
+
+    public void SpawnHitbox2()
+    {
+        GameObject hitboxInstance = Instantiate(hitboxPrefab2, attackPoint.position, attackPoint.rotation);
         PlayerHitbox hitbox = hitboxInstance.GetComponent<PlayerHitbox>();
 
         if (hitbox != null)
@@ -155,15 +180,17 @@ public class PlayerAttack : MonoBehaviour
     {
         playerData.currentHealth -= damage;
 
-        if (playerData.currentHealth <= 0)
+        if (playerData.currentHealth <= 0 && !isDie)
         {
             Die();
         }
     }
 
-
     void Die()
     {
         Debug.Log("플레이어 사망");
+        animator.SetTrigger("die");
+        UIStateManager.Instance.isUIOpen = true;
+        isDie = true;
     }
 }

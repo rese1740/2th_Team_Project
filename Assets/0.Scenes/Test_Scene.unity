@@ -3579,6 +3579,7 @@ MonoBehaviour:
   slot2Icon: {fileID: 369512515}
   popupAnimator: {fileID: 723302226}
   playerElementManager: {fileID: 1269300961}
+  ElementEffecct: []
   selectedCount: 0
 --- !u!1 &674169586
 GameObject:
@@ -9046,6 +9047,11 @@ MonoBehaviour:
   slot2Icon: {fileID: 369512515}
   popupAnimator: {fileID: 853730927}
   playerElementManager: {fileID: 1269300961}
+  ElementEffecct:
+  - {fileID: 6421477855652613833, guid: 9f3534191f4a8ca469a75f20f732c873, type: 3}
+  - {fileID: 6818556315848946957, guid: fcc80841ae9b2ac4880f2e6b24c4f6d5, type: 3}
+  - {fileID: 1565444114548982558, guid: d90fb2c96a93bd848811204dd8ca25e4, type: 3}
+  - {fileID: 1631752146357024329, guid: 0ccd4a89a36f3f449b7a4c017eccdd57, type: 3}
   selectedCount: 0
 --- !u!1 &1441997960
 GameObject:
@@ -13745,6 +13751,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
+    - target: {fileID: 843613690190492723, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 637145064, guid: 1ff98d60af2cabd49b0d269b972808a3, type: 3}
     - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: iceSO
       value: 
@@ -13765,6 +13775,38 @@ PrefabInstance:
       propertyPath: playerSO
       value: 
       objectReference: {fileID: 11400000, guid: a72220e268eec4c41945cdcdde04485d, type: 2}
+    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: m_Size.x
+      value: 0.185897
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.3397225
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.010324467
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.011994302
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: hitboxPrefab1
+      value: 
+      objectReference: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: hitboxPrefab2
+      value: 
+      objectReference: {fileID: 718453544710883730, guid: 443fbd9a81df8b841b6f4a3207ad6f5d, type: 3}
     - target: {fileID: 7212076026127047472, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: m_Name
       value: Player

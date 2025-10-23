@@ -74,7 +74,6 @@ public class PlayerSO : ScriptableObject
     public PlayerElement saved2;
 
 
-
     #region 아이템
     [Header("아이템 세팅")]
     public Dictionary<string, int> itemLevels = new Dictionary<string, int>();
