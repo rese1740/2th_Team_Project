@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
     public HpSO hpData;
 
 
-    [Header("Damage Feedback")]
+    [Header("피격 시 이펙트")]
     [Tooltip("피격 시 이펙트")]
     public SpriteRenderer sr;
 

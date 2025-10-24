@@ -6,38 +6,38 @@ public class BoundaryEnemy : MonoBehaviour
 {
     public enum State { Patrol, Alert, Chase, Attack }
 
-    [Header("Config (ScriptableObject)")]
+    [Header("바운더리 적 So불러오기")]
     public EnemySO config;
 
-    [Header("Scene Refs")]
-    public Transform firePoint;
-    public SpriteRenderer spriteRenderer;
+    [Header("씬 참조")]
+    public Transform firePoint;             // 발사 지점(총구)
+    public SpriteRenderer spriteRenderer;   // 적 스프라이트 렌더러
     public Transform gfxRoot;
 
-    [Header("Ground Settings")]
+    [Header("지면 감지")]
     public LayerMask groundLayer;
     public float groundCheckDistance = 0.2f; // 바닥 감지 거리
     public float airGravityScale = 3f;       // 공중일 때 중력
     public float groundGravityScale = 0f;    // Ground 위일 때 중력
 
-    private Rigidbody2D rb;
-    private Transform player;
+    private Rigidbody2D rb;                 // 물리 바디
+    private Transform player;               // 플레이어 Transform
 
-    private bool movingRight = true;
-    private bool isAlerting = false;
-    private bool hasAggro = false;
+    private bool movingRight = true;        // 현재 바라보는 방향(true=우측)
+    private bool isAlerting = false;        // 경고 연출 중 여부(중복 방지)
+    private bool hasAggro = false;          // 플레이어에게 어그로가 붙었는지
 
-    private Coroutine attackRoutine;
-    private float nextShotTime = 0f;
+    private Coroutine attackRoutine;        // 공격 루프 코루틴 핸들
+    private float nextShotTime = 0f;        // 쿨다운 관리
 
-    private State state = State.Patrol;
-    private bool isOnGround = false;
+    private State state = State.Patrol;     // 현재 상태
+    private bool isOnGround = false;        // Ground 감지 결과
 
-    // --------------------------------------------------------------------
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
+        // 참조 자동 보정
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
@@ -50,35 +50,46 @@ public class BoundaryEnemy : MonoBehaviour
 
     void Start()
     {
+        // 플레이어 참조
         var p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
     }
 
     void OnDisable()
     {
+        // 비활성화 시 안전 정리
         StopAttackLoop();
         rb.velocity = Vector2.zero;
         hasAggro = false;
     }
 
-    // --------------------------------------------------------------------
     void FixedUpdate()
     {
+        // 매 고정 프레임마다 상태 전이 + 이동 + 뒤집기 + 지면 감지
         bool inRange = IsPlayerInRange();
 
         switch (state)
         {
             case State.Patrol:
+                // 아직 어그로가 없고 탐지 범위 안에 들어오면 경고로 진입
                 if (!hasAggro && inRange && !isAlerting)
                     StartCoroutine(EnterAlert());
                 break;
+
             case State.Alert:
+                // 연출 후 추격
                 break;
             case State.Chase:
                 if (inRange)
+                { 
+                    // 사정거리 재진입
                     state = State.Attack;
+                }
+
+
                 else if (!config.persistAggro)
                 {
+                    // 어그로 유지 옵션이 꺼져 있으면 복귀
                     state = State.Patrol;
                     hasAggro = false;
                 }
@@ -86,18 +97,19 @@ public class BoundaryEnemy : MonoBehaviour
             case State.Attack:
                 if (!inRange)
                 {
+                    // 사정거리 이탈 > 추격
                     state = State.Chase;
-                    StopAttackLoop();
+                    StopAttackLoop();   // 발사 즉시 중지
                 }
                 break;
         }
 
-        MoveByState();
-        ApplyFlip();
-        CheckGround();
+        MoveByState();      // 상태에 따른 이동/속도/공격 루프 처리
+        ApplyFlip();        // 바라보는 방향에 맞게 스프라이트/파이어포인트 반전
+        CheckGround();     // Ground 감지(지면 위면 중력 0, 아니면 중력 적용) 
     }
 
-    // --------------------------------------------------------------------
+    // 플레이어가 탐지 범위 안에 있는지 확인
     private bool IsPlayerInRange()
     {
         if (player == null || config == null) return false;
@@ -105,6 +117,7 @@ public class BoundaryEnemy : MonoBehaviour
         return Vector2.Distance(transform.position, player.position) <= r;
     }
 
+    // 경고 상태 진입(느낌표 아이콘 + 깡총 애니메이션 + 대기 후 추격으로 전이)
     private IEnumerator EnterAlert()
     {
         if (config == null) yield break;
@@ -119,14 +132,18 @@ public class BoundaryEnemy : MonoBehaviour
             Destroy(icon, config.alertDuration);
         }
 
+        // 경고 연출(깡총)
         yield return StartCoroutine(BounceAnimation());
         yield return new WaitForSeconds(config.alertDuration);
 
+
+        // 추격 시작
         hasAggro = true;
         state = State.Chase;
         isAlerting = false;
     }
 
+    // 바운스 애니메이션
     private IEnumerator BounceAnimation()
     {
         if (config == null) yield break;
@@ -137,6 +154,7 @@ public class BoundaryEnemy : MonoBehaviour
         Vector3 start = gfxRoot.localPosition;
         Vector3 peak = start + Vector3.up * config.bounceHeight;
 
+        // 위로
         while (elapsed < half)
         {
             elapsed += Time.deltaTime;
@@ -145,6 +163,7 @@ public class BoundaryEnemy : MonoBehaviour
             yield return null;
         }
 
+        // 아래로
         elapsed = 0f;
         while (elapsed < half)
         {
@@ -157,7 +176,7 @@ public class BoundaryEnemy : MonoBehaviour
         gfxRoot.localPosition = start;
     }
 
-    // --------------------------------------------------------------------
+    //상태별 이동/속도/공격 루프 제어
     private void MoveByState()
     {
         if (config == null) return;
@@ -165,16 +184,19 @@ public class BoundaryEnemy : MonoBehaviour
         switch (state)
         {
             case State.Patrol:
+                // 좌우 순찰
                 rb.velocity = new Vector2((movingRight ? 1f : -1f) * config.patrolSpeed, rb.velocity.y);
                 StopAttackLoop();
                 break;
 
             case State.Alert:
+                // 경고 중에는 정지
                 rb.velocity = Vector2.zero;
                 StopAttackLoop();
                 break;
 
             case State.Chase:
+                // 추격 상태에서는 공격 루프 중단, 옵션에 따라 플레이어 쪽으로 x 이동
                 StopAttackLoop();
                 if (config.chaseWhileAggro && hasAggro && player != null)
                 {
@@ -189,6 +211,7 @@ public class BoundaryEnemy : MonoBehaviour
                 break;
 
             case State.Attack:
+                // 공격 상태: 옵션에 따라 이동을 유지하며 사격하거나 제자리 사격
                 if (config.chaseWhileAggro && hasAggro && player != null)
                 {
                     float dirX = Mathf.Sign(player.position.x - transform.position.x);
@@ -199,18 +222,20 @@ public class BoundaryEnemy : MonoBehaviour
                 {
                     rb.velocity = new Vector2(0f, rb.velocity.y);
                 }
-                StartAttackLoop();
+                StartAttackLoop(); // 단일 루프 보장
                 break;
         }
     }
 
-    // --------------------------------------------------------------------
+    // 공격 루프 시작
     private void StartAttackLoop()
     {
         if (attackRoutine == null)
             attackRoutine = StartCoroutine(AttackLoop());
     }
 
+
+    // 공격 루프 중지
     private void StopAttackLoop()
     {
         if (attackRoutine != null)
@@ -220,6 +245,7 @@ public class BoundaryEnemy : MonoBehaviour
         }
     }
 
+    // 공격 루프: 쿨다운을 고려하여 반복 발사
     private IEnumerator AttackLoop()
     {
         while (state == State.Attack)
@@ -229,11 +255,13 @@ public class BoundaryEnemy : MonoBehaviour
                 FireOnce();
                 nextShotTime = Time.time + Mathf.Max(0f, config.attackInterval);
             }
-            yield return null;
+            yield return null;  // 매 프레임 체크
         }
         attackRoutine = null;
     }
 
+
+    // 1회 발사 처리
     private void FireOnce()
     {
         if (config == null || config.projectilePrefab == null || player == null)
@@ -241,6 +269,7 @@ public class BoundaryEnemy : MonoBehaviour
 
         Vector2 dir = (player.position - firePoint.position);
 
+        // 수평 전용 발사 모드 
         if (config.attackOnlyHorizontal)
         {
             float sx = Mathf.Sign(dir.x);
@@ -251,6 +280,7 @@ public class BoundaryEnemy : MonoBehaviour
         dir = dir.sqrMagnitude > 0.0001f ? dir.normalized : Vector2.right;
         movingRight = dir.x >= 0f;
 
+        // 투사체 생성
         GameObject proj = Instantiate(config.projectilePrefab, firePoint.position, Quaternion.identity);
 
         var bullet = proj.GetComponent<BELBullet>();
@@ -264,13 +294,14 @@ public class BoundaryEnemy : MonoBehaviour
         }
     }
 
-    // --------------------------------------------------------------------
+    // 경계 트리거에 닿으면 순찰 방향 반전
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (state == State.Patrol && collision.CompareTag("Boundary"))
             movingRight = !movingRight;
     }
 
+    // 바라보는 방향에 맞게 스프라이트 및 발사포인트 반전
     private void ApplyFlip()
     {
         if (spriteRenderer == null) return;
@@ -289,8 +320,7 @@ public class BoundaryEnemy : MonoBehaviour
         }
     }
 
-    // --------------------------------------------------------------------
-    // Ground 감지: Ground 위에서는 중력 꺼서 바닥처럼 유지
+    // Ground 지면 감지
     private void CheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
@@ -299,7 +329,7 @@ public class BoundaryEnemy : MonoBehaviour
         {
             isOnGround = true;
             rb.gravityScale = groundGravityScale;
-            rb.velocity = new Vector2(rb.velocity.x, 0f); // y속도 제거
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
         else
         {
@@ -310,6 +340,7 @@ public class BoundaryEnemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // 탐지 범위 표시
         if (config != null)
         {
             Gizmos.color = Color.yellow;
@@ -317,6 +348,7 @@ public class BoundaryEnemy : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, r);
         }
 
+        // 발사 지점 표시
         if (firePoint != null)
         {
             Gizmos.color = Color.cyan;

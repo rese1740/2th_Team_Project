@@ -501,6 +501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BDummyL (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4114080353133586042, guid: de2564eeb46117242b7d508957110ec6, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4804521681890158689, guid: de2564eeb46117242b7d508957110ec6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.54
@@ -3580,6 +3584,7 @@ MonoBehaviour:
   popupAnimator: {fileID: 723302226}
   playerElementManager: {fileID: 1269300961}
   ElementEffecct: []
+  isChangedElement: 0
   selectedCount: 0
 --- !u!1 &674169586
 GameObject:
@@ -6225,6 +6230,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
+    - target: {fileID: 3806188235784530403, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4910632714518866029, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: m_Name
       value: BDummyS (1)
@@ -9052,6 +9061,7 @@ MonoBehaviour:
   - {fileID: 6818556315848946957, guid: fcc80841ae9b2ac4880f2e6b24c4f6d5, type: 3}
   - {fileID: 1565444114548982558, guid: d90fb2c96a93bd848811204dd8ca25e4, type: 3}
   - {fileID: 1631752146357024329, guid: 0ccd4a89a36f3f449b7a4c017eccdd57, type: 3}
+  isChangedElement: 0
   selectedCount: 0
 --- !u!1 &1441997960
 GameObject:
@@ -13633,6 +13643,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4114080353133586042, guid: de2564eeb46117242b7d508957110ec6, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4804521681890158689, guid: de2564eeb46117242b7d508957110ec6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.01
@@ -13694,6 +13708,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
+    - target: {fileID: 3806188235784530403, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4910632714518866029, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: m_Name
       value: BDummyS
