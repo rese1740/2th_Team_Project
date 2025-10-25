@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6174bfcb7a8844b9a70fd941024206, type: 3}
   m_Name: BESHpSO
   m_EditorClassIdentifier: 
-  maxHealth: 400
-  currentHealth: 400
+  maxHealth: 150
+  currentHealth: 150
   hitColor: {r: 1, g: 0, b: 0, a: 1}

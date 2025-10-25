@@ -21,7 +21,7 @@ MonoBehaviour:
   bounceHeight: 0.3
   bounceSpeed: 6
   projectilePrefab: {fileID: 3375249882092023955, guid: f07b2fa08fde6df43b930d06ef269829, type: 3}
-  projectileSpeed: 8
+  projectileSpeed: 5
   attackInterval: 0.8
   attackOnlyHorizontal: 0
   persistAggro: 1
