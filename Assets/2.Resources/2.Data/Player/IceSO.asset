@@ -15,7 +15,7 @@ MonoBehaviour:
   elementType: 3
   attackPower: 7
   maxHP: 120
-  moveSpeed: 2
+  moveSpeed: 4
   rageValue: 10
   critChance: 2
   critPower: 12
