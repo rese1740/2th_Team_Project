@@ -20,6 +20,13 @@ public class BoundaryEnemy : MonoBehaviour
     public float airGravityScale = 3f;       // 공중일 때 중력
     public float groundGravityScale = 0f;    // Ground 위일 때 중력
 
+    [Header("피격/넉백 제어")]
+    [Tooltip("넉백 중 이동 AI를 일시 정지할지")]
+    public bool pauseAIWhileKnockback = true;
+
+    private bool isKnockback = false;
+    private float knockbackEndTime = 0f;
+
     private Rigidbody2D rb;                 // 물리 바디
     private Transform player;               // 플레이어 Transform
 
@@ -65,48 +72,53 @@ public class BoundaryEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        // 매 고정 프레임마다 상태 전이 + 이동 + 뒤집기 + 지면 감지
+        // 넉백 타이머 갱신
+        if (isKnockback && Time.time >= knockbackEndTime)
+            isKnockback = false;
+
         bool inRange = IsPlayerInRange();
 
-        switch (state)
+        if (!isKnockback) // 넉백 아닐 때만 상태 머신 전이
         {
-            case State.Patrol:
-                // 아직 어그로가 없고 탐지 범위 안에 들어오면 경고로 진입
-                if (!hasAggro && inRange && !isAlerting)
-                    StartCoroutine(EnterAlert());
-                break;
+            switch (state)
+            {
+                case State.Patrol:
+                    if (!hasAggro && inRange && !isAlerting)
+                        StartCoroutine(EnterAlert());
+                    break;
+                case State.Alert:
+                    break;
+                case State.Chase:
+                    if (inRange) state = State.Attack;
+                    else if (!config.persistAggro)
+                    {
+                        state = State.Patrol;
+                        hasAggro = false;
+                    }
+                    break;
+                case State.Attack:
+                    if (!inRange)
+                    {
+                        state = State.Chase;
+                        StopAttackLoop();
+                    }
+                    break;
+            }
 
-            case State.Alert:
-                // 연출 후 추격
-                break;
-            case State.Chase:
-                if (inRange)
-                { 
-                    // 사정거리 재진입
-                    state = State.Attack;
-                }
+            MoveByState();  //  넉백 아닐 때만 AI가 속도 제어
+        }
+        else
+        {
+            // 넉백 중: AI 속도 세팅 금지
+            StopAttackLoop(); // 공격 루프도 잠시 정지 (원치 않으면 제거)
 
-
-                else if (!config.persistAggro)
-                {
-                    // 어그로 유지 옵션이 꺼져 있으면 복귀
-                    state = State.Patrol;
-                    hasAggro = false;
-                }
-                break;
-            case State.Attack:
-                if (!inRange)
-                {
-                    // 사정거리 이탈 > 추격
-                    state = State.Chase;
-                    StopAttackLoop();   // 발사 즉시 중지
-                }
-                break;
+            // 보는 방향은 현재 속도 기준으로만 업데이트(선택)
+            if (rb.velocity.x != 0f)
+                movingRight = rb.velocity.x > 0f;
         }
 
-        MoveByState();      // 상태에 따른 이동/속도/공격 루프 처리
-        ApplyFlip();        // 바라보는 방향에 맞게 스프라이트/파이어포인트 반전
-        CheckGround();     // Ground 감지(지면 위면 중력 0, 아니면 중력 적용) 
+        ApplyFlip();
+        CheckGround();
     }
 
     // 플레이어가 탐지 범위 안에 있는지 확인
@@ -324,9 +336,18 @@ public class BoundaryEnemy : MonoBehaviour
     private void CheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+        bool hitGround = hit.collider != null;
 
-        if (hit.collider != null)
+        if (hitGround)
         {
+            //  넉백 중에는 상승 중(y>0)일 때는 중력/속도 클램프 금지 → 자연스러운 호 상승 유지
+            if (isKnockback && rb.velocity.y > 0f)
+            {
+                rb.gravityScale = airGravityScale;  // 올라갈 땐 중력 유지
+                return;
+            }
+
+            // 하강 중/정지일 때만 "바닥처럼" 붙이기
             isOnGround = true;
             rb.gravityScale = groundGravityScale;
             rb.velocity = new Vector2(rb.velocity.x, 0f);
@@ -336,6 +357,13 @@ public class BoundaryEnemy : MonoBehaviour
             isOnGround = false;
             rb.gravityScale = airGravityScale;
         }
+    }
+
+    public void EnterKnockback(float duration)
+    {
+        isKnockback = true;
+        knockbackEndTime = Time.time + duration;
+        StopAttackLoop();
     }
 
     private void OnDrawGizmosSelected()
