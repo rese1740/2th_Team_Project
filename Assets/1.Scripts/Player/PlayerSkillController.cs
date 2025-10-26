@@ -108,10 +108,26 @@ public class PlayerSkillController : MonoBehaviour
     }
     private void UseSummonSkill(SkillData skill)
     {
-        Debug.Log("발사체 스킬 실행");
+        Debug.Log("소환 스킬 실행");
         Vector3 spawnPos = transform.position + new Vector3(pm.facingRight ? 1f : -1f, 0f, 0f);
+        GameObject summonPrefab = Instantiate(skill.skillEffectPrefab, spawnPos, Quaternion.identity);
 
-        Instantiate(skill.skillEffectPrefab, spawnPos, Quaternion.identity);
+        IceProjectile skill_ = summonPrefab.GetComponent<IceProjectile>();
+        PlayerHitBox hitBox = summonPrefab.GetComponent<PlayerHitBox>();
+
+        
+
+        if (skill_ != null || hitBox != null)
+        {
+            skill_.damage = skill.damage;
+        }
+
+        if (!pm.facingRight)
+        {
+            Vector3 scale = summonPrefab.transform.localScale;
+            scale.x *= -1;
+            summonPrefab.transform.localScale = scale;
+        }
     }
 
     private void UseProjectileSkill(SkillData skill)
@@ -122,11 +138,11 @@ public class PlayerSkillController : MonoBehaviour
 
         GameObject projectile = Instantiate(skill.skillEffectPrefab, spawnPos, Quaternion.identity);
 
-        IceProjectile skill_ = projectile.GetComponent<IceProjectile>();
+        PlayerHitBox hitBox = projectile.GetComponent<PlayerHitBox>();
 
-        if(skill != null)
+        if (hitBox != null)
         {
-            skill_.damage = skill.damage;
+            hitBox.damage = skill.damage;
         }
 
         if (!pm.facingRight)

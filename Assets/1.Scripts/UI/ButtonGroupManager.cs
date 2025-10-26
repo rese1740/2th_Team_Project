@@ -10,6 +10,7 @@ public class ButtonGroupManager : MonoBehaviour
     public List<ButtonScaler> selectedButtons = new List<ButtonScaler>();
 
     [Header("선택된 버튼을 표시할 UI 슬롯")]
+    public Image element_Img;
     public Image slot1Icon;
     public Image slot2Icon;
     public UIPopupAnimator popupAnimator;
@@ -47,6 +48,8 @@ public class ButtonGroupManager : MonoBehaviour
 
     public void OnButtonClicked(ButtonScaler clicked)
     {
+        element_Img.sprite = clicked.iconSprite;
+
         PlayerSO.Instance.currentElement_Q = clicked.stateToSet;
         playerElementManager.ChangeElement(clicked.stateToSet);
 

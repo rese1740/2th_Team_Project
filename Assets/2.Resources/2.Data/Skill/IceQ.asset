@@ -16,7 +16,7 @@ MonoBehaviour:
   key: 113
   elementType: 3
   skillType: 1
-  skillEffectPrefab: {fileID: 1288243435288698471, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+  skillEffectPrefab: {fileID: 3815372443133339415, guid: 14dfdd6306d2db74196e6d6f5797ee14, type: 3}
   damage: 10
   coolTime: 0
   projectileCount: 1

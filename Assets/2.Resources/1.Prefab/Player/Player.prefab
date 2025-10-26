@@ -178,7 +178,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -638278426, guid: 1ff98d60af2cabd49b0d269b972808a3, type: 3}
+  m_Sprite: {fileID: 637145064, guid: 1ff98d60af2cabd49b0d269b972808a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -206,6 +206,9 @@ MonoBehaviour:
   skillList:
   - {fileID: 11400000, guid: 55a40ae7a6507e4418555bdf0aaa9ae4, type: 2}
   - {fileID: 11400000, guid: efead3ce7fca1f542b7d4e4b3cdbd0ce, type: 2}
+  - {fileID: 11400000, guid: 7904931c827264441b0da1f584d03b7a, type: 2}
+  - {fileID: 11400000, guid: 8f4872f4f51fb9f4fb0930076fc113e8, type: 2}
+  - {fileID: 11400000, guid: 0695354c818a7474a9147d75c76182ad, type: 2}
 --- !u!114 &7947841960093207985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,11 +239,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: a72220e268eec4c41945cdcdde04485d, type: 2}
   attackPoint: {fileID: 424420845633094096}
-  hitboxPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
+  hitboxPrefab1: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
+  hitboxPrefab2: {fileID: 718453544710883730, guid: 443fbd9a81df8b841b6f4a3207ad6f5d, type: 3}
   isRaging: 0
   maxCombo: 3
   comboResetTime: 1
   attackDelay: 0.3
+  diePanel: {fileID: 0}
+  virtualCamera: {fileID: 0}
+  zoomAmount: -1
+  zoomDuration: 1
 --- !u!114 &8859339661136349649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,11 +281,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23975c7d5625908438ccf40eb3ef150a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSO: {fileID: 11400000, guid: 38bd9b2793e9e88439e4918bf22be8c5, type: 2}
-  waterSO: {fileID: 11400000, guid: 1fdbd6b3d39dc0c4da8087993be3c786, type: 2}
-  iceSO: {fileID: 11400000, guid: ecdfbeebd6f643548a1413178b5aef09, type: 2}
-  windSO: {fileID: 11400000, guid: e9763003d2f1e8c449bcedee72a7a9fa, type: 2}
-  currentSO: {fileID: 11400000, guid: a72220e268eec4c41945cdcdde04485d, type: 2}
+  fireSO: {fileID: 11400000, guid: 6173e1222769cfc4086724244b2bf2cc, type: 2}
+  waterSO: {fileID: 11400000, guid: 1405e553476cc7c448eab78cc6216f44, type: 2}
+  iceSO: {fileID: 11400000, guid: 69b587915d780434584931cbfb455167, type: 2}
+  windSO: {fileID: 11400000, guid: 3b9a071118b4de2499b8ba2410b0c670, type: 2}
+  playerSO: {fileID: 11400000, guid: a72220e268eec4c41945cdcdde04485d, type: 2}
 --- !u!61 &4676524161680268797
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -310,18 +318,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05915387, y: 0.0068961605}
+  m_Offset: {x: -0.010324467, y: 0.011994302}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.34}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.19598886, y: 0.34991878}
+  m_Size: {x: 0.185897, y: 0.3397225}
   m_EdgeRadius: 0
 --- !u!50 &5725696781877795741
 Rigidbody2D:

@@ -15,7 +15,7 @@ MonoBehaviour:
   skillName: "\uBB3C E"
   key: 101
   elementType: 9
-  skillType: 1
+  skillType: 3
   skillEffectPrefab: {fileID: 3815372443133339415, guid: fa73521af285bca428fa04245eb54300, type: 3}
   damage: 10
   coolTime: 0

@@ -9,6 +9,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 231664451919425105, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: m_Size.x
+      value: 0.99218976
+      objectReference: {fileID: 0}
+    - target: {fileID: 231664451919425105, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: m_Size.y
+      value: 0.29132116
+      objectReference: {fileID: 0}
+    - target: {fileID: 231664451919425105, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0014387369
+      objectReference: {fileID: 0}
+    - target: {fileID: 231664451919425105, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0076628327
+      objectReference: {fileID: 0}
+    - target: {fileID: 231664451919425105, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_SpriteTilingProperty.border.w
       value: 0
       objectReference: {fileID: 0}
@@ -26,27 +42,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 231664451919425105, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 1.0104934
       objectReference: {fileID: 0}
     - target: {fileID: 231664451919425105, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 745113778019452597, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2e6d3c0c3a8b80f45884a2677c39293c, type: 3}
+      objectReference: {fileID: 262030103, guid: 282906257a1852d4c87a079d39139545, type: 3}
     - target: {fileID: 1288243435288698471, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_Name
       value: Water_Ice_E
       objectReference: {fileID: 0}
     - target: {fileID: 2431120996888887022, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.4137125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431120996888887022, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.3091655
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431120996888887022, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.3574376
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431120996888887022, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8626
+      value: 4.1295
       objectReference: {fileID: 0}
     - target: {fileID: 2431120996888887022, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.7
+      value: -5.4902
       objectReference: {fileID: 0}
     - target: {fileID: 2431120996888887022, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -88,6 +116,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1288243435288698471, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       insertIndex: 1
       addedObject: {fileID: -4740305142459972525}
+    - targetCorrespondingSourceObject: {fileID: 1288243435288698471, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8160028898519949732}
   m_SourcePrefab: {fileID: 100100000, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
 --- !u!1 &3815372443133339415 stripped
 GameObject:
@@ -109,3 +140,24 @@ MonoBehaviour:
   damage: 5
   lifetime: 1
   freezeDuration: 3
+--- !u!95 &8160028898519949732
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815372443133339415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30415775b9d523b4b888841cfa4d3d05, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -3774,6 +3774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedButtons: []
+  element_Img: {fileID: 0}
   slot1Icon: {fileID: 702486761}
   slot2Icon: {fileID: 369512515}
   popupAnimator: {fileID: 723302226}
@@ -9323,6 +9324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedButtons: []
+  element_Img: {fileID: 1478756986}
   slot1Icon: {fileID: 702486761}
   slot2Icon: {fileID: 369512515}
   popupAnimator: {fileID: 853730927}
@@ -14597,90 +14599,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
-    - target: {fileID: 843613690190492723, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 637145064, guid: 1ff98d60af2cabd49b0d269b972808a3, type: 3}
-    - target: {fileID: 971369656305273810, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: skillList.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 971369656305273810, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: skillList.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 7904931c827264441b0da1f584d03b7a, type: 2}
-    - target: {fileID: 971369656305273810, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: skillList.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f4872f4f51fb9f4fb0930076fc113e8, type: 2}
-    - target: {fileID: 971369656305273810, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: skillList.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0695354c818a7474a9147d75c76182ad, type: 2}
-    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: iceSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 69b587915d780434584931cbfb455167, type: 2}
-    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: fireSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 6173e1222769cfc4086724244b2bf2cc, type: 2}
-    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: windSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 3b9a071118b4de2499b8ba2410b0c670, type: 2}
-    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: waterSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 1405e553476cc7c448eab78cc6216f44, type: 2}
-    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: playerSO
-      value: 
-      objectReference: {fileID: 11400000, guid: a72220e268eec4c41945cdcdde04485d, type: 2}
-    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Size.x
-      value: 0.185897
-      objectReference: {fileID: 0}
-    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Size.y
-      value: 0.3397225
-      objectReference: {fileID: 0}
-    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.010324467
-      objectReference: {fileID: 0}
-    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.011994302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 4676524161680268797, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.28
-      objectReference: {fileID: 0}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: diePanel
       value: 
       objectReference: {fileID: 2040333066}
-    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: zoomAmount
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: zoomDuration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: hitboxPrefab1
-      value: 
-      objectReference: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
-    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: hitboxPrefab2
-      value: 
-      objectReference: {fileID: 718453544710883730, guid: 443fbd9a81df8b841b6f4a3207ad6f5d, type: 3}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: virtualCamera
       value: 

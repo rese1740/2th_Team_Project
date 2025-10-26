@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,7 +95,637 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_0
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 69
+        width: 17
+        height: 4
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ffc0f0294624104c892c04c948b0e1f
+      internalID: -1413823340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_1
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 45
+        width: 101
+        height: 33
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 176c449b70205684cb48f1411e3ab992
+      internalID: 262030103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_2
+      rect:
+        serializedVersion: 2
+        x: 1948
+        y: 45
+        width: 100
+        height: 33
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4ff2d08ce58c8e448e56b0a58efeb9f
+      internalID: 644682082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_3
+      rect:
+        serializedVersion: 2
+        x: 2125
+        y: 45
+        width: 99
+        height: 33
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dd994ed12c9b3f449b6e5d271f53f88
+      internalID: 891152405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_4
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 70
+        width: 7
+        height: 12
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdc3f4aee07f08049aa85ac6a3603dd6
+      internalID: -223290134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_5
+      rect:
+        serializedVersion: 2
+        x: 2284
+        y: 45
+        width: 104
+        height: 28
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7d1a6f6ab38e9f489751621994fa398
+      internalID: -1863274102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_6
+      rect:
+        serializedVersion: 2
+        x: 2429
+        y: 45
+        width: 104
+        height: 28
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b0d1d2845e264a4a9c2774348ec95cd
+      internalID: -211797594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_7
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 45
+        width: 102
+        height: 23
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd92a0d3ad343fa4ab82bc73c4f57579
+      internalID: -445382984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_8
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 45
+        width: 102
+        height: 23
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e55a3b7110da6db4d9086e0519ba113d
+      internalID: -883503137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_9
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 45
+        width: 103
+        height: 23
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c786f7f8a72703a4496f7d53fefd633f
+      internalID: -405714995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_10
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 45
+        width: 103
+        height: 23
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ba42749f44100e4fbdf2fe35fc99feb
+      internalID: 1151044334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_11
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 45
+        width: 100
+        height: 20
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 040d40a26b293a347bf6e1db1248e9bc
+      internalID: 282328212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_12
+      rect:
+        serializedVersion: 2
+        x: 1406
+        y: 45
+        width: 96
+        height: 20
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57ac786a91fa6da46ae881526e76dde7
+      internalID: 301464560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_13
+      rect:
+        serializedVersion: 2
+        x: 1611
+        y: 45
+        width: 97
+        height: 25
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72ed2e2c7df0f8f418962747b39f0d53
+      internalID: -347043422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 58
+        width: 12
+        height: 8
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d98a2ffd57e9d7b4ca68c6515919fa76
+      internalID: -1886754075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_15
+      rect:
+        serializedVersion: 2
+        x: 2225
+        y: 58
+        width: 12
+        height: 8
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b38cd7ebffb0470499c7060babaa79f1
+      internalID: 320371327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_16
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 45
+        width: 59
+        height: 25
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ad418ae77f2d8429b79d4c10b79d2f
+      internalID: -73486076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_17
+      rect:
+        serializedVersion: 2
+        x: 2738
+        y: 45
+        width: 59
+        height: 25
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65853f54d383744183fe53ffb1f92e8
+      internalID: 460183180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_18
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 45
+        width: 59
+        height: 18
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b755caa7f8fd3c548a552810af91f1f7
+      internalID: -765818878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_19
+      rect:
+        serializedVersion: 2
+        x: 2921
+        y: 60
+        width: 6
+        height: 6
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71a2ec2b1d6d5f84b9e194314aa71a10
+      internalID: -181218639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_20
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 47
+        width: 23
+        height: 6
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30a919e4351b9b843b1c105ec6155bdc
+      internalID: -1620516857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_21
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 46
+        width: 46
+        height: 9
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 382a20b58bd4ede4aa40ffd7c22e6162
+      internalID: -591607735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_22
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 46
+        width: 70
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 250fb6f90830bbc45adaa93ea46ffd50
+      internalID: 858805905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_23
+      rect:
+        serializedVersion: 2
+        x: 2056
+        y: 50
+        width: 5
+        height: 6
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a3d44e7035835d4caf665433f36a718
+      internalID: 1666400282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_24
+      rect:
+        serializedVersion: 2
+        x: 2231
+        y: 50
+        width: 6
+        height: 6
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eda6896c7827ac4aba0ff085c339d9c
+      internalID: 879776616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_25
+      rect:
+        serializedVersion: 2
+        x: 2559
+        y: 46
+        width: 40
+        height: 12
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 423249e9d8980c743b7a391b4812f9e1
+      internalID: 446137786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_26
+      rect:
+        serializedVersion: 2
+        x: 2697
+        y: 46
+        width: 16
+        height: 12
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5e9df03d2a8e704a93f598b2964c54e
+      internalID: -660250781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_27
+      rect:
+        serializedVersion: 2
+        x: 2711
+        y: 46
+        width: 26
+        height: 12
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a49181dcd9d25e945ba5de0cbf61219c
+      internalID: 832995669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_28
+      rect:
+        serializedVersion: 2
+        x: 2828
+        y: 46
+        width: 10
+        height: 6
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e1b1bddff794c84e9c6a52181808a38
+      internalID: 1639738644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice_Water_Skill_E_29
+      rect:
+        serializedVersion: 2
+        x: 2840
+        y: 46
+        width: 26
+        height: 9
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 047ae14069cb4d147ab9b48a867f3229
+      internalID: -588613939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +736,37 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Ice_Water_Skill_E_0: -1413823340
+      Ice_Water_Skill_E_1: 262030103
+      Ice_Water_Skill_E_10: 1151044334
+      Ice_Water_Skill_E_11: 282328212
+      Ice_Water_Skill_E_12: 301464560
+      Ice_Water_Skill_E_13: -347043422
+      Ice_Water_Skill_E_14: -1886754075
+      Ice_Water_Skill_E_15: 320371327
+      Ice_Water_Skill_E_16: -73486076
+      Ice_Water_Skill_E_17: 460183180
+      Ice_Water_Skill_E_18: -765818878
+      Ice_Water_Skill_E_19: -181218639
+      Ice_Water_Skill_E_2: 644682082
+      Ice_Water_Skill_E_20: -1620516857
+      Ice_Water_Skill_E_21: -591607735
+      Ice_Water_Skill_E_22: 858805905
+      Ice_Water_Skill_E_23: 1666400282
+      Ice_Water_Skill_E_24: 879776616
+      Ice_Water_Skill_E_25: 446137786
+      Ice_Water_Skill_E_26: -660250781
+      Ice_Water_Skill_E_27: 832995669
+      Ice_Water_Skill_E_28: 1639738644
+      Ice_Water_Skill_E_29: -588613939
+      Ice_Water_Skill_E_3: 891152405
+      Ice_Water_Skill_E_4: -223290134
+      Ice_Water_Skill_E_5: -1863274102
+      Ice_Water_Skill_E_6: -211797594
+      Ice_Water_Skill_E_7: -445382984
+      Ice_Water_Skill_E_8: -883503137
+      Ice_Water_Skill_E_9: -405714995
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
