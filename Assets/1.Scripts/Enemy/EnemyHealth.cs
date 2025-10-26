@@ -50,6 +50,8 @@ public class EnemyHealth : MonoBehaviour
     void Die() 
     { 
     Debug.Log("Àû »ç¸Á!"); gameObject.SetActive(false); 
+        PlayerSO.Instance.Gold += hpData.gainGold;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
