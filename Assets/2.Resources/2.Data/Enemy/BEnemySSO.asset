@@ -26,4 +26,4 @@ MonoBehaviour:
   attackOnlyHorizontal: 0
   persistAggro: 1
   chaseWhileAggro: 1
-  chaseSpeed: 3.5
+  chaseSpeed: 1.5
