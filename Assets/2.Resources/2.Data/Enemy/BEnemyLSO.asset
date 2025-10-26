@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31239be3adb89c40969f9d2a7d6bc53, type: 3}
   m_Name: BEnemyLSO
   m_EditorClassIdentifier: 
-  patrolSpeed: 3
+  patrolSpeed: 1.5
   detectRangeTiles: 4
   tileSize: 1
   alertIconPrefab: {fileID: 0}
@@ -21,7 +21,7 @@ MonoBehaviour:
   bounceHeight: 0.3
   bounceSpeed: 6
   projectilePrefab: {fileID: 3375249882092023955, guid: e673e9bb20ae8b948833f0881ac6324b, type: 3}
-  projectileSpeed: 6
+  projectileSpeed: 2.5
   attackInterval: 0.8
   attackOnlyHorizontal: 0
   persistAggro: 1

@@ -22,8 +22,8 @@ MonoBehaviour:
   bounceSpeed: 6
   projectilePrefab: {fileID: 3375249882092023955, guid: f07b2fa08fde6df43b930d06ef269829, type: 3}
   projectileSpeed: 5
-  attackInterval: 0.8
+  attackInterval: 1.2
   attackOnlyHorizontal: 0
   persistAggro: 1
   chaseWhileAggro: 1
-  chaseSpeed: 4.5
+  chaseSpeed: 3.5
