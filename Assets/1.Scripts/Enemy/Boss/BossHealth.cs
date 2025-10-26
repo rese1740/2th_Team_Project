@@ -52,7 +52,7 @@ public class BossHealth : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // PlayerHitbox와 충돌했는지 확인
-        PlayerHitbox hitbox = collision.GetComponent<PlayerHitbox>();
+        IceProjectile hitbox = collision.GetComponent<IceProjectile>();
         if (hitbox != null)
         {
             TakeDamage(hitbox.damage);

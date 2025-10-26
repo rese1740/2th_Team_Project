@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19fcb1880b2e5f489e8983c8f90ce80, type: 3}
   m_Name: CurrentPlayerSO
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 7.5
   jumpForce: 15
-  currentHealth: 0
+  currentHealth: -75
   maxHealth: 100
-  attackPower: 5
-  critValue: 5
-  critPower: 8
-  rageValue: 0
+  attackPower: 135
+  critValue: 2
+  critPower: 12
+  rageValue: 77.632484
   rageDuration: 10
-  rageAttack: 40
-  rageHPDecrease: 70
+  rageAttack: 35
+  rageHPDecrease: 85
   rageGainRate: 10
   Gold: 1000
-  currentElement_Q: 4
-  currentElement_E: 5
-  saved1: 2
-  saved2: 1
+  currentElement_Q: 3
+  currentElement_E: 9
+  saved1: 3
+  saved2: 2
   hpPotionCount: 0
   rageIncreasePotionCount: 1
   rageDecreasePotionCount: 0

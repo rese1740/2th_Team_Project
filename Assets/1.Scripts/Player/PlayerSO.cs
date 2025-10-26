@@ -11,7 +11,8 @@ public enum PlayerElement
     Steam,
     Firestorm,
     Mud,
-    Sandstorm
+    Sandstorm,
+    IceWater
 }
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "PlayerSO", order = 1)]

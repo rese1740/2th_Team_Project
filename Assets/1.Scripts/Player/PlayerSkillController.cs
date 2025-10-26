@@ -117,14 +117,29 @@ public class PlayerSkillController : MonoBehaviour
     private void UseProjectileSkill(SkillData skill)
     {
         Debug.Log("발사체 스킬 실행");
+
         Vector3 spawnPos = transform.position + new Vector3(pm.facingRight ? 1f : -1f, 0f, 0f);
 
         GameObject projectile = Instantiate(skill.skillEffectPrefab, spawnPos, Quaternion.identity);
 
+        IceProjectile skill_ = projectile.GetComponent<IceProjectile>();
+
+        if(skill != null)
+        {
+            skill_.damage = skill.damage;
+        }
+
+        if (!pm.facingRight)
+        {
+            Vector3 scale = projectile.transform.localScale;
+            scale.x *= -1; 
+            projectile.transform.localScale = scale;
+        }
+
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            float speed = skill.projectileSpeed; 
+            float speed = skill.projectileSpeed;
             rb.velocity = new Vector2(pm.facingRight ? speed : -speed, 0f);
         }
     }

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHitBox : MonoBehaviour
+public class IceProjectile : MonoBehaviour
 {
     public float damage;
-    public float duration = 0.2f; 
+    public float lifetime = 0.2f; 
+    public float freezeDuration = 2f;
 
     private void Start()
     {
-        Destroy(gameObject, duration);
+        Destroy(gameObject, lifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -19,8 +20,8 @@ public class PlayerHitBox : MonoBehaviour
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                Debug.Log("Àû ÇÇ°Ý");
-                enemy.TakeDamage(damage);
+                enemy.Freeze(freezeDuration, damage);
+                Destroy(gameObject);
             }
         }
     }

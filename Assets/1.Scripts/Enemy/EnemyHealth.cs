@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("피격 연출")]
     public SpriteRenderer sr;
+    private bool isFrozen = false;
 
     [Header("런타임 상태(개별 인스턴스)")]
     [SerializeField] private float currentHealth;
@@ -47,6 +48,14 @@ public class EnemyHealth : MonoBehaviour
         if (p != null) player = p.transform;
     }
 
+    private void Update()
+    {
+        if(isFrozen)
+        {
+          sr.color = Color.cyan;
+        }
+    }
+
     private void OnEnable()
     {
         isDead = false;
@@ -77,7 +86,6 @@ public class EnemyHealth : MonoBehaviour
             flashRoutine = StartCoroutine(DamageEffect());
         }
 
-        //넉백 처리
         ApplyKnockback();
 
         onHealthChanged?.Invoke(currentHealth, hpData != null ? hpData.maxHealth : 1f);
@@ -135,13 +143,40 @@ public class EnemyHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Freeze(float duration,float damage)
     {
-        var hitbox = collision.GetComponent<PlayerHitbox>();
-        if (hitbox != null)
-        {
-            TakeDamage(hitbox.damage);
-            Destroy(collision.gameObject);
-        }
+        StartCoroutine(FreezeCoroutine(duration,damage));
     }
+
+    IEnumerator FreezeCoroutine(float duration, float d)
+    {
+        if (isFrozen) yield break;
+        isFrozen = true;
+        TakeDamage(d);
+
+        Vector2 originalVelocity = Vector2.zero;
+
+        if (rb != null)
+        {
+            originalVelocity = rb.velocity;
+            rb.velocity = Vector2.zero;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll; 
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        TakeDamage(d);
+
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints2D.None; 
+            rb.velocity = originalVelocity; 
+        }
+
+        if (sr != null)
+            sr.color = Color.white;
+
+        isFrozen = false;
+    }
+
 }

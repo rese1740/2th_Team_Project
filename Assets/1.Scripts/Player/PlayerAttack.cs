@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
     [Header("컴퍼넌트")]
     public PlayerSO playerData;
+
     Animator animator;
 
     [Header("공격 세팅")]
@@ -22,7 +24,14 @@ public class PlayerAttack : MonoBehaviour
     private int currentCombo = 0;
     private float lastAttackTime = 0f;
     private bool isAttacking = false;
+
+    [Header("사망 세팅")]
     bool isDie = false;
+    public GameObject diePanel;
+    public CinemachineVirtualCamera virtualCamera;
+    public float zoomAmount = 3f;     
+    public float zoomDuration = 0.5f;
+    private float originalSize;
 
     private void Start()
     {
@@ -134,7 +143,7 @@ public class PlayerAttack : MonoBehaviour
     public void SpawnHitbox1()
     {
         GameObject hitboxInstance = Instantiate(hitboxPrefab1, attackPoint.position, attackPoint.rotation);
-        PlayerHitbox hitbox = hitboxInstance.GetComponent<PlayerHitbox>();
+        PlayerHitBox hitbox = hitboxInstance.GetComponent<PlayerHitBox>();
 
         if (hitbox != null)
         {
@@ -156,7 +165,7 @@ public class PlayerAttack : MonoBehaviour
     public void SpawnHitbox2()
     {
         GameObject hitboxInstance = Instantiate(hitboxPrefab2, attackPoint.position, attackPoint.rotation);
-        PlayerHitbox hitbox = hitboxInstance.GetComponent<PlayerHitbox>();
+        PlayerHitBox hitbox = hitboxInstance.GetComponent<PlayerHitBox>();
 
         if (hitbox != null)
         {
@@ -175,6 +184,28 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    private IEnumerator ZoomCoroutine()
+    {
+        float elapsed = 0f;
+        float startSize = virtualCamera.m_Lens.OrthographicSize;
+        float targetSize = originalSize - zoomAmount;
+
+        Vector3 originalOffset = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset;
+
+        virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = Vector3.zero;
+
+        while (elapsed < zoomDuration)
+        {
+            elapsed += Time.deltaTime;
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(startSize, targetSize, elapsed / zoomDuration);
+            yield return null;
+        }
+
+        virtualCamera.m_Lens.OrthographicSize = targetSize;
+        diePanel.SetActive(true);
+
+        virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = originalOffset;
+    }
 
     public void TakeDamage(float damage)
     {
@@ -192,5 +223,13 @@ public class PlayerAttack : MonoBehaviour
         animator.SetTrigger("die");
         UIStateManager.Instance.isUIOpen = true;
         isDie = true;
+         StartCoroutine(ZoomCoroutine());
+
+        #region 이동 제어
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        rb.velocity = Vector2.zero;     
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        #endregion
     }
 }

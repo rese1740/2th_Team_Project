@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
-  m_Name: WaterQ
+  m_Name: Ice_water_E
   m_EditorClassIdentifier: 
-  skillName: "\uD30C\uB3D7\uACB0"
-  key: 113
-  elementType: 2
+  skillName: "\uBB3C E"
+  key: 101
+  elementType: 9
   skillType: 1
-  skillEffectPrefab: {fileID: 3815372443133339415, guid: c8354f1b2cdf1ec49a8c28f2d04b8efb, type: 3}
-  damage: 12
+  skillEffectPrefab: {fileID: 3815372443133339415, guid: fa73521af285bca428fa04245eb54300, type: 3}
+  damage: 10
   coolTime: 0
   projectileCount: 1
   projectileSpeed: 10
