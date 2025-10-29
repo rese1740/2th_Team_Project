@@ -1,19 +1,51 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
     [Header("Stats")]
-    public float maxHealth = 100f;
-    public float currentHealth;
+    public float maxHealth ;
+    private float currentHealth;
 
     [Header("Damage Feedback")]
     public SpriteRenderer sr;
 
+    [Header("HP Data (HpSO)")]
+    [Tooltip("HpSO 불러오기")]
+    public HpSO hpData;
+
+    [Header("HpUI")]
+    [Tooltip("HpSlider 불러오기")]
+    public Slider hpSlider;
+
+    [Header("HpText")]
+    [Tooltip("Hp숫자 표기")]
+    bool updateText = true;
+    public TMP_Text hpText;
+
+
     private void Awake()
     {
         currentHealth = maxHealth;
+
         if (sr == null)
             sr = GetComponentInChildren<SpriteRenderer>();
+
+        if (hpData != null && hpSlider != null)
+        {
+            hpSlider.maxValue = maxHealth;
+            hpSlider.value = currentHealth;
+        }
+    }
+    private void Update()
+    {
+        if (hpData == null || hpSlider == null) return;
+
+        if (updateText && hpText != null)
+        {
+            hpText.text = $"{currentHealth}/{maxHealth}";
+        }
     }
 
     // 플레이어 히트박스나 총알과 충돌했을 때 호출
