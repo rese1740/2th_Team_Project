@@ -78,6 +78,8 @@ public class PlayerSkillController : MonoBehaviour
                 return;
             }
 
+         
+
             Debug.Log($"사용한 스킬: {skill.skillName}");
 
             cooldownTimers[skillKey] = skill.coolTime;
@@ -109,13 +111,13 @@ public class PlayerSkillController : MonoBehaviour
     private void UseSummonSkill(SkillData skill)
     {
         Debug.Log("소환 스킬 실행");
+        StartCoroutine(PlayerPause());
         Vector3 spawnPos = transform.position + new Vector3(pm.facingRight ? 1f : -1f, 0f, 0f);
         GameObject summonPrefab = Instantiate(skill.skillEffectPrefab, spawnPos, Quaternion.identity);
 
         IceProjectile skill_ = summonPrefab.GetComponent<IceProjectile>();
         PlayerHitBox hitBox = summonPrefab.GetComponent<PlayerHitBox>();
 
-        
 
         if (skill_ != null || hitBox != null)
         {
@@ -133,6 +135,7 @@ public class PlayerSkillController : MonoBehaviour
     private void UseProjectileSkill(SkillData skill)
     {
         Debug.Log("발사체 스킬 실행");
+        StartCoroutine(PlayerPause());
 
         Vector3 spawnPos = transform.position + new Vector3(pm.facingRight ? 1f : -1f, 0f, 0f);
 
@@ -185,6 +188,13 @@ public class PlayerSkillController : MonoBehaviour
     {
         Debug.Log("버프 스킬 실행");
         yield return null;
+    }
+
+    IEnumerator PlayerPause()
+    {
+        pm.isAction = true;
+       yield return new WaitForSeconds(0.5f);
+        pm.isAction = false;
     }
 
 

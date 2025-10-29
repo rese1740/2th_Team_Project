@@ -160,7 +160,7 @@ public class EnemyHealth : MonoBehaviour
         {
             originalVelocity = rb.velocity;
             rb.velocity = Vector2.zero;
-            rb.constraints = RigidbodyConstraints2D.FreezeAll; 
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
         }
 
         yield return new WaitForSeconds(duration);
@@ -169,8 +169,8 @@ public class EnemyHealth : MonoBehaviour
 
         if (rb != null)
         {
-            rb.constraints = RigidbodyConstraints2D.None; 
-            rb.velocity = originalVelocity; 
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rb.velocity = originalVelocity;
         }
 
         if (sr != null)
@@ -178,5 +178,6 @@ public class EnemyHealth : MonoBehaviour
 
         isFrozen = false;
     }
+
 
 }

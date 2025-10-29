@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("컴퍼넌트")]
     public PlayerSO playerData;
-
+    private PlayerMovement pm;
     Animator animator;
 
     [Header("공격 세팅")]
@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("폭주 세팅")]
     public bool isRaging = false;
+    private float originalHealth;
 
     [Header("콤보 세팅")]
     public int maxCombo = 3;
@@ -33,16 +34,19 @@ public class PlayerAttack : MonoBehaviour
     public float zoomDuration = 0.5f;
     private float originalSize;
 
+    [Header("치트 세팅")]
+    private bool isInvincibility = false;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
+        pm = GetComponent<PlayerMovement>();
         playerData.currentHealth = playerData.maxHealth;
     }
 
     private void Update()
     {
         if (UIStateManager.Instance.isUIOpen) return;
-
 
         if (!isRaging && playerData.rageValue >= 100f)
         {
@@ -71,6 +75,11 @@ public class PlayerAttack : MonoBehaviour
         {
             TryAttack();
         }
+
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            isInvincibility = !isInvincibility;
+        }
     }
 
 
@@ -78,8 +87,11 @@ public class PlayerAttack : MonoBehaviour
     {
         Debug.Log("폭주 모드 시작");
         isRaging = true;
+        originalHealth = playerData.currentHealth;
+
         playerData.rageValue = 100f;
         playerData.attackPower += playerData.rageAttack;
+
         playerData.currentHealth -= playerData.rageHPDecrease;
 
         StartCoroutine(RageRoutine());
@@ -106,6 +118,7 @@ public class PlayerAttack : MonoBehaviour
         isRaging = false;
         playerData.attackPower -= playerData.rageAttack;
         playerData.rageValue = 0f;
+        playerData.currentHealth = Mathf.Min(originalHealth, playerData.maxHealth);
     }
 
 
@@ -136,8 +149,10 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator AttackCooldown()
     {
         isAttacking = true;
+        pm.isAction = true;
         yield return new WaitForSeconds(attackDelay);
         isAttacking = false;
+        pm.isAction = false;
     }
 
     public void SpawnHitbox1()
@@ -209,6 +224,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(isInvincibility || isDie) return;
+
         playerData.currentHealth -= damage;
 
         if (playerData.currentHealth <= 0 && !isDie)
@@ -223,7 +240,8 @@ public class PlayerAttack : MonoBehaviour
         animator.SetTrigger("die");
         UIStateManager.Instance.isUIOpen = true;
         isDie = true;
-         StartCoroutine(ZoomCoroutine());
+        pm.isAction = true;
+        StartCoroutine(ZoomCoroutine());
 
         #region 이동 제어
         Rigidbody2D rb = GetComponent<Rigidbody2D>();

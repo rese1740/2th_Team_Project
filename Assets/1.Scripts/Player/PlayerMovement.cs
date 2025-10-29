@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public bool facingRight = true;
+    public bool isAction = false;
 
     [Header("Components")]
     public PlayerSO playerData;
@@ -25,6 +26,13 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (UIStateManager.Instance.isUIOpen) return;
+
+        if (isAction)
+        {
+            rb.velocity = Vector2.zero;
+            animator.SetBool("isMove", false);
+            return;
+        }
 
 
         Move();
