@@ -95,7 +95,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Store_UI_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 415
+        width: 65
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 739911af7657fcc4ca36cbdf81b849bd
+      internalID: -1635510200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Store_UI_1
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 5
+        width: 175
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ba45d46e9b082a4f9a3ceb007369e35
+      internalID: 1891201084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Store_UI_2
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 45
+        width: 555
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c7ec236b035ba42a6acc9e957ff6c7
+      internalID: 927799171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +169,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Store_UI_0: -1635510200
+      Store_UI_1: 1891201084
+      Store_UI_2: 927799171
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

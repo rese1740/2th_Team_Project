@@ -46,6 +46,11 @@ public class EnemyHealth : MonoBehaviour
     {
         var p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
+
+        if(hpData != null)
+        {
+            hpData.ResetHealth();
+        }
     }
 
     private void Update()

@@ -73,7 +73,7 @@ public class PlayerAttack : MonoBehaviour
         {
             TryAttack();
         }
-        if(Input.GetKeyDown(KeyCode.F12))
+        if(Input.GetKeyDown(KeyCode.I))
         {
             PlayerSO.Instance.infiniteHealth = !PlayerSO.Instance.infiniteHealth;
         }
