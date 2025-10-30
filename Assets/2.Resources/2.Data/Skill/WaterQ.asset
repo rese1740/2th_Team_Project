@@ -17,6 +17,7 @@ MonoBehaviour:
   elementType: 2
   skillType: 1
   skillEffectPrefab: {fileID: 3815372443133339415, guid: c8354f1b2cdf1ec49a8c28f2d04b8efb, type: 3}
+  animationName: Water_Skill
   damage: 12
   coolTime: 0
   projectileCount: 1

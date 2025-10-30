@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("폭주 세팅")]
     public bool isRaging = false;
+    private float originalHealth;
 
     [Header("콤보 세팅")]
     public int maxCombo = 3;
@@ -33,6 +34,8 @@ public class PlayerAttack : MonoBehaviour
     public float zoomDuration = 0.5f;
     private float originalSize;
 
+  
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -42,7 +45,6 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         if (UIStateManager.Instance.isUIOpen) return;
-
 
         if (!isRaging && playerData.rageValue >= 100f)
         {
@@ -71,6 +73,10 @@ public class PlayerAttack : MonoBehaviour
         {
             TryAttack();
         }
+        if(Input.GetKeyDown(KeyCode.F12))
+        {
+            PlayerSO.Instance.infiniteHealth = !PlayerSO.Instance.infiniteHealth;
+        }
     }
 
 
@@ -80,6 +86,7 @@ public class PlayerAttack : MonoBehaviour
         isRaging = true;
         playerData.rageValue = 100f;
         playerData.attackPower += playerData.rageAttack;
+        originalHealth = playerData.currentHealth;
         playerData.currentHealth -= playerData.rageHPDecrease;
 
         StartCoroutine(RageRoutine());
@@ -105,6 +112,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("폭주 모드 종료");
         isRaging = false;
         playerData.attackPower -= playerData.rageAttack;
+        playerData.currentHealth = originalHealth;
         playerData.rageValue = 0f;
     }
 
@@ -209,6 +217,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (PlayerSO.Instance.infiniteHealth || isDie) return;
+
         playerData.currentHealth -= damage;
 
         if (playerData.currentHealth <= 0 && !isDie)

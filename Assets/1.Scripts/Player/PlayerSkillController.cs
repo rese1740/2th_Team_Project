@@ -11,14 +11,15 @@ public class PlayerSkillController : MonoBehaviour
     public PlayerElement currentElement_E;
 
     [Tooltip("플레이어 스킬 목록")]
-    Rigidbody2D rb;
     [SerializeField] private List<SkillData> skillList; 
 
     private Dictionary<(PlayerElement, KeyCode), SkillData> skillMap;
     private Dictionary<(PlayerElement, KeyCode), float> cooldownTimers = new();
 
+    Rigidbody2D rb;
     private PlayerMovement pm;
     private PlayerAttack pa;
+    private Animator animator;
 
 
     private void Awake()
@@ -26,6 +27,7 @@ public class PlayerSkillController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         pm = GetComponent<PlayerMovement>();
         pa = GetComponent<PlayerAttack>();
+        animator = GetComponent<Animator>();
         skillMap = new Dictionary<(PlayerElement, KeyCode), SkillData>();
         currentElement_Q = PlayerElement.None;
         currentElement_E = PlayerElement.None;
@@ -79,6 +81,11 @@ public class PlayerSkillController : MonoBehaviour
             }
 
             Debug.Log($"사용한 스킬: {skill.skillName}");
+
+            if (!string.IsNullOrEmpty(skill.animationName))
+            {
+                animator.SetTrigger(skill.animationName);
+            }
 
             cooldownTimers[skillKey] = skill.coolTime;
             switch (skill.skillType)

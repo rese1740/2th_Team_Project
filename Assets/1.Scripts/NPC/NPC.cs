@@ -9,6 +9,7 @@ public class NPC : MonoBehaviour
     {
         if (uiPanel != null)
         {
+            UIStateManager.Instance.isUIOpen = true;
             uiPanel.SetActive(true);
         }
     }

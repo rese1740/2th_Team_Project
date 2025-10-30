@@ -18,6 +18,7 @@ public class SkillData : ScriptableObject
     public PlayerElement elementType;
     public SkillType skillType;
     public GameObject skillEffectPrefab;
+    public string animationName;
     public float damage;
     public float coolTime;
 

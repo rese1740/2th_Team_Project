@@ -11,7 +11,7 @@ public class PlayerGoal : MonoBehaviour
     {
         if (collision.CompareTag("Goal"))
         {
-            SceneManager.LoadScene(sceneName);
+            SceneFadeManager.Instance.SceneMove(sceneName);
         }
     }
 }

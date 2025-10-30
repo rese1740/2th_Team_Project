@@ -74,6 +74,8 @@ public class PlayerSO : ScriptableObject
     public PlayerElement saved1;
     public PlayerElement saved2;
 
+    [Header("치트 세팅")]
+    public bool infiniteHealth = false;
 
     #region 아이템
     [Header("아이템 세팅")]
@@ -177,6 +179,7 @@ public class PlayerSO : ScriptableObject
                 break;
         }
     }
+
+    #endregion
 }
-#endregion
 
