@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5522974717516419834}
   - component: {fileID: -1306070432145243610}
   m_Layer: 0
-  m_Name: EBulletDummy
+  m_Name: Slam_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.9574027, y: -2.6756163, z: 0}
-  m_LocalScale: {x: 4, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c4cb776f6fde3c4b8a0676ea1fb5392, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0456317e36c411a4aa21b33106e831a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -178,7 +178,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.14
+  m_Radius: 0.2
 --- !u!66 &-1306070432145243610
 CompositeCollider2D:
   m_ObjectHideFlags: 0

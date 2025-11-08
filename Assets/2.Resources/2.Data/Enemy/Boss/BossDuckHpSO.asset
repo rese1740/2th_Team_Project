@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6174bfcb7a8844b9a70fd941024206, type: 3}
   m_Name: BossDuckHpSO
   m_EditorClassIdentifier: 
-  maxHealth: 2000
-  currentHealth: -100
+  maxHealth: 3000
+  gainGold: 10
+  currentHealth: 0
   hitColor: {r: 1, g: 0, b: 0, a: 1}

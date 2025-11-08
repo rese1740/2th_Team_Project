@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6208110124585844998, guid: de2564eeb46117242b7d508957110ec6, type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 8616101925567455038, guid: de2564eeb46117242b7d508957110ec6, type: 3}
       propertyPath: m_BodyType
       value: 0
@@ -2733,6 +2737,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 389bb6a7627d9214ebd44c301a9a7a75, type: 3}
+    - target: {fileID: 6208110124585844998, guid: de2564eeb46117242b7d508957110ec6, type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7744022028443780320, guid: de2564eeb46117242b7d508957110ec6, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -4902,6 +4910,14 @@ PrefabInstance:
     - target: {fileID: 19380211836065439, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: m_BodyType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19380211836065439, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433309934094479402, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: maxHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3806188235784530403, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -7076,6 +7092,14 @@ PrefabInstance:
     - target: {fileID: 19380211836065439, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: m_BodyType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19380211836065439, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433309934094479402, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: maxHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3806188235784530403, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -35681,6 +35705,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 389bb6a7627d9214ebd44c301a9a7a75, type: 3}
+    - target: {fileID: 6208110124585844998, guid: de2564eeb46117242b7d508957110ec6, type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7744022028443780320, guid: de2564eeb46117242b7d508957110ec6, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -35713,6 +35741,14 @@ PrefabInstance:
     - target: {fileID: 19380211836065439, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: m_BodyType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19380211836065439, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433309934094479402, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
+      propertyPath: maxHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3806188235784530403, guid: d2b0408b5a99fd04a80fe5476f8490ec, type: 3}
       propertyPath: groundLayer.m_Bits

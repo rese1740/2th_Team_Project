@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BELHpSO
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
+  gainGold: 10
+  currentHealth: 0
   hitColor: {r: 1, g: 0, b: 0, a: 1}

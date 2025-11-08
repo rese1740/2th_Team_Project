@@ -1,6 +1,8 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyHealth : MonoBehaviour
@@ -13,8 +15,9 @@ public class EnemyHealth : MonoBehaviour
     private bool isFrozen = false;
 
     [Header("런타임 상태(개별 인스턴스)")]
-    [SerializeField] private float currentHealth;
-    [SerializeField] private bool isDead = false;
+    public float maxHealth;
+    public float currentHealth;
+    private bool isDead = false;
 
     [Header("피격 옵션")]
     [Tooltip("연속 트리거 다중 히트 방지를 위한 짧은 무적 시간(초). 0이면 비활성.")]
@@ -35,11 +38,23 @@ public class EnemyHealth : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
 
+    [Header("HPUI")]
+    [Tooltip("HP슬라이더")]
+    public Slider hpSlider;
+
+    [Header("HPText")]
+    [Tooltip("HP텍스트")]
+    public TMP_Text hpText;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         if (sr == null)
             sr = GetComponentInChildren<SpriteRenderer>();
+
+        if (hpData != null)
+            hpData.maxHealth = maxHealth;
+
     }
 
     private void Start()
@@ -47,7 +62,21 @@ public class EnemyHealth : MonoBehaviour
         var p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
 
-        if(hpData != null)
+
+        currentHealth = maxHealth;
+
+        if (hpSlider != null)
+        {
+            hpSlider.maxValue = maxHealth;
+            hpSlider.value = currentHealth;
+        }
+
+        if (hpText != null)
+        {
+            hpText.text = $"{currentHealth:0}/{maxHealth:0}";
+        }
+
+        if (hpData != null)
         {
             hpData.ResetHealth();
         }
@@ -58,6 +87,19 @@ public class EnemyHealth : MonoBehaviour
         if(isFrozen)
         {
           sr.color = Color.cyan;
+        }
+
+        if (isDead) return;
+
+        if (hpData != null && hpSlider != null)
+        {
+            hpSlider.maxValue = hpData.maxHealth;
+            hpSlider.value = currentHealth;
+        }
+
+        if (hpText != null)
+        {
+            hpText.text = $"{currentHealth:0}/{maxHealth:0}";
         }
     }
 
@@ -70,6 +112,12 @@ public class EnemyHealth : MonoBehaviour
         onHealthChanged?.Invoke(currentHealth, hpData != null ? hpData.maxHealth : 1f);
 
         if (sr != null) sr.color = Color.white;
+
+        if (hpData != null && hpSlider != null)
+        {
+            hpSlider.maxValue = hpData.maxHealth;
+            hpSlider.value = currentHealth;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -93,7 +141,7 @@ public class EnemyHealth : MonoBehaviour
 
         ApplyKnockback();
 
-        onHealthChanged?.Invoke(currentHealth, hpData != null ? hpData.maxHealth : 1f);
+        onHealthChanged?.Invoke(currentHealth, hpData.maxHealth);
 
         if (invincibleTime > 0f)
             StartCoroutine(CoInvincible(invincibleTime));
@@ -139,6 +187,16 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+
+        currentHealth = 0f;
+
+        if (hpText != null)
+            hpText.text = $"{currentHealth:0}/{maxHealth:0}";
+
+        if (hpSlider != null)
+            hpSlider.value = 0f;
+
+
 
         Debug.Log("적 사망!");
         if (hpData != null && PlayerSO.Instance != null)
