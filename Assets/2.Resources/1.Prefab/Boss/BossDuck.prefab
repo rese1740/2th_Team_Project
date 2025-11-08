@@ -212,7 +212,7 @@ MonoBehaviour:
   slamDecalPrefab: {fileID: 5006686032466867144, guid: b35a0514b7af67141a6cbe6e00c4ae55, type: 3}
   firePointLeft: {fileID: 5293256963574102991}
   firePointRight: {fileID: 1922457398839276643}
-  shockwavePrefab: {fileID: 3375249882092023955, guid: e673e9bb20ae8b948833f0881ac6324b, type: 3}
+  shockwavePrefab: {fileID: 3375249882092023955, guid: eaf7f33b2b2db9e4aa04ca4bcf8e2ac6, type: 3}
   spawnShockwaveOnSlam: 1
   shockwaveSideDelay: 0
   shockwaveForwardAxis: 0
@@ -268,6 +268,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpData: {fileID: 11400000, guid: c3040d4fdb5734f4f9543509fe0ae64b, type: 2}
   sr: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  invincibleTime: 0.1
+  knockbackForce: 10
+  knockbackUpForce: 2
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  hpSlider: {fileID: 0}
+  hpText: {fileID: 0}
 --- !u!61 &5212855745189597519
 BoxCollider2D:
   m_ObjectHideFlags: 0
