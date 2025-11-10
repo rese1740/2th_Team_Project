@@ -241,6 +241,7 @@ MonoBehaviour:
   attackPoint: {fileID: 424420845633094096}
   hitboxPrefab1: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
   hitboxPrefab2: {fileID: 718453544710883730, guid: 443fbd9a81df8b841b6f4a3207ad6f5d, type: 3}
+  isAction: 0
   isRaging: 0
   maxCombo: 3
   comboResetTime: 1

@@ -27,7 +27,7 @@ public class PlayerUIController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             OpenNpcWindow(currentNpc);
-            UIStateManager.Instance.isUIOpen = false;
+            UIStateManager.Instance.isUIOpen = true;
         }
         else if (Input.GetKeyDown(KeyCode.V) && !ButtonGroupManager.Instance.isChangedElement)
         {

@@ -51,7 +51,6 @@ public class ShopManager : MonoBehaviour
                 return true;
             }
 
-            Debug.Log("골드 부족!");
             return false;
         }
     }
@@ -60,6 +59,7 @@ public class ShopManager : MonoBehaviour
     {
         if (TryBuy(item))
         {
+            InventoryManager.Instance.AddItem(item);
             if (item.itemType == ItemType.consumption)
             {
                 if (item.itemID == "HpPotion")

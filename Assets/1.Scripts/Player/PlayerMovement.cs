@@ -14,17 +14,24 @@ public class PlayerMovement : MonoBehaviour
     public PlayerSO playerData;
     Animator animator;
     Rigidbody2D rb;
+    PlayerAttack pa;
     SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        pa = GetComponent<PlayerAttack>();
     }
 
     private void Update()
     {
-        if (UIStateManager.Instance.isUIOpen) return;
+        if (pa.isAction || UIStateManager.Instance.isUIOpen)
+        {
+            rb.velocity = Vector2.zero;
+            animator.SetBool("isMove", false);
+            return;
+        }
 
 
         Move();

@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackPoint;
     public GameObject hitboxPrefab1;
     public GameObject hitboxPrefab2;
+    public bool isAction = false;   
 
     [Header("폭주 세팅")]
     public bool isRaging = false;
@@ -20,8 +21,8 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("콤보 세팅")]
     public int maxCombo = 3;
-    public float comboResetTime = 1f;   // 콤보 초기화 시간
-    public float attackDelay = 0.3f;    // 공격 텀
+    public float comboResetTime = 1f;   
+    public float attackDelay = 0.3f;  
     private int currentCombo = 0;
     private float lastAttackTime = 0f;
     private bool isAttacking = false;
@@ -144,7 +145,9 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator AttackCooldown()
     {
         isAttacking = true;
+        isAction = true;
         yield return new WaitForSeconds(attackDelay);
+        isAction = false;
         isAttacking = false;
     }
 
