@@ -53,7 +53,9 @@ public class EnemyHealth : MonoBehaviour
             sr = GetComponentInChildren<SpriteRenderer>();
 
         if (hpData != null)
-            hpData.maxHealth = maxHealth;
+        {
+            maxHealth = hpData.maxHealth;
+        }
 
     }
 
@@ -75,11 +77,7 @@ public class EnemyHealth : MonoBehaviour
         {
             hpText.text = $"{currentHealth:0}/{maxHealth:0}";
         }
-
-        if (hpData != null)
-        {
-            hpData.ResetHealth();
-        }
+ 
     }
 
     private void Update()
@@ -108,8 +106,8 @@ public class EnemyHealth : MonoBehaviour
         isDead = false;
         invincible = false;
 
-        currentHealth = (hpData != null) ? hpData.maxHealth : 1f;
-        onHealthChanged?.Invoke(currentHealth, hpData != null ? hpData.maxHealth : 1f);
+        currentHealth = maxHealth;
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (sr != null) sr.color = Color.white;
 

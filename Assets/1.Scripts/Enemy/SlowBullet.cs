@@ -1,9 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class BELBullet : MonoBehaviour
+public class SlowBullet : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("세팅")]
     public float speed = 8f;      // 이동 속도
     public float lifeTime = 5f;   // 수명 (초 단위)
 
