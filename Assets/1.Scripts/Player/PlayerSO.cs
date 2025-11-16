@@ -8,11 +8,9 @@ public enum PlayerElement
     Water,
     Ice,
     Wind,
-    Steam,
-    Firestorm,
-    Mud,
-    Sandstorm,
-    IceWater
+    IceWater,
+    FireIce,
+       
 }
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "PlayerSO", order = 1)]

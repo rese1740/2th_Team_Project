@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
-  m_Name: Ice_Water_E
+  m_Name: Ie_Fire_E 1
   m_EditorClassIdentifier: 
-  skillName: "\uBB3C E"
+  skillName: "\uC5BC\uC74C \uBB3C E"
   key: 101
-  elementType: 5
-  skillType: 3
-  skillEffectPrefab: {fileID: 3815372443133339415, guid: fa73521af285bca428fa04245eb54300, type: 3}
+  elementType: 6
+  skillType: 4
+  skillEffectPrefab: {fileID: 3815372443133339415, guid: eb16e23cc58e265488b54d655430206d, type: 3}
   animationName: 
   damage: 10
   coolTime: 0
-  projectileCount: 1
+  projectileCount: 4
   projectileSpeed: 10
-  range: 1
+  range: 5
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   dashingPower: 15
   dashDuration: 0.2
   isDashing: 0

@@ -7,7 +7,8 @@ public enum SkillType
     Move,
     Projectile,
     Buff,
-    Summon  
+    Summon,
+    Targeting
 }
 
 [CreateAssetMenu(fileName = "NewSkillData", menuName = "ScriptableObjects/SkillData", order = 4)]
@@ -25,6 +26,11 @@ public class SkillData : ScriptableObject
     [Header("투사체 세팅")]
     public int projectileCount = 1;
     public float projectileSpeed = 10f;
+
+    [Header("타겟팅 세팅")]
+    public float range = 1;
+    public LayerMask targetLayer;
+
 
     [Header("이동 세팅")]
     public float dashingPower = 15f;   

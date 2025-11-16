@@ -24,14 +24,11 @@ public class ButtonGroupManager : MonoBehaviour
     private Dictionary<(PlayerElement, PlayerElement), PlayerElement> elementCombinations =
         new Dictionary<(PlayerElement, PlayerElement), PlayerElement>()
     {
-        { (PlayerElement.Fire, PlayerElement.Water), PlayerElement.Steam },
-        { (PlayerElement.Water, PlayerElement.Fire), PlayerElement.Steam },
-        { (PlayerElement.Fire, PlayerElement.Wind), PlayerElement.Firestorm },
-        { (PlayerElement.Wind, PlayerElement.Fire), PlayerElement.Firestorm },
         { (PlayerElement.Water, PlayerElement.Ice), PlayerElement.IceWater },
         { (PlayerElement.Ice, PlayerElement.Water), PlayerElement.IceWater },
-        { (PlayerElement.Wind, PlayerElement.Ice), PlayerElement.Sandstorm },
-        { (PlayerElement.Ice, PlayerElement.Wind), PlayerElement.Sandstorm },
+         { (PlayerElement.Fire, PlayerElement.Ice), PlayerElement.FireIce },
+        { (PlayerElement.Ice, PlayerElement.Fire), PlayerElement.FireIce },
+
     };
 
     private void Start()

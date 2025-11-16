@@ -38048,30 +38048,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
-    - target: {fileID: 843613690190492723, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 843613690190492723, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 843613690190492723, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 843613690190492723, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: diePanel
       value: 
       objectReference: {fileID: 2040333066}
-    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
-      propertyPath: Rage_Panel
-      value: 
-      objectReference: {fileID: 1674188856}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: virtualCamera
       value: 

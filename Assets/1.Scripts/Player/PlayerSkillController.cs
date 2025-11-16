@@ -53,14 +53,10 @@ public class PlayerSkillController : MonoBehaviour
     private void UseSkill(KeyCode key)
     {
         if (pa.isRaging)
-        {
             return;
-        }
 
         if(currentElement_Q == PlayerElement.None && currentElement_E == PlayerElement.None)
-        {
             return;
-        }
 
         PlayerElement element = key switch
         {
@@ -104,6 +100,10 @@ public class PlayerSkillController : MonoBehaviour
 
                 case SkillType.Buff:
                     StartCoroutine(UseBuffSkill(skill));
+                    break;
+
+                case SkillType.Targeting:
+                    UseTargetingSkill(skill);
                     break;
 
                 default:
@@ -186,14 +186,52 @@ public class PlayerSkillController : MonoBehaviour
         skill.canDash = true;
     }
 
+    private void UseTargetingSkill(SkillData skill)
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, skill.range, skill.targetLayer);
+
+        if (enemies.Length == 0)
+        {
+            Debug.Log("타겟 없음!");
+            return;
+        }
+
+        Transform target = enemies[0].transform;
+        float closestDist = Vector2.Distance(transform.position, target.position);
+
+        foreach (var e in enemies)
+        {
+            float dist = Vector2.Distance(transform.position, e.transform.position);
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                target = e.transform;
+            }
+        }
+
+        for (int i = 0; i < skill.projectileCount; i++)
+        {
+            float t = (skill.projectileCount == 1) ? 0.5f : (float)i / (skill.projectileCount - 1);
+            float angle = Mathf.Lerp(-90f, 90f, t); // -90° ~ 90° 위쪽 반원
+
+            Vector2 dir = new Vector2(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
+            Vector3 offset = dir * 1f; 
+
+            GameObject proj = Instantiate(skill.skillEffectPrefab, transform.position + offset, skill.skillEffectPrefab.transform.rotation);
+
+            HomingProjectile p = proj.GetComponent<HomingProjectile>();
+            if (p != null)
+            {
+                p.SetTarget(target, skill.damage, skill.projectileSpeed);
+            }
+        }
+    }
 
     IEnumerator UseBuffSkill(SkillData skill)
     {
         Debug.Log("버프 스킬 실행");
         yield return null;
     }
-
-
 
     private void HandleCooldowns()
     {
