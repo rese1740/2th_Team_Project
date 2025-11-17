@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 2364243395562691538}
   - component: {fileID: 4676524161680268797}
   - component: {fileID: 5725696781877795741}
-  - component: {fileID: 7293501853790966821}
   - component: {fileID: 8853706774626935570}
   m_Layer: 6
   m_Name: Player
@@ -360,19 +359,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7293501853790966821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7212076026127047472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cdf170b154662f438e7c869e65e03e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Test_Scene 1
 --- !u!95 &8853706774626935570
 Animator:
   serializedVersion: 5

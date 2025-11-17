@@ -153,6 +153,7 @@ MonoBehaviour:
   rotateSpeed: 200
   damage: 10
   lifeTime: 5
+  launchDelay: 0.3
 --- !u!212 &6308441482724592769
 SpriteRenderer:
   m_ObjectHideFlags: 0

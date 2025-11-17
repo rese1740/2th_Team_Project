@@ -2867,7 +2867,7 @@ Transform:
   m_GameObject: {fileID: 443744470}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.9412, y: 2, z: 1.3}
+  m_LocalPosition: {x: 29.6034, y: 4.6, z: 1.3}
   m_LocalScale: {x: 1.4465609, y: 1.808201, z: 1.4465609}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2919,7 +2919,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 129.4955, y: 10.24}
+  m_Size: {x: 133.17622, y: 10.006628}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5423,6 +5423,7 @@ GameObject:
   - component: {fileID: 740906509}
   - component: {fileID: 740906508}
   - component: {fileID: 740906510}
+  - component: {fileID: 740906511}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Goal
@@ -5542,6 +5543,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &740906511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740906507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cdf170b154662f438e7c869e65e03e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Test_Scene 3
 --- !u!1 &740914879
 GameObject:
   m_ObjectHideFlags: 0
@@ -7726,7 +7740,7 @@ MonoBehaviour:
   m_Follow: {fileID: 442761516}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -7752,7 +7766,7 @@ Transform:
   m_GameObject: {fileID: 919423330}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.587, y: -2.25, z: -10}
+  m_LocalPosition: {x: 0.587, y: -1.25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8076,7 +8090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &983412257
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30896,7 +30910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 3.5, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 4.5, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -36492,7 +36506,7 @@ Transform:
   m_GameObject: {fileID: 2072069729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.587, y: -2.25, z: -10}
+  m_LocalPosition: {x: 0.587, y: -1.25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36619,7 +36633,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -37013,7 +37027,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -37023,7 +37037,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -37060,12 +37074,12 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 7906efd9674a949479fb1bfb72a2797a, type: 2}
   m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: d739882943f5af74f9870930247dc5c0, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 27d45fd431e364a4cb044ba935722eb7, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 2361abc5ab770da4fb40ae87af762fb6, type: 3}
   m_TileMatrixArray:

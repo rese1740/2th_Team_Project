@@ -33,6 +33,7 @@ public class EnemyHealth : MonoBehaviour
     [Header("¿Ã∫•∆Æ")]
     public UnityEvent<float, float> onHealthChanged;
     public UnityEvent onDeath;
+    public string sceneName;
 
     private Coroutine flashRoutine;
     private Rigidbody2D rb;
@@ -200,6 +201,7 @@ public class EnemyHealth : MonoBehaviour
         if (hpData != null && PlayerSO.Instance != null)
             PlayerSO.Instance.Gold += hpData.gainGold;
 
+        SceneFadeManager.Instance.SceneMove(sceneName);
         onDeath?.Invoke();
         gameObject.SetActive(false);
     }
