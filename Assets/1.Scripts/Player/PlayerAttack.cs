@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -27,15 +28,24 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime = 0f;
     private bool isAttacking = false;
 
+    [Header("강화 공격 세팅")]
+    private int enhancedAttackCount = 0;
+    private float enhancedBonusDamage = 0f;
+    private bool isEnhancedAttackActive = false;
+    public GameObject enchantIconPrefab; 
+    public Transform enchantIconHolder; 
+    private List<GameObject> activeIcons = new();
+
     [Header("사망 세팅")]
     bool isDie = false;
     public GameObject diePanel;
-    public CinemachineVirtualCamera virtualCamera;
-    public float zoomAmount = 3f;     
-    public float zoomDuration = 0.5f;
-    private float originalSize;
 
-  
+    [Header("카메라 세팅")]
+    public CinemachineVirtualCamera cam;
+    public CinemachineVirtualCamera death_cam;
+
+
+
 
     private void Start()
     {
@@ -117,8 +127,6 @@ public class PlayerAttack : MonoBehaviour
         playerData.rageValue = 0f;
     }
 
-
-
     void TryAttack()
     {
         if (isAttacking) return;
@@ -131,13 +139,16 @@ public class PlayerAttack : MonoBehaviour
         currentCombo++;
         lastAttackTime = Time.time;
 
-        string element = PlayerSO.Instance.currentElement_Q.ToString(); // ex) "Fire"
+        string element = PlayerSO.Instance.currentElement_Q.ToString(); 
         string comboName = currentCombo <= 2 ? "attack1" : "attack2";
 
         animator.SetTrigger($"{element}_{comboName}");
 
         if (currentCombo > maxCombo)
             currentCombo = 1;
+
+
+
 
         StartCoroutine(AttackCooldown());
     }
@@ -169,6 +180,23 @@ public class PlayerAttack : MonoBehaviour
 
             finalDamage *= 1f + (currentCombo - 1) * 0.2f;
 
+            if (isEnhancedAttackActive)
+            {
+                finalDamage += enhancedBonusDamage;
+                enhancedAttackCount--;
+
+                if (activeIcons.Count > 0)
+                {
+                    Destroy(activeIcons[0]);
+                    activeIcons.RemoveAt(0);
+                }
+
+                if (enhancedAttackCount <= 0)
+                {
+                    isEnhancedAttackActive = false;
+                }
+            }
+
             hitbox.damage = finalDamage;
         }
     }
@@ -191,32 +219,48 @@ public class PlayerAttack : MonoBehaviour
 
             finalDamage *= 1f + (currentCombo - 1) * 0.2f;
 
+            if (isEnhancedAttackActive)
+            {
+                finalDamage += enhancedBonusDamage;
+                enhancedAttackCount--;
+
+                if (activeIcons.Count > 0)
+                {
+                    Destroy(activeIcons[0]);
+                    activeIcons.RemoveAt(0);
+                }
+
+                if (enhancedAttackCount <= 0)
+                {
+                    isEnhancedAttackActive = false;
+                }
+            }
+
             hitbox.damage = finalDamage;
         }
     }
 
-    private IEnumerator ZoomCoroutine()
+    public void ActivateEnhancedAttack(int count, float bonusDamage,GameObject effectPrefabs)
     {
-        float elapsed = 0f;
-        float startSize = virtualCamera.m_Lens.OrthographicSize;
-        float targetSize = originalSize - zoomAmount;
+        enhancedAttackCount = count;
+        enhancedBonusDamage = bonusDamage;
+        enchantIconPrefab = effectPrefabs;
 
-        Vector3 originalOffset = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset;
+        isEnhancedAttackActive = true;
 
-        virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = Vector3.zero;
+        foreach (var icon in activeIcons)
+            Destroy(icon);
+        activeIcons.Clear();
 
-        while (elapsed < zoomDuration)
+        for (int i = 0; i < count; i++)
         {
-            elapsed += Time.deltaTime;
-            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(startSize, targetSize, elapsed / zoomDuration);
-            yield return null;
+            Vector3 offset = new Vector3(i * 0.5f - (count - 1) * 0.25f, 0f, 0f);
+            GameObject icon = Instantiate(enchantIconPrefab, enchantIconHolder.position + offset, Quaternion.identity, enchantIconHolder);
+
+            activeIcons.Add(icon);
         }
-
-        virtualCamera.m_Lens.OrthographicSize = targetSize;
-        diePanel.SetActive(true);
-
-        virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = originalOffset;
     }
+
 
     public void TakeDamage(float damage)
     {
@@ -236,7 +280,9 @@ public class PlayerAttack : MonoBehaviour
         animator.SetTrigger("die");
         UIStateManager.Instance.isUIOpen = true;
         isDie = true;
-         StartCoroutine(ZoomCoroutine());
+
+        Invoke("OpenDiePanel", 1.5f);
+        cam.Priority = 0;
 
         #region 이동 제어
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -244,5 +290,10 @@ public class PlayerAttack : MonoBehaviour
         rb.velocity = Vector2.zero;     
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         #endregion
+    }
+
+    private void OpenDiePanel()
+    {
+        diePanel.SetActive(true);
     }
 }

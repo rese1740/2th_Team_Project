@@ -34,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
     public UnityEvent<float, float> onHealthChanged;
     public UnityEvent onDeath;
     public string sceneName;
+    public bool isBoss = false;
 
     private Coroutine flashRoutine;
     private Rigidbody2D rb;
@@ -78,14 +79,14 @@ public class EnemyHealth : MonoBehaviour
         {
             hpText.text = $"{currentHealth:0}/{maxHealth:0}";
         }
- 
+
     }
 
     private void Update()
     {
-        if(isFrozen)
+        if (isFrozen)
         {
-          sr.color = Color.cyan;
+            sr.color = Color.cyan;
         }
 
         if (isDead) return;
@@ -201,14 +202,16 @@ public class EnemyHealth : MonoBehaviour
         if (hpData != null && PlayerSO.Instance != null)
             PlayerSO.Instance.Gold += hpData.gainGold;
 
-        SceneFadeManager.Instance.SceneMove(sceneName);
+        if (isBoss)
+            SceneFadeManager.Instance.SceneMove(sceneName);
+
         onDeath?.Invoke();
         gameObject.SetActive(false);
     }
 
-    public void Freeze(float duration,float damage)
+    public void Freeze(float duration, float damage)
     {
-        StartCoroutine(FreezeCoroutine(duration,damage));
+        StartCoroutine(FreezeCoroutine(duration, damage));
     }
 
     IEnumerator FreezeCoroutine(float duration, float d)
@@ -223,7 +226,7 @@ public class EnemyHealth : MonoBehaviour
         {
             originalVelocity = rb.velocity;
             rb.velocity = Vector2.zero;
-            rb.constraints = RigidbodyConstraints2D.FreezeAll; 
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
         }
 
         yield return new WaitForSeconds(duration);
@@ -232,8 +235,8 @@ public class EnemyHealth : MonoBehaviour
 
         if (rb != null)
         {
-            rb.constraints = RigidbodyConstraints2D.None; 
-            rb.velocity = originalVelocity; 
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.velocity = originalVelocity;
         }
 
         if (sr != null)

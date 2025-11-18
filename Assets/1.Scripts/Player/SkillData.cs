@@ -8,7 +8,8 @@ public enum SkillType
     Projectile,
     Buff,
     Summon,
-    Targeting
+    Targeting,
+    Enchant,
 }
 
 [CreateAssetMenu(fileName = "NewSkillData", menuName = "ScriptableObjects/SkillData", order = 4)]
@@ -31,6 +32,9 @@ public class SkillData : ScriptableObject
     public float range = 1;
     public LayerMask targetLayer;
 
+    [Header("인첸트 세팅")]
+    public int attackCount;
+    public float enhancedBonusDamage;
 
     [Header("이동 세팅")]
     public float dashingPower = 15f;   

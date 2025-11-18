@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
 
     public Sprite[] elementIcon;
 
+    public Text[] playerStatusTxt;
+
     private void Awake()
     {
         Instance = this;
@@ -55,6 +57,13 @@ public class InventoryManager : MonoBehaviour
                 elementSlots[1].sprite = elementIcon[3];
                 break;
         }
+
+        playerStatusTxt[0].text = $"HP: {PlayerSO.Instance.currentHealth} / {PlayerSO.Instance.maxHealth}";
+        playerStatusTxt[1].text = $"공격력: {PlayerSO.Instance.attackPower}";
+        playerStatusTxt[2].text = $"크리티컬 확률: {PlayerSO.Instance.critValue}%";
+        playerStatusTxt[3].text = $"크리티컬 데미지: {PlayerSO.Instance.critPower}%";
+        playerStatusTxt[4].text = $"폭주 게이지: {PlayerSO.Instance.rageValue}%";
+
     }
 
     public bool AddItem(ItemData item)

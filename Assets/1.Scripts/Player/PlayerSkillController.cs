@@ -106,6 +106,10 @@ public class PlayerSkillController : MonoBehaviour
                     UseTargetingSkill(skill);
                     break;
 
+                case SkillType.Enchant:
+                    UseEnchantSkill(skill);
+                    break;
+
                 default:
                     Debug.LogWarning("스킬 타입이 지정되지 않음");
                     break;
@@ -225,6 +229,11 @@ public class PlayerSkillController : MonoBehaviour
                 p.SetTarget(target, skill.damage, skill.projectileSpeed);
             }
         }
+    }
+
+    private void UseEnchantSkill(SkillData skill)
+    {
+        pa.ActivateEnhancedAttack(skill.attackCount, skill.enhancedBonusDamage,skill.skillEffectPrefab);
     }
 
     IEnumerator UseBuffSkill(SkillData skill)

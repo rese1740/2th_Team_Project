@@ -15,6 +15,20 @@ MonoBehaviour:
   skillName: "\uBD88\uBE5B\uB3CC\uB9BC"
   key: 113
   elementType: 1
-  skillEffectPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
+  skillType: 5
+  skillEffectPrefab: {fileID: 2305597951587972507, guid: 8b2838b9e73f5194e98a61315e51327d, type: 3}
+  animationName: 
   damage: 10
-  cooldown: 10
+  coolTime: 0
+  projectileCount: 1
+  projectileSpeed: 10
+  range: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackCount: 3
+  enhancedBonusDamage: 10
+  dashingPower: 15
+  dashDuration: 0.2
+  isDashing: 0
+  canDash: 1
