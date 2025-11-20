@@ -28,6 +28,8 @@ public class ButtonGroupManager : MonoBehaviour
         { (PlayerElement.Ice, PlayerElement.Water), PlayerElement.IceWater },
          { (PlayerElement.Fire, PlayerElement.Ice), PlayerElement.FireIce },
         { (PlayerElement.Ice, PlayerElement.Fire), PlayerElement.FireIce },
+         { (PlayerElement.Water, PlayerElement.Wind), PlayerElement.WaterWind},
+        { (PlayerElement.Wind, PlayerElement.Water), PlayerElement.WaterWind },
 
     };
 
@@ -56,7 +58,7 @@ public class ButtonGroupManager : MonoBehaviour
         clicked.SetSelected();
         UpdatePlayerElement();
 
-       isChangedElement = true;
+        isChangedElement = true;
         Vector2 spawnPos = player.transform.position + new Vector3(0, 2.5f);
         GameObject effectInstance = null;
 

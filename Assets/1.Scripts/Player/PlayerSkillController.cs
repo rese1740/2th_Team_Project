@@ -1,5 +1,4 @@
-﻿using Cinemachine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class PlayerSkillController : MonoBehaviour
     public PlayerElement currentElement_E;
 
     [Tooltip("플레이어 스킬 목록")]
-    [SerializeField] private List<SkillData> skillList; 
+    [SerializeField] private List<SkillData> skillList;
 
     private Dictionary<(PlayerElement, KeyCode), SkillData> skillMap;
     private Dictionary<(PlayerElement, KeyCode), float> cooldownTimers = new();
@@ -55,7 +54,7 @@ public class PlayerSkillController : MonoBehaviour
         if (pa.isRaging)
             return;
 
-        if(currentElement_Q == PlayerElement.None && currentElement_E == PlayerElement.None)
+        if (currentElement_Q == PlayerElement.None && currentElement_E == PlayerElement.None)
             return;
 
         PlayerElement element = key switch
@@ -94,8 +93,7 @@ public class PlayerSkillController : MonoBehaviour
                     break;
 
                 case SkillType.Move:
-                    if (skill.canDash)
-                        StartCoroutine(UseDashSkill(skill));
+                    UseDashSkill(skill);
                     break;
 
                 case SkillType.Buff:
@@ -125,7 +123,7 @@ public class PlayerSkillController : MonoBehaviour
         IceProjectile skill_ = summonPrefab.GetComponent<IceProjectile>();
         PlayerHitBox hitBox = summonPrefab.GetComponent<PlayerHitBox>();
 
-        
+
 
         if (skill_ != null || hitBox != null)
         {
@@ -158,7 +156,7 @@ public class PlayerSkillController : MonoBehaviour
         if (!pm.facingRight)
         {
             Vector3 scale = projectile.transform.localScale;
-            scale.x *= -1; 
+            scale.x *= -1;
             projectile.transform.localScale = scale;
         }
 
@@ -170,24 +168,10 @@ public class PlayerSkillController : MonoBehaviour
         }
     }
 
-    private IEnumerator UseDashSkill(SkillData skill)
+    private void UseDashSkill(SkillData skill)
     {
-        yield return new WaitForFixedUpdate(); 
-
-        skill.canDash = false;
-        skill.isDashing = true;
-
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * skill.dashingPower, 0f);
-
-        yield return new WaitForSeconds(skill.dashDuration);
-
-        rb.gravityScale = originalGravity;
-        skill.isDashing = false;
-
-        yield return new WaitForSeconds(skill.coolTime);
-        skill.canDash = true;
+        if(pm.canDash && !pm.isDashing)
+            pm.StartDash(skill.dashingPower, skill.dashDuration);
     }
 
     private void UseTargetingSkill(SkillData skill)
@@ -219,7 +203,7 @@ public class PlayerSkillController : MonoBehaviour
             float angle = Mathf.Lerp(-90f, 90f, t); // -90° ~ 90° 위쪽 반원
 
             Vector2 dir = new Vector2(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
-            Vector3 offset = dir * 1f; 
+            Vector3 offset = dir * 1f;
 
             GameObject proj = Instantiate(skill.skillEffectPrefab, transform.position + offset, skill.skillEffectPrefab.transform.rotation);
 
@@ -233,7 +217,7 @@ public class PlayerSkillController : MonoBehaviour
 
     private void UseEnchantSkill(SkillData skill)
     {
-        pa.ActivateEnhancedAttack(skill.attackCount, skill.enhancedBonusDamage,skill.skillEffectPrefab);
+        pa.ActivateEnhancedAttack(skill.attackCount, skill.enhancedBonusDamage, skill.skillEffectPrefab);
     }
 
     IEnumerator UseBuffSkill(SkillData skill)

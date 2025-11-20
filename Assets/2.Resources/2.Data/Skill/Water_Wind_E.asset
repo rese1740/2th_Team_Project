@@ -10,23 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
-  m_Name: WindQ
+  m_Name: Water_Wind_E
   m_EditorClassIdentifier: 
-  skillName: "\uBC14\uB78C\uAE38"
-  key: 113
-  elementType: 4
-  skillType: 0
-  skillEffectPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
+  skillName: "\uBB3C \uBC14\uB78C E"
+  key: 101
+  elementType: 7
+  skillType: 1
+  skillEffectPrefab: {fileID: 8809611660199667029, guid: 58d7c9ac34e2b714985c2bda2b711759, type: 3}
   animationName: 
-  damage: 4
-  coolTime: 0
-  projectileCount: 0
-  projectileSpeed: 10
-  range: 1
+  damage: 10
+  coolTime: 3
+  projectileCount: 1
+  projectileSpeed: 3
+  range: 5
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   attackCount: 0
   enhancedBonusDamage: 0
-  dashingPower: 20
+  dashingPower: 15
   dashDuration: 0.2
+  isDashing: 0
+  canDash: 1

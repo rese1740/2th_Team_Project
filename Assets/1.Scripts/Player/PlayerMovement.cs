@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -9,6 +10,12 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public bool facingRight = true;
+
+    public float dashSpeed = 12f;
+    public float dashDuration = 0.15f;
+    public float dashCooldown = 0.5f;
+   public bool isDashing = false;
+   public bool canDash = true;
 
     [Header("Components")]
     public PlayerSO playerData;
@@ -33,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (isDashing)
+            return; 
 
         Move();
         Fall();
@@ -41,6 +50,36 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+    }
+
+    public void StartDash(float power, float duraction)
+    {
+
+        dashDuration = duraction;
+        dashSpeed = power;
+        StartCoroutine(Dash());
+        return;
+    }
+
+    IEnumerator Dash()
+    {
+        isDashing = true;
+        canDash = false;
+
+        animator.SetBool("isDash", true);
+
+        // 바라보는 방향으로 대시
+        float dashDirection = facingRight ? 1f : -1f;
+
+        rb.gravityScale = 0; // 대시 중 중력 무시
+        rb.velocity = new Vector2(dashDirection * dashSpeed, 0);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.gravityScale = 3; // 다시 기본 중력 설정 (너의 기본값에 맞춰 변경)
+        isDashing = false;
+        animator.SetBool("isDash", false);
+        canDash = true;
     }
 
     void Move()
