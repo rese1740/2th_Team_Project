@@ -241,4 +241,32 @@ public class PlayerSkillController : MonoBehaviour
             }
         }
     }
+
+    public SkillData GetSkillData(PlayerElement element, KeyCode key)
+    {
+        var skillKey = (element, key);
+
+        if (skillMap.TryGetValue(skillKey, out SkillData skill))
+            return skill;
+
+        return null;
+    }
+
+    public float GetCooldown(PlayerElement element, KeyCode key)
+    {
+        var skillKey = (element, key);
+        if (cooldownTimers.TryGetValue(skillKey, out float value))
+            return value;
+
+        return 0f; // 쿨타임 없음
+    }
+
+    public float GetMaxCooldown(PlayerElement element, KeyCode key)
+    {
+        var skillKey = (element, key);
+        if (skillMap.TryGetValue(skillKey, out SkillData data))
+            return data.coolTime;
+
+        return 0f;
+    }
 }

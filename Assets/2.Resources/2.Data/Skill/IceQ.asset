@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: IceQ
   m_EditorClassIdentifier: 
   skillName: "\uC11C\uB9AC\uB0A0"
+  skillIcon: {fileID: -1410040694, guid: 68fd8a2ed521af1498cf2a6966211083, type: 3}
   key: 113
   elementType: 3
   skillType: 1
   skillEffectPrefab: {fileID: 3815372443133339415, guid: 14dfdd6306d2db74196e6d6f5797ee14, type: 3}
+  animationName: 
   damage: 10
   coolTime: 0
   projectileCount: 1
   projectileSpeed: 10
+  range: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackCount: 0
+  enhancedBonusDamage: 0
   dashingPower: 15
   dashDuration: 0.2
-  isDashing: 0
-  canDash: 1

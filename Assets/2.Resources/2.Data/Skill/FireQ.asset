@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: FireQ
   m_EditorClassIdentifier: 
   skillName: "\uBD88\uBE5B\uB3CC\uB9BC"
+  skillIcon: {fileID: 295931405, guid: 68fd8a2ed521af1498cf2a6966211083, type: 3}
   key: 113
   elementType: 1
   skillType: 5
   skillEffectPrefab: {fileID: 2305597951587972507, guid: 8b2838b9e73f5194e98a61315e51327d, type: 3}
   animationName: 
   damage: 10
-  coolTime: 0
+  coolTime: 20
   projectileCount: 1
   projectileSpeed: 10
   range: 1
@@ -30,5 +31,3 @@ MonoBehaviour:
   enhancedBonusDamage: 10
   dashingPower: 15
   dashDuration: 0.2
-  isDashing: 0
-  canDash: 1

@@ -16,6 +16,7 @@ public enum SkillType
 public class SkillData : ScriptableObject
 {
     public string skillName;
+    public Sprite skillIcon;
     public KeyCode key; // Q or E
     public PlayerElement elementType;
     public SkillType skillType;
