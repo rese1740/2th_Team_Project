@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireQ
   m_EditorClassIdentifier: 
   skillName: "\uBD88\uBE5B\uB3CC\uB9BC"
-  skillIcon: {fileID: 295931405, guid: 68fd8a2ed521af1498cf2a6966211083, type: 3}
+  skillIcon: {fileID: -616265392, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
   key: 113
   elementType: 1
   skillType: 5
@@ -31,3 +31,4 @@ MonoBehaviour:
   enhancedBonusDamage: 10
   dashingPower: 15
   dashDuration: 0.2
+  useGhostEffect: 0

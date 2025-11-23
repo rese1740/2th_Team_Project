@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WindQ
   m_EditorClassIdentifier: 
   skillName: "\uBC14\uB78C\uAE38"
+  skillIcon: {fileID: 244522398, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
   key: 113
   elementType: 4
   skillType: 0
@@ -30,3 +31,4 @@ MonoBehaviour:
   enhancedBonusDamage: 0
   dashingPower: 20
   dashDuration: 0.2
+  useGhostEffect: 0

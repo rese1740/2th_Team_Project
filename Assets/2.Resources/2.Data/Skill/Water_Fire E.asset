@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
-  m_Name: Wind_Ice_E
+  m_Name: Water_Fire E
   m_EditorClassIdentifier: 
-  skillName: "\uBC14\uB78C \uC5BC\uC74C E"
-  skillIcon: {fileID: 0}
+  skillName: "\uC99D\uD654"
+  skillIcon: {fileID: -1261695963, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
   key: 101
-  elementType: 8
-  skillType: 0
-  skillEffectPrefab: {fileID: 0}
+  elementType: 9
+  skillType: 1
+  skillEffectPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
   animationName: 
   damage: 10
   coolTime: 0
   projectileCount: 1
-  projectileSpeed: 3
-  range: 5
+  projectileSpeed: 10
+  range: 1
   targetLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   attackCount: 0
   enhancedBonusDamage: 0
   dashingPower: 15
   dashDuration: 0.2
-  useGhostEffect: 1
+  useGhostEffect: 0

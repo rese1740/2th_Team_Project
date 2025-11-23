@@ -26,12 +26,21 @@ public class ButtonGroupManager : MonoBehaviour
     {
         { (PlayerElement.Water, PlayerElement.Ice), PlayerElement.IceWater },
         { (PlayerElement.Ice, PlayerElement.Water), PlayerElement.IceWater },
-         { (PlayerElement.Fire, PlayerElement.Ice), PlayerElement.FireIce },
-        { (PlayerElement.Ice, PlayerElement.Fire), PlayerElement.FireIce },
+
+         { (PlayerElement.Fire, PlayerElement.Ice), PlayerElement.IceFire },
+        { (PlayerElement.Ice, PlayerElement.Fire), PlayerElement.IceFire },
+
          { (PlayerElement.Water, PlayerElement.Wind), PlayerElement.WaterWind},
         { (PlayerElement.Wind, PlayerElement.Water), PlayerElement.WaterWind },
+
          { (PlayerElement.Ice, PlayerElement.Wind), PlayerElement.IceWind},
         { (PlayerElement.Wind, PlayerElement.Ice), PlayerElement.IceWind },
+
+          { (PlayerElement.Water, PlayerElement.Fire), PlayerElement.WaterFire},
+        { (PlayerElement.Fire, PlayerElement.Water), PlayerElement.WaterFire },
+
+          { (PlayerElement.Wind, PlayerElement.Fire), PlayerElement.FireWind},
+        { (PlayerElement.Fire, PlayerElement.Wind), PlayerElement.FireWind },
 
     };
 

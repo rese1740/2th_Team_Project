@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water_Q
       objectReference: {fileID: 0}
+    - target: {fileID: 1652179127943197493, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: isPiercing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2431120996888887022, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

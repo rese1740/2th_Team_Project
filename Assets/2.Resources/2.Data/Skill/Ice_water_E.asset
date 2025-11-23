@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
   m_Name: Ice_Water_E
   m_EditorClassIdentifier: 
-  skillName: "\uBB3C E"
+  skillName: "\uC11C\uB9BF\uBB3C"
+  skillIcon: {fileID: -1607350307, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
   key: 101
   elementType: 5
   skillType: 3
@@ -26,7 +27,8 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
+  attackCount: 0
+  enhancedBonusDamage: 0
   dashingPower: 15
   dashDuration: 0.2
-  isDashing: 0
-  canDash: 1
+  useGhostEffect: 0

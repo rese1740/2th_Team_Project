@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaterQ
   m_EditorClassIdentifier: 
   skillName: "\uD30C\uB3D7\uACB0"
+  skillIcon: {fileID: 1038995951, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
   key: 113
   elementType: 2
   skillType: 1
@@ -22,7 +23,12 @@ MonoBehaviour:
   coolTime: 0
   projectileCount: 1
   projectileSpeed: 10
+  range: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackCount: 0
+  enhancedBonusDamage: 0
   dashingPower: 15
   dashDuration: 0.2
-  isDashing: 0
-  canDash: 1
+  useGhostEffect: 0

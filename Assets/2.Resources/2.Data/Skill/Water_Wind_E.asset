@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
   m_Name: Water_Wind_E
   m_EditorClassIdentifier: 
-  skillName: "\uBB3C \uBC14\uB78C E"
+  skillName: "\uBE44\uC5F0"
+  skillIcon: {fileID: -1733245565, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
   key: 101
-  elementType: 7
+  elementType: 8
   skillType: 1
   skillEffectPrefab: {fileID: 8809611660199667029, guid: 58d7c9ac34e2b714985c2bda2b711759, type: 3}
   animationName: 
@@ -30,5 +31,4 @@ MonoBehaviour:
   enhancedBonusDamage: 0
   dashingPower: 15
   dashDuration: 0.2
-  isDashing: 0
-  canDash: 1
+  useGhostEffect: 0

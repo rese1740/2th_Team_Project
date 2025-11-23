@@ -9,9 +9,11 @@ public enum PlayerElement
     Ice,
     Wind,
     IceWater,
-    FireIce,
+    IceFire,
+    IceWind,
     WaterWind,
-    IceWind
+    WaterFire,
+    FireWind
 }
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "PlayerSO", order = 1)]

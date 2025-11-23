@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7144a448aec45624c9e9f5797cdabec4, type: 3}
-  m_Name: IceQ
+  m_Name: Ice_Fire_E
   m_EditorClassIdentifier: 
-  skillName: "\uC11C\uB9AC\uB0A0"
-  skillIcon: {fileID: -995512453, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
-  key: 113
-  elementType: 3
-  skillType: 1
-  skillEffectPrefab: {fileID: 3815372443133339415, guid: 14dfdd6306d2db74196e6d6f5797ee14, type: 3}
+  skillName: "\uD64D\uC11C\uB9AC"
+  skillIcon: {fileID: -741397285, guid: 3f6e7bbca7f757e41b6904f3cac3caf2, type: 3}
+  key: 101
+  elementType: 6
+  skillType: 4
+  skillEffectPrefab: {fileID: 3815372443133339415, guid: eb16e23cc58e265488b54d655430206d, type: 3}
   animationName: 
   damage: 10
   coolTime: 0
-  projectileCount: 1
+  projectileCount: 4
   projectileSpeed: 10
-  range: 1
+  range: 5
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   attackCount: 0
   enhancedBonusDamage: 0
   dashingPower: 15

@@ -6,6 +6,7 @@ public class PlayerHitBox : MonoBehaviour
 {
     public float damage;
     public float duration = 0.2f; 
+    public bool isPiercing = false;
 
     private void Start()
     {
@@ -21,6 +22,9 @@ public class PlayerHitBox : MonoBehaviour
             {
                 Debug.Log("Àû ÇÇ°Ý");
                 enemy.TakeDamage(damage);
+
+                if(!isPiercing)
+                    Destroy(gameObject);
             }
         }
     }

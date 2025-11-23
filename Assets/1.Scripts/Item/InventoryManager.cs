@@ -11,6 +11,10 @@ public class InventoryManager : MonoBehaviour
 
     public Sprite[] elementIcon;
 
+    public Image[] skillSlots;
+
+    public Sprite[] skillIcons;
+
     public Text[] playerStatusTxt;
 
     private void Awake()
@@ -24,18 +28,22 @@ public class InventoryManager : MonoBehaviour
         {
             case PlayerElement.Fire:
                 elementSlots[0].sprite = elementIcon[0];
+                skillSlots[0].sprite = skillIcons[0];
                 break;
 
             case PlayerElement.Water:
                 elementSlots[0].sprite = elementIcon[1];
+                skillSlots[0].sprite = skillIcons[1];
                 break;
 
             case PlayerElement.Wind:
                 elementSlots[0].sprite = elementIcon[2];
+                skillSlots[0].sprite = skillIcons[2];
                 break;
 
             case PlayerElement.Ice:
                 elementSlots[0].sprite = elementIcon[3];
+                skillSlots[0].sprite = skillIcons[3];
                 break;
         }
 
@@ -43,18 +51,22 @@ public class InventoryManager : MonoBehaviour
         {
             case PlayerElement.Fire:
                 elementSlots[1].sprite = elementIcon[0];
+                skillSlots[1].sprite = skillIcons[0];
                 break;
 
             case PlayerElement.Water:
                 elementSlots[1].sprite = elementIcon[1];
+                skillSlots[1].sprite = skillIcons[1];
                 break;
 
             case PlayerElement.Wind:
                 elementSlots[1].sprite = elementIcon[2];
+                skillSlots[1].sprite = skillIcons[2];
                 break;
 
             case PlayerElement.Ice:
                 elementSlots[1].sprite = elementIcon[3];
+                skillSlots[1].sprite = skillIcons[3];
                 break;
         }
 
