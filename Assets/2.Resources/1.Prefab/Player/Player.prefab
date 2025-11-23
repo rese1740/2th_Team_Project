@@ -103,6 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8255253347229207623}
   - component: {fileID: 843613690190492723}
+  - component: {fileID: 5109535171686772289}
   - component: {fileID: 971369656305273810}
   - component: {fileID: 7947841960093207985}
   - component: {fileID: 6958276900505706978}
@@ -189,6 +190,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5109535171686772289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212076026127047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040b93f0cd652fc48afecd12b24199cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostPrefab: {fileID: 4898947567291618758, guid: c4be70c18ae3a8f43bb6f14b0bd86426, type: 3}
+  spawnRate: 0.05
+  ghostDuration: 0.3
 --- !u!114 &971369656305273810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +227,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0695354c818a7474a9147d75c76182ad, type: 2}
   - {fileID: 11400000, guid: dca228bbbcedf364c8e58251e51eacc4, type: 2}
   - {fileID: 11400000, guid: 0c83ef29a7bdaf548867750d7f6f6b19, type: 2}
+  - {fileID: 11400000, guid: 0ee08666ecc28944691f5be4aa62ff61, type: 2}
 --- !u!114 &7947841960093207985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +294,7 @@ MonoBehaviour:
   dashCooldown: 0.5
   isDashing: 0
   canDash: 1
+  useGhostEffect: 0
   playerData: {fileID: 11400000, guid: a72220e268eec4c41945cdcdde04485d, type: 2}
 --- !u!114 &2364243395562691538
 MonoBehaviour:

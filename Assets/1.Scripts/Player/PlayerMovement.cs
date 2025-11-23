@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,8 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed = 12f;
     public float dashDuration = 0.15f;
     public float dashCooldown = 0.5f;
-   public bool isDashing = false;
-   public bool canDash = true;
+    public bool isDashing = false;
+    public bool canDash = true;
+    public bool useGhostEffect = false;
 
     [Header("Components")]
     public PlayerSO playerData;
@@ -23,12 +23,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     PlayerAttack pa;
     SpriteRenderer spriteRenderer;
+    PlayerGhost pg;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         pa = GetComponent<PlayerAttack>();
+        pg = GetComponent<PlayerGhost>();
     }
 
     private void Update()
@@ -41,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (isDashing)
-            return; 
+            return;
 
         Move();
         Fall();
@@ -52,8 +54,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void StartDash(float power, float duraction)
+    public void StartDash(float power, float duraction, bool effect)
     {
+        if (effect)
+            pg.StartGhost();
 
         dashDuration = duraction;
         dashSpeed = power;
@@ -75,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(dashDirection * dashSpeed, 0);
 
         yield return new WaitForSeconds(dashDuration);
+        pg.StopGhost();
 
         rb.gravityScale = 3; // 다시 기본 중력 설정 (너의 기본값에 맞춰 변경)
         isDashing = false;

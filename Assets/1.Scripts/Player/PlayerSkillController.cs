@@ -171,7 +171,7 @@ public class PlayerSkillController : MonoBehaviour
     private void UseDashSkill(SkillData skill)
     {
         if(pm.canDash && !pm.isDashing)
-            pm.StartDash(skill.dashingPower, skill.dashDuration);
+            pm.StartDash(skill.dashingPower, skill.dashDuration,skill.useGhostEffect);
     }
 
     private void UseTargetingSkill(SkillData skill)

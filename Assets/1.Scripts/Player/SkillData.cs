@@ -40,4 +40,5 @@ public class SkillData : ScriptableObject
     [Header("이동 세팅")]
     public float dashingPower = 15f;   
     public float dashDuration = 0.2f;
+    public bool useGhostEffect;
 }
