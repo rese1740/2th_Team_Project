@@ -40,8 +40,12 @@ public class BoundaryEnemy : MonoBehaviour
     private State state = State.Patrol;     // 현재 상태
     private bool isOnGround = false;        // Ground 감지 결과
 
+    private Animator anim;
+
+
     void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         // 참조 자동 보정
@@ -57,6 +61,7 @@ public class BoundaryEnemy : MonoBehaviour
 
     void Start()
     {
+
         // 플레이어 참조
         var p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
@@ -260,6 +265,7 @@ public class BoundaryEnemy : MonoBehaviour
     // 공격 루프: 쿨다운을 고려하여 반복 발사
     private IEnumerator AttackLoop()
     {
+        anim.SetTrigger("Attack");
         while (state == State.Attack)
         {
             if (IsPlayerInRange() && Time.time >= nextShotTime)
