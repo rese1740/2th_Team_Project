@@ -44,9 +44,6 @@ public class PlayerAttack : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public CinemachineVirtualCamera death_cam;
 
-
-
-
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -56,6 +53,8 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         if (UIStateManager.Instance.isUIOpen) return;
+
+        playerData.isRaging = isRaging;
 
         if (!isRaging && playerData.rageValue >= 100f)
         {

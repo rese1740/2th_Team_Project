@@ -9,6 +9,7 @@ public class HpSO : ScriptableObject
     [Tooltip("Hp °ª")]
     public float maxHealth = 100f;
     public int gainGold = 10;   
+    public int dataPiece = 1;
 
     [HideInInspector] public float currentHealth;
 

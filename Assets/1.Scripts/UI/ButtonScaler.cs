@@ -50,6 +50,7 @@ public class ButtonScaler : MonoBehaviour
         {
             PlayerSO.Instance.saved2 = stateToSet;
         }
+        this.buttonImage.color = Color.gray;
 
         if (groupManager != null)
         {
@@ -58,6 +59,7 @@ public class ButtonScaler : MonoBehaviour
             if (groupManager.selectedCount >= 2 && groupManager.popupAnimator != null)
             {
                 groupManager.UpdatePlayerElement();
+                PlayerSO.Instance.currentElement_Q = PlayerSO.Instance.saved2;
                 groupManager.popupAnimator.Hide();
             }
         }

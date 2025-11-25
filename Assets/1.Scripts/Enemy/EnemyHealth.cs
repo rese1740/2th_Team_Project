@@ -196,14 +196,11 @@ public class EnemyHealth : MonoBehaviour
         if (hpSlider != null)
             hpSlider.value = 0f;
 
-
-
         Debug.Log("Àû »ç¸Á!");
-        if (hpData != null && PlayerSO.Instance != null)
+        if (hpData != null && !PlayerSO.Instance.isRaging)
             PlayerSO.Instance.Gold += hpData.gainGold;
-
-        if (isBoss)
-            SceneFadeManager.Instance.SceneMove(sceneName);
+        else
+            PlayerSO.Instance.dataPiece += hpData.dataPiece;
 
         onDeath?.Invoke();
         gameObject.SetActive(false);

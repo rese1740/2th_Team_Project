@@ -64,10 +64,11 @@ public class PlayerSO : ScriptableObject
     [Tooltip("플레이어 폭주 게이지 증가량")]
     [Range(0, 1000)] public float rageGainRate = 100f;
 
-
+    public bool isRaging = false;
 
     [Tooltip("플레이어 골드량")]
     [Range(0, 1000)] public int Gold = 100;
+    public int dataPiece = 0;
 
     [Tooltip("플레이어 속성")]
     public PlayerElement currentElement_Q = PlayerElement.None;
