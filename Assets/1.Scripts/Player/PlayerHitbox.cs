@@ -15,6 +15,7 @@ public class PlayerHitBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+              
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
@@ -24,6 +25,17 @@ public class PlayerHitBox : MonoBehaviour
                 enemy.TakeDamage(damage);
 
                 if(!isPiercing)
+                    Destroy(gameObject);
+            }
+
+            //추가
+            BossTwinHp twin = other.GetComponent<BossTwinHp>();
+            if (twin != null)
+            {
+                Debug.Log("보스 피격");
+                twin.TakeDamage(damage);
+
+                if (!isPiercing)
                     Destroy(gameObject);
             }
         }

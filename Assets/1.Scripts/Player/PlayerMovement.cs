@@ -25,6 +25,15 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer spriteRenderer;
     PlayerGhost pg;
 
+    //-----추가-----
+    [Header("Status / Debuff")]
+    public bool isStunned = false;      // 기절 상태
+    private float stunEndTime = 0f;
+
+    public float slowAmount = 0f;       // 감소된 이동속도 양
+    private float slowEndTime = 0f;     // 슬로우 끝나는 시간
+    //-----추가-----
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -35,6 +44,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //-----추가-----
+        // 스턴 시간 체크
+        if (isStunned)
+        {
+            if (Time.time >= stunEndTime)
+            {
+                // 스턴 해제
+                isStunned = false;
+            }
+            else
+            {
+                // 스턴 중에는 움직임/입력 전부 막기
+                rb.velocity = Vector2.zero;
+                animator.SetBool("isMove", false);
+                animator.SetBool("isDash", false);
+                animator.SetBool("isFalling", false);
+                return;
+            }
+        }
+        //-----추가-----
+
         if (pa.isAction || UIStateManager.Instance.isUIOpen)
         {
             rb.velocity = Vector2.zero;
@@ -52,7 +82,38 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+        //-----추가-----
+        // 슬로우 해제 체크
+        if (slowAmount > 0f && Time.time >= slowEndTime)
+        {
+            slowAmount = 0f;
+        }
+        //-----추가-----
+
     }
+
+
+    //-----추가-----
+    public void ApplySpeedDebuff(float amount, float duration)
+    {
+        // 슬로우 중복 적용 시 더 큰 지속시간을 유지
+        slowAmount += amount;
+        slowEndTime = Mathf.Max(slowEndTime, Time.time + duration);
+    }
+
+    public void Stun(float duration)
+    {
+        if (duration <= 0f) return;
+
+        isStunned = true;
+        stunEndTime = Mathf.Max(stunEndTime, Time.time + duration);
+
+        //멈추기
+        rb.velocity = Vector2.zero;
+        animator.SetBool("isMove", false);
+        animator.SetBool("isDash", false);
+    }
+    //-----추가-----
 
     public void StartDash(float power, float duraction, bool effect)
     {
@@ -90,6 +151,12 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         float move = Input.GetAxisRaw("Horizontal");
+
+        //-----추가-----
+        // 슬로우 적용: 기본 속도 - slowAmount (0 이하로는 내려가지 않도록)
+        float currentSpeed = Mathf.Max(0f, playerData.moveSpeed - slowAmount);
+        //-----추가-----
+
         rb.velocity = new Vector2(move * playerData.moveSpeed, rb.velocity.y);
 
         bool isWalking = move != 0;
