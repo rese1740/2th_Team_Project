@@ -70,11 +70,40 @@ public class InventoryManager : MonoBehaviour
                 break;
         }
 
+        switch (PlayerSO.Instance.currentElement_E)
+        {
+            case PlayerElement.IceWind:
+                skillSlots[2].sprite = skillIcons[5];
+                break;
+
+            case PlayerElement.IceWater:
+                skillSlots[2].sprite = skillIcons[6];
+                break;
+
+            case PlayerElement.IceFire:
+                skillSlots[2].sprite = skillIcons[7];
+                break;
+
+            case PlayerElement.WaterFire:
+                skillSlots[2].sprite = skillIcons[8];
+                break;
+
+            case PlayerElement.WaterWind:
+                skillSlots[2].sprite = skillIcons[9];
+                break;
+
+            case PlayerElement.FireWind:
+                skillSlots[2].sprite = skillIcons[4];
+
+                break;
+        }
+
         playerStatusTxt[0].text = $"HP: {PlayerSO.Instance.currentHealth} / {PlayerSO.Instance.maxHealth}";
         playerStatusTxt[1].text = $"공격력: {PlayerSO.Instance.attackPower}";
         playerStatusTxt[2].text = $"크리티컬 확률: {PlayerSO.Instance.critValue}%";
         playerStatusTxt[3].text = $"크리티컬 데미지: {PlayerSO.Instance.critPower}%";
-        playerStatusTxt[4].text = $"폭주 게이지: {PlayerSO.Instance.rageValue}%";
+        playerStatusTxt[4].text =  $"폭주 게이지: {PlayerSO.Instance.rageValue.ToString("F0")}%";
+
 
     }
 
