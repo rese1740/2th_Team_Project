@@ -31,6 +31,7 @@ public class SceneFadeManager : MonoBehaviour
 
     public void SceneMove(string sceneName)
     {
+
         StartCoroutine(FadeOutAndLoad(sceneName));
     }
 
