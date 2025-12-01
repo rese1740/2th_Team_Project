@@ -32,3 +32,5 @@ MonoBehaviour:
   dashingPower: 15
   dashDuration: 0.2
   useGhostEffect: 1
+  sfxClip: {fileID: 8300000, guid: 24700c96f0bc0324c8d738fac7398f6d, type: 3}
+  volume: 1

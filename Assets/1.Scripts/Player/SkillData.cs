@@ -41,4 +41,8 @@ public class SkillData : ScriptableObject
     public float dashingPower = 15f;   
     public float dashDuration = 0.2f;
     public bool useGhostEffect;
+
+    [Header("효과음 세팅")]
+    public AudioClip sfxClip;
+    public float volume = 1f;
 }

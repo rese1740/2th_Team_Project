@@ -146,7 +146,7 @@ public class PlayerAttack : MonoBehaviour
         if (currentCombo > maxCombo)
             currentCombo = 1;
 
-
+        
 
 
         StartCoroutine(AttackCooldown());

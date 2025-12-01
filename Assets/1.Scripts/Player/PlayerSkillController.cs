@@ -82,6 +82,10 @@ public class PlayerSkillController : MonoBehaviour
             }
 
             cooldownTimers[skillKey] = skill.coolTime;
+
+            if (skill.sfxClip != null)
+                SoundManager.Instance.PlaySFX(skill.sfxClip, skill.volume);     // 효과음 재생
+
             switch (skill.skillType)
             {
                 case SkillType.Projectile:
