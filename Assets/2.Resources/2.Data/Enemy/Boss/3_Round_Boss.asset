@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff6174bfcb7a8844b9a70fd941024206, type: 3}
-  m_Name: BossDuckHpSO
+  m_Name: 3_Round_Boss
   m_EditorClassIdentifier: 
-  maxHealth: 2000
+  maxHealth: 4000
   gainGold: 10
   dataPiece: 50
   currentHealth: 0

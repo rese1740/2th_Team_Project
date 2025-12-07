@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1500
   gainGold: 10
+  dataPiece: 50
   currentHealth: 0
   hitColor: {r: 1, g: 0, b: 0, a: 1}

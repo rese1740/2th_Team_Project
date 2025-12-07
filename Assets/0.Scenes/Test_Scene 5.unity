@@ -47231,7 +47231,7 @@ PrefabInstance:
     - target: {fileID: 3561545245304921016, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: hpData
       value: 
-      objectReference: {fileID: 11400000, guid: c3040d4fdb5734f4f9543509fe0ae64b, type: 2}
+      objectReference: {fileID: 11400000, guid: 961b2b5f39d48d64b9f5101ceb1b57a3, type: 2}
     - target: {fileID: 3561545245304921016, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: hpText
       value: 
@@ -47240,10 +47240,6 @@ PrefabInstance:
       propertyPath: hpSlider
       value: 
       objectReference: {fileID: 1095370554}
-    - target: {fileID: 3561545245304921016, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
-      propertyPath: maxHealth
-      value: 2000
-      objectReference: {fileID: 0}
     - target: {fileID: 3641116736193167857, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.39
@@ -47286,15 +47282,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8578968697429672901, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: slamCooldown
-      value: 15
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 8578968697429672901, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: chargeCooldown
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8578968697429672901, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: summonCooldown
-      value: 17
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 8614754418647921398, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: m_Name
