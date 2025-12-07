@@ -92,6 +92,23 @@ public class ButtonGroupManager : MonoBehaviour
         effectInstance.transform.SetParent(player.transform);
     }
 
+    public void RefreshButtonLocks()
+    {
+        foreach (var btn in buttons)
+        {
+            if (PlayerSO.Instance.unlockedElements.Contains(btn.stateToSet))
+            {
+                btn.isLocked = false;
+            }
+            else
+            {
+                btn.isLocked = true;
+            }
+
+            btn.ApplyLockState();
+        }
+    }
+
     public void UpdatePlayerElement()
     {
         PlayerElement e1 = PlayerSO.Instance.saved1;

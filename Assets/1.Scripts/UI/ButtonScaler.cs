@@ -3,11 +3,13 @@ using UnityEngine.UI;
 
 public class ButtonScaler : MonoBehaviour
 {
-    public UIPopupAnimator popupAnimator; // 버튼 클릭 시 닫을 팝업
-    public Sprite iconSprite;             // 버튼 고유 아이콘
-    public PlayerElement stateToSet;      // 선택 속성
+    public UIPopupAnimator popupAnimator; 
+    public Sprite iconSprite;            
+    public PlayerElement stateToSet;  
     public float scaleUpSize = 1.2f;
     public float scaleDuration = 0.2f;
+
+    public bool isLocked = false;
 
     private Vector3 originalScale;
     private Button button;
@@ -25,7 +27,13 @@ public class ButtonScaler : MonoBehaviour
 
         groupManager = GetComponentInParent<ButtonGroupManager>();
         groupManager.RegisterButton(this);
-       
+
+        if (isLocked)
+        {
+            button.interactable = false;
+            buttonImage.color = new Color(0.5f, 0.5f, 0.5f); 
+        }
+
     }
 
     private void Update()
@@ -38,6 +46,13 @@ public class ButtonScaler : MonoBehaviour
     public void ForceSelect()
     {
         if (isSelected) return;
+
+        if (isLocked)
+        {
+            buttonImage.color = Color.gray;
+            button.interactable = false;
+            return;  
+        }
 
         otherButton.isSelected = true;
         isSelected = true;
@@ -64,7 +79,25 @@ public class ButtonScaler : MonoBehaviour
             }
         }
     }
-
+    public void Unlock()
+    {
+        isLocked = false;
+        button.interactable = true;
+        buttonImage.color = Color.white;
+    }
+    public void ApplyLockState()
+    {
+        if (isLocked)
+        {
+            button.interactable = false;
+            buttonImage.color = new Color(0.5f, 0.5f, 0.5f);
+        }
+        else
+        {
+            button.interactable = true;
+            buttonImage.color = Color.white;
+        }
+    }
 
     public void OnButtonClicked()
     {

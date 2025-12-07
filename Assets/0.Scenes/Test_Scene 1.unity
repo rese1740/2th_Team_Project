@@ -33648,6 +33648,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 686541993}
@@ -34622,6 +34623,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -34899,6 +34901,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -35984,6 +35987,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -37049,6 +37053,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 1720462339}
@@ -40519,6 +40524,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 806716332}
@@ -44745,6 +44751,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -47237,9 +47244,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 753590081}
     - target: {fileID: 3561545245304921016, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561545245304921016, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: hpSlider
       value: 
       objectReference: {fileID: 1095370554}
+    - target: {fileID: 3561545245304921016, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
+      propertyPath: data_Soul
+      value: 
+      objectReference: {fileID: 140405878418936397, guid: 2c5d54d79c96b794599336736e95191d, type: 3}
     - target: {fileID: 3561545245304921016, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: maxHealth
       value: 2000
@@ -47283,6 +47298,10 @@ PrefabInstance:
     - target: {fileID: 3641116736193167857, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578968697429672901, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8578968697429672901, guid: de6dae5b539a0314e9e8e660529c46c2, type: 3}
       propertyPath: slamCooldown
@@ -47418,6 +47437,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 669718091}

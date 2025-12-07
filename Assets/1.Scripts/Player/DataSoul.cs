@@ -1,9 +1,11 @@
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class DataSoul : MonoBehaviour
 {
     public string nextSceneName;
     private bool isPlayerInRange = false;
+    public PlayerElement element;
 
     void Update()
     {
@@ -35,6 +37,7 @@ public class DataSoul : MonoBehaviour
         if(PlayerSO.Instance.dataPiece <= 29)
             return;
 
+        PlayerSO.Instance.unlockedElements.Add(element);
         PlayerSO.Instance.dataPiece -= 30;
         SceneFadeManager.Instance.SceneMove(nextSceneName);
 
