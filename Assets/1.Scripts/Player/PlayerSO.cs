@@ -75,6 +75,7 @@ public class PlayerSO : ScriptableObject
     public PlayerElement currentElement_E = PlayerElement.None;
     public PlayerElement saved1;
     public PlayerElement saved2;
+    public List<PlayerElement> unlockedElements;
 
     [Header("치트 세팅")]
     public bool infiniteHealth = false;

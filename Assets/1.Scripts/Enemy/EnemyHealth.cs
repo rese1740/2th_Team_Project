@@ -35,6 +35,7 @@ public class EnemyHealth : MonoBehaviour
     public UnityEvent onDeath;
     public string sceneName;
     public bool isBoss = false;
+    public GameObject data_Soul;
 
     private Coroutine flashRoutine;
     private Rigidbody2D rb;
@@ -202,7 +203,12 @@ public class EnemyHealth : MonoBehaviour
         else
             PlayerSO.Instance.dataPiece += hpData.dataPiece;
 
-        onDeath?.Invoke();
+        if (isBoss)
+        {
+            Instantiate(data_Soul, transform.position, Quaternion.identity);
+        }
+
+            onDeath?.Invoke();
         gameObject.SetActive(false);
     }
 
@@ -232,7 +238,8 @@ public class EnemyHealth : MonoBehaviour
 
         if (rb != null)
         {
-            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
             rb.velocity = originalVelocity;
         }
 
