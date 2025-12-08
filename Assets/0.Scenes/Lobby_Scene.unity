@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae228dd004c725c4a9ffb191e76ef698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeImage: {fileID: 0}
+  fadeImage: {fileID: 983412259}
   fadeDuration: 1
 --- !u!4 &530394149
 Transform:
