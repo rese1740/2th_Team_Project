@@ -2353,6 +2353,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 319468180}
@@ -2569,6 +2570,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -2872,6 +2874,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -9472,6 +9475,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -9711,6 +9715,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 307090368}
@@ -30564,6 +30569,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 940916996}
@@ -35539,6 +35545,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 1827091520}
@@ -37109,6 +37116,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}

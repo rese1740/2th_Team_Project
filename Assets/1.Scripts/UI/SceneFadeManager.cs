@@ -24,6 +24,11 @@ public class SceneFadeManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
     private void Start()
     {
         StartCoroutine(FadeIn());
