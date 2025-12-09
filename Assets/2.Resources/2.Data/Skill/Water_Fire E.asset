@@ -17,7 +17,7 @@ MonoBehaviour:
   key: 101
   elementType: 9
   skillType: 1
-  skillEffectPrefab: {fileID: 6725013092843525549, guid: 50c41b5d6de54ab4b9368c6e7833418a, type: 3}
+  skillEffectPrefab: {fileID: 3538152115475519884, guid: a848335f4f351a44ba6dbeff1629a31b, type: 3}
   animationName: 
   damage: 10
   coolTime: 0

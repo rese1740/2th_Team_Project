@@ -29867,9 +29867,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 919423331}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: iceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7862cc1a4b4be714e9d18a3e461ca4f0, type: 3}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: fireSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 15d95620d3abcd042b589313cb1a7578, type: 3}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: windSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ff1d27c0e1085ac49a6b57e5f4580891, type: 3}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: diePanel
       value: 
       objectReference: {fileID: 2040333066}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: waterSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e753f59173920054c88feac7b9b9fd2b, type: 3}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: death_cam
       value: 

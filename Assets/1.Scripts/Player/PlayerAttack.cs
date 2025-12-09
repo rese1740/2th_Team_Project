@@ -44,6 +44,12 @@ public class PlayerAttack : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public CinemachineVirtualCamera death_cam;
 
+    [Header("사운드 세팅")]
+    public AudioClip iceSFX;       // 효과음 오디오 클립
+    public AudioClip fireSFX;
+    public AudioClip waterSFX;
+    public AudioClip windSFX;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -142,6 +148,23 @@ public class PlayerAttack : MonoBehaviour
         string comboName = currentCombo <= 2 ? "attack1" : "attack2";
 
         animator.SetTrigger($"{element}_{comboName}");
+
+        if (element == "Ice")
+        {
+            SoundManager.Instance.PlaySFX(iceSFX);
+        }
+        else if (element == "Fire")
+        {
+            SoundManager.Instance.PlaySFX(fireSFX);
+        }
+        else if (element == "Water")
+        {
+            SoundManager.Instance.PlaySFX(waterSFX);
+        }
+        else if (element == "Wind")
+        {
+            SoundManager.Instance.PlaySFX(windSFX);
+        }
 
         if (currentCombo > maxCombo)
             currentCombo = 1;

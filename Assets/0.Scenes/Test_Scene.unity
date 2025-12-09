@@ -864,6 +864,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -4122,6 +4123,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -4618,6 +4620,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 110318496}
@@ -5517,6 +5520,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 2125099473}
@@ -6214,6 +6218,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -9361,7 +9366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &983412257
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40291,6 +40296,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 510840245}
@@ -47691,6 +47697,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 716282579}
@@ -51490,6 +51497,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -51984,14 +51992,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544105734}
     m_Modifications:
+    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: IceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: c2dc8e11c54d2ac48bf57c062b777292, type: 3}
+    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: FireSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d7f5c7b89953f644a7d94ce87721079, type: 3}
+    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: WindSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 8dc42705128652e41975360eafeb7178, type: 3}
+    - target: {fileID: 2364243395562691538, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: WaterSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 12e62a3a3ebf5ee4ca6a15b58e89d2d6, type: 3}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 919423331}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: iceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7862cc1a4b4be714e9d18a3e461ca4f0, type: 3}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: fireSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 15d95620d3abcd042b589313cb1a7578, type: 3}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: windSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ff1d27c0e1085ac49a6b57e5f4580891, type: 3}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: diePanel
       value: 
       objectReference: {fileID: 2040333066}
+    - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
+      propertyPath: waterSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e753f59173920054c88feac7b9b9fd2b, type: 3}
     - target: {fileID: 6958276900505706978, guid: b4399cf2fe86bab48b0c0949d835e7a0, type: 3}
       propertyPath: death_cam
       value: 

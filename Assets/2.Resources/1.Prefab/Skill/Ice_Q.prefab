@@ -13,6 +13,10 @@ PrefabInstance:
       value: Ice_Q
       objectReference: {fileID: 0}
     - target: {fileID: 1652179127943197493, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652179127943197493, guid: bbe92223b4a09c1489db7a842105637e, type: 3}
       propertyPath: isPiercing
       value: 1
       objectReference: {fileID: 0}

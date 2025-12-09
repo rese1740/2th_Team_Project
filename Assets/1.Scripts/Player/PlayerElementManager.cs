@@ -11,6 +11,12 @@ public class PlayerElementManager : MonoBehaviour
     [Header("현재 활성 PlayerSO")]
     public PlayerSO playerSO;
 
+    [Header("사운드 설정")]
+    public AudioClip WindSFX;
+    public AudioClip FireSFX;
+    public AudioClip WaterSFX;
+    public AudioClip IceSFX;
+
     private ElementSO currentElementSO;
 
     public void ChangeElement(PlayerElement newElement)
@@ -19,15 +25,19 @@ public class PlayerElementManager : MonoBehaviour
         {
             case PlayerElement.Fire:
                 currentElementSO = fireSO;
+                SoundManager.Instance.PlaySFX(FireSFX);
                 break;
             case PlayerElement.Water:
                 currentElementSO = waterSO;
+                SoundManager.Instance.PlaySFX(WaterSFX);
                 break;
             case PlayerElement.Ice:
                 currentElementSO = iceSO;
+                SoundManager.Instance.PlaySFX(IceSFX);
                 break;
             case PlayerElement.Wind:
                 currentElementSO = windSO;
+                SoundManager.Instance.PlaySFX(WindSFX);
                 break;
             default:
                 currentElementSO = null;
