@@ -123,8 +123,10 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        
         if (hpData == null || isDead) return;
         if (invincible) return;
+        if (damage < 0) return;
 
         currentHealth -= damage;
         if (currentHealth < 0f) currentHealth = 0f;

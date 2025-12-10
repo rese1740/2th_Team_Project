@@ -20,6 +20,11 @@ public class UIPopupAnimator : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+    
+    }
+
     public void Show()
     {
         StopAllCoroutines();

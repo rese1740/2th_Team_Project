@@ -846,6 +846,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -913,6 +914,7 @@ MonoBehaviour:
       m_Calls: []
   sceneName: 
   isBoss: 0
+  data_Soul: {fileID: 0}
   hpSlider: {fileID: 185384264}
   hpText: {fileID: 101132460}
 --- !u!50 &110598372
@@ -26358,6 +26360,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -26756,6 +26759,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 110318496}
@@ -27949,6 +27953,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 2125099473}
@@ -28681,6 +28686,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -32486,6 +32492,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 510840245}
@@ -33743,7 +33750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1430970129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37025,6 +37032,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 716282579}
@@ -38893,6 +38901,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}

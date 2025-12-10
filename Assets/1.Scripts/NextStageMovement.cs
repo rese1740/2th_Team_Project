@@ -7,11 +7,17 @@ public class NextStageMovement : MonoBehaviour
     [Tooltip("플레이어가 Goal에 닿았을 때 이동할 씬 이름")]
     public string sceneName = "Test_Scene 1";
 
+
+    public int stageNumber;
+
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             SceneFadeManager.Instance.SceneMove(sceneName);
+            StageTitleManager.Instance.ShowStageTitle(stageNumber);
         }
     }
 }

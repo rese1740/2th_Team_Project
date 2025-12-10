@@ -34399,6 +34399,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 686541993}
@@ -35719,6 +35720,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -35996,6 +35998,7 @@ MonoBehaviour:
   stateToSet: 3
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -37025,6 +37028,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -38270,6 +38274,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 1720462339}
@@ -39070,7 +39075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &986568787
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41725,6 +41730,7 @@ MonoBehaviour:
   stateToSet: 4
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 806716332}
@@ -46523,6 +46529,7 @@ MonoBehaviour:
   stateToSet: 1
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 1
   otherButton: {fileID: 0}
@@ -49854,6 +49861,7 @@ MonoBehaviour:
   stateToSet: 2
   scaleUpSize: 1
   scaleDuration: 0.2
+  isLocked: 0
   isSelected: 0
   isUse: 0
   otherButton: {fileID: 669718091}
